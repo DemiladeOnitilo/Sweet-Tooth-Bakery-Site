@@ -54,7 +54,7 @@ const Sliders = (props) => {
                 })}
               </Slider>
             ) : (
-              <div className='grid grid-row-2 grid-cols-2 gap-5 lg:flex '>
+              <div className='grid grid-row-2 grid-cols-2 gap-5 lg:flex lg:flex-wrap lg:gap-5 p-4'>
                 {main.map((item, index) => {
                   return (
                     <CakeCard 

@@ -14,11 +14,11 @@ const CakeCard = ({ id, img, name, price, description, onPage, isHome,  }) => {
   return (
     <>
       {onPage ? (
-        <div className="flex flex-col bg-white h-auto shadow-sm gap-y-2 justify-center items-center hover:shadow-lg hover:max-w-lg hover:transition hover:duration-300 hover:ease-in-out hover:scale-100 hover:overflow-hidden ">
-          <Link to={`/products/${id}`} onClick={refreshPage} className="relative bg-cover bg-no-repeat rounded-xl cursor-pointer">
-            <img src={img} className="h-50 w-50 md:h-100 md:w-100 lg:h-80 lg:w-80"/>
+        <div className="flex flex-col bg-white h-auto shadow-sm gap-2 justify-center items-center hover:shadow-lg hover:max-w-lg hover:transition hover:duration-300 hover:ease-in-out hover:scale-100 hover:overflow-hidden ">
+          <Link to={`/products/${id}`} onClick={refreshPage} className="relative bg-cover bg-no-repeat rounded-xl cursor-pointer w-full h-full">
+            <img src={img} className="h-50 w-full md:h-100 md:w-100 lg:h-80 lg:w-80"/>
           </Link>
-          <div className="flex flex-col justify-center items-center w-70 h-auto gap-y-2 py-5">
+          <div className="flex flex-col justify-center items-center lg:w-70 md:w-60 w-auto h-auto gap-2 p-5 ">
             <div className="text-center">
               <Link to={`/products/${id}`} onClick={refreshPage} className="text-2xl hover:text-[#f86a82] cursor-pointer sour-gummy">
                 {name}
