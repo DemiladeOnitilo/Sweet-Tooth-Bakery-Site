@@ -109,7 +109,7 @@ const CartContainer = () => {
                         <button
                           type="button"
                           onClick={() => handleRemoveFromCart(item.id)}
-                          className="border-r border-gray-300 bg-gray-200 cursor-pointer p-2"
+                          className="border-r border-gray-300 bg-gray-200 rounded-l-lg cursor-pointer p-2"
                         >
                           <FaTrash className="text-lg" />
                         </button>
@@ -117,7 +117,7 @@ const CartContainer = () => {
                         <button
                           type="button"
                           onClick={() => handleQuantityDecrease(item.id)}
-                          className="font-bold border-r border-gray-300 bg-gray-200 cursor-pointer p-2"
+                          className="font-bold border-r border-gray-300 bg-gray-200 rounded-l-lg cursor-pointer p-2"
                         >
                           <FaMinus className="text-lg" />
                         </button>
@@ -128,7 +128,7 @@ const CartContainer = () => {
                       <button
                         type="button"
                         onClick={() => handleQuantityIncrease(item.id)}
-                        className="font-bold border-l border-gray-300 bg-gray-200 cursor-pointer p-2"
+                        className="font-bold border-l border-gray-300 bg-gray-200 rounded-r-lg cursor-pointer p-2"
                       >
                         <FaPlus className="text-lg" />
                       </button>
