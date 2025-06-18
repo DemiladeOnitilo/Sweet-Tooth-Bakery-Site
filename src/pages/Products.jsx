@@ -51,7 +51,7 @@ const Products = () => {
   return (
     <div className='flex flex-col items-center px-4 lg:px-16 py-10 gap-20'>
       
-      <div className='flex flex-col lg:flex-row gap-10 bg-white p-5 rounded-xl shadow-lg mt-40'>
+      <div className='flex flex-col lg:flex-row gap-10 bg-white p-5 rounded-xl shadow-lg lg:mt-40 mt-20'>
         <div className='w-full lg:w-1/2 flex justify-center items-center'>
           <img 
             src={product.img} 
@@ -89,7 +89,7 @@ const Products = () => {
       <div className='flex flex-col justify-center items-center gap-10'>
         <h1 className='text-5xl sour-gummy'>Related Offers</h1>
         { relatedProducts.length > 0 ? (
-          <div className="flex space-x-4 overflow-x-auto pb-4">
+          <div className="flex flex-wrap justify-center items-center space-x-4 overflow-x-auto pb-4">
             {relatedProducts.map(item => (
               <div key={item.id} className="min-w-[200px] flex-shrink-0">
                 <CakeCard {...item} />
@@ -103,7 +103,7 @@ const Products = () => {
 
       <div className='flex flex-col justify-center items-center gap-10'>
         <h1 className='text-5xl sour-gummy'>You Might Also Like</h1>
-        <div className="flex space-x-4 overflow-x-auto pb-4">
+        <div className="flex flex-wrap justify-center items-center space-x-4 overflow-x-auto pb-4">
           {recommendedItems.map(item => (
             <div key={item.id} className="min-w-[200px] flex-shrink-0">
               <CakeCard {...item} isHome={true}/>
