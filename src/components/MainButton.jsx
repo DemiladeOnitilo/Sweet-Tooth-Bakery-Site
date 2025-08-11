@@ -19,7 +19,6 @@ const MainButton = (props) => {
     >
       <span className="relative z-10">{props.name}</span>
 
-      {/* Arrow Icon */}
       <FaArrowRight className="w-5 h-5 text-white group-hover:translate-x-1 transition-transform duration-300" />
     </Link>
   );

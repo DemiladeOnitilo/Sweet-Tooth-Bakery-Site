@@ -81,7 +81,6 @@ const Navbar = () => {
             </NavLink>
           </div>
 
-          {/* Right Section */}
           <div className="flex items-center space-x-6">
             {/* Search Bar */}
             <div className="hidden md:flex items-center relative">
@@ -107,13 +106,13 @@ const Navbar = () => {
               </div>
             </div>
 
-            {/* Notifications Bell */}
+            {/* Notifications */}
             <button className="hidden md:flex relative p-2 rounded-full hover:bg-pink-50 transition-all duration-300 group cursor-pointer">
               <FaBell className="text-xl text-gray-700 group-hover:text-pink-600 transition-colors duration-300" />
               <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></div>
             </button>
 
-            {/* Shopping Cart */}
+            {/* Cart */}
             <Link
               onClick={refreshPage}
               to="/Cart"
@@ -159,7 +158,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Navigation Menu */}
+      {/* Mobile  Menu */}
       <div
         className={`lg:hidden transition-all duration-300 ease-in-out ${
           isOpen

@@ -9,7 +9,7 @@ const About = () => {
     <div className='flex flex-col gap-y-30'>
       <AboutHero />
       <AboutMain />
-      <AboutValues />
+      <AboutValues /> 
       <Goals />
     </div>
   )

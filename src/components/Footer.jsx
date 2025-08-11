@@ -1,50 +1,132 @@
-import React from 'react'
-import logo from '../assets/Images/sweet-tooth-logo.png'
-import { Link } from 'react-router-dom'
-import { FaInstagram, FaFacebook, FaTwitter, FaYoutube, FaTiktok, FaPhone, FaEnvelope } from 'react-icons/fa'
+import React from "react";
+import logo from "../assets/Images/sweet-tooth-logo.png";
+import { Link } from "react-router-dom";
+import {
+  FaInstagram,
+  FaFacebook,
+  FaTwitter,
+  FaYoutube,
+  FaTiktok,
+  FaPhone,
+  FaEnvelope,
+} from "react-icons/fa";
 
 const Footer = () => {
-
-    function refreshPage(){ 
-        window.location.reload = window.parent.location.href; 
-    }
+  const refreshPage = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
-    <div>
-        <div className='mt-20 bg-[url(https://static.vecteezy.com/system/resources/thumbnails/053/280/078/small_2x/delicious-assortment-of-gourmet-cakes-with-fresh-berries-photo.jpeg)] 
-        bg-cover bg-center bg-no-repeat opacity-50 h-[40vh] flex justify-center items-center text-center '>
-            <h1 className='text-6xl '>FOR ALL OUR <span className='text-[#f86a82]'>SWEET TOOTH</span> OUT THERE</h1>
+    <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-300 py-14 px-8 md:px-16 lg:px-24">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
+        <div className="space-y-5">
+          <Link
+            to="/"
+            onClick={refreshPage}
+            className="flex items-center gap-3"
+          >
+            <img
+              src={logo}
+              alt="Sweet Tooth"
+              className="h-14 w-14 rounded-full ring-2 ring-pink-400"
+            />
+            <span className="text-3xl font-bold bg-gradient-to-r from-pink-500 to-pink-300 bg-clip-text text-transparent dancing-script">
+              Sweet Tooth
+            </span>
+          </Link>
+          <div className="space-y-3 text-sm">
+            <p className="flex items-center gap-2">
+              <FaPhone className="text-pink-500" /> +234 12345678910
+            </p>
+            <p className="flex items-center gap-2">
+              <FaEnvelope className="text-pink-500" /> sweettooth@gmail.com
+            </p>
+          </div>
+          <div className="flex gap-4 text-lg">
+            {[
+              { img: <FaInstagram />, link: "https://www.instagram.com/" },
+              { img: <FaFacebook />, link: "https://www.facebook.com/" },
+              { img: <FaTwitter />, link: "https://www.twitter.com/" },
+              { img: <FaYoutube />, link: "https://www.youtube.com/" },
+              { img: <FaTiktok />, link: "https://www.tiktok.com/" }
+            ].map((icon, index) => (
+              <a
+                key={index}
+                href={icon.link}
+                className="hover:text-pink-400 transition-colors"
+              >
+                {icon.img}
+              </a>
+            ))}
+          </div>
         </div>
-        <div className='bg-pink-200 h-[90vh] md:h-[60vh] lg:h-[50vh] flex flex-col justify-center items-center gap-y-15 md:flex-row md:justify-between md:items-center lg:flex-row lg:justify-between lg:items-center p-10 md:p-10 lg:p-15'>
-            <div className='text-4xl dancing-script col-span-2 flex flex-col justify-center items-center gap-y-5 lg:flex lg:flex-col lg:justify-center lg:items-center lg:gap-y-5 text-center'>
-                <Link onClick={refreshPage} to='/' className='flex text-5xl md:text-4xl lg:text-6xl'><img src={logo} alt='Sweet Tooth logo' className='h-15 md:h-10 lg:h-20 rounded-full'/>Sweet Tooth</Link>
-                <div className='text-3xl text-black flex gap-x-4 '>
-                    <Link className='hover:text-white' to='https://www.instagram.com/'><FaInstagram /></Link>
-                    <Link className='hover:text-white' to='https://www.facebook.com/'><FaFacebook /></Link>
-                    <Link className='hover:text-white' to='https://www.x.com/'><FaTwitter /></Link>
-                    <Link className='hover:text-white' to='https://www.youtube.com/'><FaYoutube /></Link>
-                    <Link className='hover:text-white' to='https://www.tiktok.com/'><FaTiktok /></Link>
-                </div>
-            </div>
-            <div className='flex flex-col justify-center items-center gap-y-5'>
-                <h2  className='text-3xl underline underline-offset-8 '>Quick Links</h2>
-                <div className='grid grid-rows-3 grid-cols-2 gap-10 text-xl'>
-                    <Link onClick={refreshPage} className='hover:text-white' to='/'>Home</Link>
-                    <Link onClick={refreshPage} className='hover:text-white' to='/About'>About</Link>
-                    <Link onClick={refreshPage} className='hover:text-white' to='/Services'>Services</Link>
-                    <Link onClick={refreshPage} className='hover:text-white' to='/Contacts'>Contacts</Link>
-                    <Link onClick={refreshPage} className='hover:text-white' to='/Services'>Order</Link>
-                    <Link onClick={refreshPage} className='hover:text-white' to='/Join'>Join</Link>
-                </div>
-            </div>
-            <div className='flex flex-col justify-center items-center gap-y-[15px] w-50'>
-                <h2  className='text-4xl'>Contacts Us</h2>
-                <p className='flex items-center gap-x-2'><FaPhone />+234 12345678910</p>
-                <p className='flex items-center gap-x-2 '><FaEnvelope />sweettooth@gmail.com</p>
-            </div>
-        </div>
-    </div>
-  )
-}
 
-export default Footer
+        <div>
+          <h2 className="text-lg font-semibold text-white mb-4 relative ">
+            QUICK LINKS
+            <span className="absolute left-0 -bottom-1 w-10 h-[3px] bg-pink-500 "></span>
+          </h2>
+          <ul className="space-y-2 ">
+            {["About", "Services", "Contact", "Join"].map(
+              (item, i) => (
+                <li key={i}>
+                  <Link
+                    to={`/${item}`}
+                    onClick={refreshPage}
+                    className="hover:text-pink-400 transition-colors relative group"
+                  >
+                    {item}
+                    <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-pink-400 transition-all duration-300 group-hover:w-3/4"></span>
+                  </Link>
+                </li>
+              )
+            )}
+          </ul>
+        </div>
+
+        <div>
+          <h2 className="text-lg font-semibold text-white mb-4 relative">
+            STAY CONNECTED
+            <span className="absolute left-0 -bottom-1 w-10 h-[3px] bg-pink-500 "></span>
+          </h2>
+          <form
+            onSubmit={(e) => e.preventDefault()}
+            className="flex rounded-full overflow-hidden border border-gray-600 focus-within:ring-2 focus-within:ring-pink-400 transition-all"
+          >
+            <input
+              type="email"
+              placeholder="Email Address"
+              className="flex-1 px-4 py-2 bg-transparent text-gray-300 placeholder-gray-500 focus:outline-none"
+              required
+            />
+            <button
+              type="submit"
+              className="px-6 py-2 bg-gradient-to-r from-pink-500 to-pink-400 text-white hover:from-pink-600 hover:to-pink-500 font-medium transition-all cursor-pointer"
+            >
+              Join
+            </button>
+          </form>
+        </div>
+
+        <div>
+          <h2 className="text-lg font-semibold text-white mb-4 relative ">
+            ABOUT US
+            <span className="absolute left-0 -bottom-1 w-10 h-[3px] bg-pink-500"></span>
+          </h2>
+          <p className="text-md leading-relaxed text-gray-400">
+            At Sweet Tooth, we bake joy into every bite. From gourmet cakes to
+            everyday treats, our passion is creating unforgettable flavors for
+            all dessert lovers.
+          </p>
+        </div>
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="border-t border-gray-700 mt-12 pt-6 text-center text-xs text-gray-500">
+        © {new Date().getFullYear()} Sweet Tooth Bakery — All Rights Reserved
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
