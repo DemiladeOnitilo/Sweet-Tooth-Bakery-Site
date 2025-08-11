@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import url('https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
 
@@ -52,3 +53,59 @@ margin: -20px;
 height:40px;
 width:40px;
 }
+=======
+@import url('https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+
+*{
+  scrollbar-width: thin;
+}
+
+html, body {
+  overflow-x: hidden;
+  background-color: rgb(255, 243, 243);
+}
+
+.sour-gummy {
+  font-family: "Sour Gummy", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+.Toastify__toast-container {
+  z-index: 9999; 
+}
+
+.slick-arrow.slick-next,
+.slick-arrow.slick-prev{
+background-color: white;
+height:25px;
+width: 25px;
+display: flex;
+align-items: center;
+justify-content: center;
+border-radius: 50%;
+opacity: 0.8;
+margin: -20px;
+}
+
+.slick-arrow.slick-next:hover,
+.slick-arrow.slick-prev:hover
+{
+    background-color: #808080;
+    opacity:1;
+}
+
+
+.slick-prev::before,.slick-next::before{
+   display:none;
+    }
+
+.arrows{
+height:40px;
+width:40px;
+}
+>>>>>>> 7d7a2436ccf69969488ba6446911d1363f65354f
