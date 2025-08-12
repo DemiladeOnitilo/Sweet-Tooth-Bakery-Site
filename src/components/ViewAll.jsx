@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { MdArrowForward, MdChevronRight } from "react-icons/md";
+import { MdArrowForward } from "react-icons/md";
 
 const ViewAll = ({ to }) => {
   const refreshPage = () => {
