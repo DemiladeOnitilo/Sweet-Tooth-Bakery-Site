@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import CakeCard from "../CakeCard";
 import { products } from "../products";
-import ViewAll from "../ViewAll";
+import MainButton from "../MainButton";
 
 const CakeList = () => {
   const SamplePrevArrow = (props) => {
@@ -90,8 +90,8 @@ const CakeList = () => {
   };
 
   return (
-    <div className="flex flex-col gap-y-10 justify-center items-center min-h-[70vh] py-16 px-4 lg:px-8">
-      <div className="flex flex-col relative justify-center items-center gap-y-8 text-center max-w-4xl">
+    <div className="flex flex-col gap-10 justify-center items-center min-h-[70vh] py-10 px-4 lg:px-8">
+      <div className="flex flex-col relative justify-center items-center gap-8 text-center max-w-4xl">
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold">
           <span className="bg-gradient-to-r from-pink-600 via-purple-600 to-pink-500 bg-clip-text text-transparent">
             Our Service
@@ -101,7 +101,7 @@ const CakeList = () => {
           Discover our most beloved pastries, crafted with love and the finest
           ingredients
         </p>
-        <ViewAll to="/services" />
+        <MainButton link="/services" name="View All" />
       </div>
 
       <div className="w-full max-w-7xl relative">
@@ -117,7 +117,6 @@ const CakeList = () => {
           </Slider>
         </div>
       </div>
-
     </div>
   );
 };

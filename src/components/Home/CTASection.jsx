@@ -55,7 +55,7 @@ const CTASection = () => {
           From birthday celebrations to everyday treats, we create moments that
           taste as good as they feel
         </p>
-        <MainButton link="/Order" name="START YOUR ORDER" />
+        <MainButton link="/Order" name="START YOUR ORDER" variant="primary" />
       </div>
     </section>
   );

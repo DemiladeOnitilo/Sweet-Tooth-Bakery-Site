@@ -16,7 +16,7 @@ const Hero = () => {
         className="absolute inset-0 bg-[url(https://img.freepik.com/free-photo/chocolate-coffee-vanilla-gluten-free-marble-cake-homemade-pound-cake_114579-5318.jpg?t=st=1742464082~exp=1742467682~hmac=35508b9f6533510ab2c05708264f07ee4568683b419bc5b60a7f3543b2ec9918&w=996)] 
         bg-no-repeat bg-cover bg-center transition-transform duration-300 ease-out"
         style={{
-          transform: `translateY(${scrollY * 0.5}px)`,
+          transform: `translateY(${scrollY * 0.3}px)`,
           filter: "brightness(0.4)",
         }}
       />

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { MdArrowForward } from "react-icons/md";
 
 const ViewAll = ({ to }) => {
+  
   const refreshPage = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
