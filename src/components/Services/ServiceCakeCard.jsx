@@ -1,33 +1,39 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
-const ServiceCakeCard = ({ name, img, id }) => {
+const ServiceCakeCard = ({ name, img }) => {
   function refreshPage() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   return (
-    <div className="flex flex-col gap-y-2 justify-center items-center">
-      <Link
-        to={`/category/${id}`}
+    <div className="flex flex-col gap-y-3 justify-center items-center group">
+      <div
         onClick={refreshPage}
-        className="relative max-w-xs overflow-hidden bg-cover bg-no-repeat"
+        className="relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer"
       >
-        <img
-          src={img}
-          alt={name} 
-          className="h-40 w-40 md:h-80 md:w-80 lg:h-60 lg:w-60 shadow-md max-w-xs transition duration-300 ease-in-out hover:scale-110"
-        />
-      </Link>
-      <Link
-        to={`/category/${id}`}
+        <div className="relative">
+          <img
+            src={img}
+            alt={name}
+            className="h-44 w-44 md:h-72 md:w-72 lg:h-64 lg:w-64 object-cover transition-transform duration-700 ease-out"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+          <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:translate-x-full transition-transform duration-1500 ease-out"></div>
+        </div>
+      </div>
+
+      <div
         onClick={refreshPage}
-        className="text-4xl hover:text-[#f86a82]"
+        className="relative curosr-pointer"
       >
-        <h1 className="text-4xl sour-gummy">{name}</h1>
-      </Link>
+        <h1 className="text-3xl md:text-4xl lg:text-3xl font-bold bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 bg-clip-text text-transparent group-hover:from-pink-500 group-hover:via-purple-500 group-hover:to-pink-400 transition-all duration-500 transform group-hover:scale-105 sour-gummy">
+          {name}
+        </h1>
+
+        <div className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-pink-500 to-purple-500 group-hover:w-full group-hover:left-0 transition-all duration-700 ease-out"></div>
+      </div>
     </div>
   );
 };
-
 export default ServiceCakeCard;
