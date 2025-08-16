@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import MainButton from "../MainButton";
 
-const CTASection = () => {
+const CTASection = ({ isServices }) => {
   const [scrollY, setScrollY] = useState(0);
   const sectionRef = useRef(null);
 
@@ -31,7 +31,9 @@ const CTASection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative h-screen flex items-center justify-center overflow-hidden"
+      className={` ${
+        isServices ? "h-[60vh]" : "h-screen"
+      } relative flex items-center justify-center overflow-hidden`}
     >
       <div
         className="absolute inset-0 bg-[url(https://img.freepik.com/free-photo/close-up-hand-preparing-dessert_23-2148972041.jpg?t=st=1742476676~exp=1742480276~hmac=1db6886fba8af4069a7157b4569efe5aa330f96fa1aeceb70601921460e540a9&w=900)] 
@@ -51,11 +53,19 @@ const CTASection = () => {
             MEMORIES
           </span>
         </h1>
-        <p className="text-lg md:text-xl text-white/90 mb-10 max-w-2xl mx-auto">
-          From birthday celebrations to everyday treats, we create moments that
-          taste as good as they feel
-        </p>
-        <MainButton link="/Order" name="START YOUR ORDER" variant="primary" />
+        {!isServices && (
+          <div>
+            <p className="text-lg md:text-xl text-white/90 mb-10 max-w-2xl mx-auto">
+              From birthday celebrations to everyday treats, we create moments
+              that taste as good as they feel
+            </p>
+            <MainButton
+              link="/Order"
+              name="START YOUR ORDER"
+              variant="primary"
+            />{" "}
+          </div>
+        )}
       </div>
     </section>
   );

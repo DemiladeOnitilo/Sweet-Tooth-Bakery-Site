@@ -2,7 +2,6 @@ import React from "react";
 import Sliders from "../Sliders";
 import { products } from "../products";
 import ViewAll from "../ViewAll";
-import MainButton from "../MainButton";
 
 const PastrySection = ({ onPage = true, category }) => {
   const filteredProducts = category
@@ -23,7 +22,7 @@ const PastrySection = ({ onPage = true, category }) => {
               <div className="flex flex-col justify-center items-center w-full">
                 <div className="relative">
                   <h1 className="text-4xl lg:text-5xl font-bold pb-2">
-                    <span className="bg-gradient-to-r from-pink-500 via-purple-500 to-pink-400 bg-clip-text text-transparent sour-gummy">
+                    <span className="bg-gradient-to-r from-pink-600 to-pink-400 bg-clip-text text-transparent">
                       {product.name}
                     </span>
                   </h1>
@@ -35,7 +34,7 @@ const PastrySection = ({ onPage = true, category }) => {
             ) : (
               <div className="mb-4">
                 <h1 className="text-4xl lg:text-5xl font-bold  pb-2">
-                  <span className="bg-gradient-to-r from-pink-500 via-purple-500 to-pink-400 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-pink-600 to-pink-400 bg-clip-text text-transparent">
                     {product.name}
                   </span>
                 </h1>

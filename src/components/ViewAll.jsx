@@ -10,7 +10,7 @@ const ViewAll = ({ to }) => {
     <div className="relative">
       <Link to={to} onClick={refreshPage} className="group inline-block">
         <h1 className="text-lg md:text-xl font-bold transition-all duration-500 group-hover:scale-105 mb-2">
-          <span className="text-black group-hover:bg-gradient-to-r group-hover:from-pink-500 group-hover:via-purple-500 group-hover:to-pink-400 group-hover:bg-clip-text group-hover:text-transparent">
+          <span className="text-black group-hover:bg-gradient-to-r from-pink-600 to-pink-400 bg-clip-text group-hover:text-transparent">
             View All
           </span>
         </h1>

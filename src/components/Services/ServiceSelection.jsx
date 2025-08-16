@@ -20,7 +20,7 @@ const ServiceSelection = ({ onService = false }) => {
       <div className="flex justify-center items-center w-320 relative">
         {back}
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-          <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-pink-300 bg-clip-text text-transparent sour-gummy">
+          <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-pink-300 bg-clip-text text-transparent">
             Selections
           </span>
         </h2>

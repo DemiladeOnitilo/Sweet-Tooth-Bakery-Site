@@ -3,6 +3,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { motion, AnimatePresence } from "framer-motion";
+import bgmain from "../assets/Images/sweet-tooth-bg.png";
 
 const MainLayout = () => {
   const [loading, setLoading] = useState(true);

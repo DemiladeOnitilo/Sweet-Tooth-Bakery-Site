@@ -47,7 +47,6 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo Section */}
           <div className="flex items-center space-x-3">
             <Link
               onClick={refreshPage}
@@ -68,7 +67,6 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-2 bg-gray-50 rounded-full p-2 shadow-inner">
             <NavLink onClick={refreshPage} to="/About" className={active}>
               About
@@ -82,7 +80,6 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center space-x-6">
-            {/* Search Bar */}
             <div className="hidden md:flex items-center relative">
               <input
                 type="text"
