@@ -23,7 +23,7 @@ const AboutHero = () => {
 
       <div className="relative z-10 text-center max-w-xl mx-auto px-6">
         <div className="md:bg-white/10 md:backdrop-blur-md md:border border-white/20 md:rounded-3xl p-8 md:shadow-lg">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
             <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-pink-300 bg-clip-text text-transparent">
               Get To Know Us
             </span>

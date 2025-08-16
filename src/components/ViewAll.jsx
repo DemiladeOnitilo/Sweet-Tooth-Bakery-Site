@@ -1,28 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { MdArrowForward } from "react-icons/md";
 
 const ViewAll = ({ to }) => {
-  
-  const refreshPage = () => {
+  function refreshPage() {
     window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  }
 
   return (
-    <div className="flex justify-center">
-      <Link
-        to={to}
-        onClick={refreshPage}
-        className={
-          "group inline-flex items-center gap-2 px-6 py-3 text-lg font-semibold text-gray-800 border-2 border-gray-300 rounded-full hover:border-pink-400 hover:text-pink-500 transition-all duration-300 hover:shadow-md hover:scale-105"
-        }
-      >
-        <span>View All</span>
-
-        <div className="flex items-center justify-center w-8 h-8 bg-pink-50 rounded-full group-hover:bg-pink-100 transition-colors duration-300">
-          <MdArrowForward className="text-lg transform group-hover:translate-x-1 transition-transform duration-300" />
-        </div>
+    <div className="relative">
+      <Link to={to} onClick={refreshPage} className="group inline-block">
+        <h1 className="text-lg md:text-xl font-bold transition-all duration-500 group-hover:scale-105 mb-2">
+          <span className="text-black group-hover:bg-gradient-to-r group-hover:from-pink-500 group-hover:via-purple-500 group-hover:to-pink-400 group-hover:bg-clip-text group-hover:text-transparent">
+            View All
+          </span>
+        </h1>
       </Link>
+      <div className="absolute bottom-0 left-0 w-full h-0.5 bg-black"></div>
     </div>
   );
 };

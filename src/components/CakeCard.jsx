@@ -65,11 +65,11 @@ const CakeCard = ({ id, img, name, price, description, onPage, isHome }) => {
           </div>
         </div>
       ) : (
-        <div className="group flex flex-col items-center gap-4 p-2">
+        <div className="group flex flex-col items-center gap-4 p-2 cursor-pointer">
           <Link
             to={isHome ? `/category/${id}` : `/products/${id}`}
             onClick={refreshPage}
-            className="relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-700 transform hover:-translate-y-2"
+            className="relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-700 transform group-hover:-translate-y-2"
           >
             <img
               src={img}
@@ -97,16 +97,8 @@ const CakeCard = ({ id, img, name, price, description, onPage, isHome }) => {
               <h3 className="text-lg md:text-xl lg:text-2xl font-bold bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 bg-clip-text text-transparent group-hover:from-pink-500 group-hover:via-purple-500 group-hover:to-pink-400 transition-all duration-500 transform group-hover:scale-105 sour-gummy line-clamp-2">
                 {name}
               </h3>
-              <div className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-pink-500 to-purple-500 group-hover:w-full group-hover:left-0 transition-all duration-700 ease-out"></div>
             </Link>
           </div>
-
-          {!isHome && price && (
-            <p className="text-lg font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
-              {currency}
-              {price}
-            </p>
-          )}
         </div>
       )}
     </>

@@ -9,7 +9,7 @@ const ServiceCakeCard = ({ name, img }) => {
     <div className="flex flex-col gap-y-3 justify-center items-center group">
       <div
         onClick={refreshPage}
-        className="relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer"
+        className="relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 transform group-hover:-translate-y-2 cursor-pointer"
       >
         <div className="relative">
           <img
@@ -23,15 +23,10 @@ const ServiceCakeCard = ({ name, img }) => {
         </div>
       </div>
 
-      <div
-        onClick={refreshPage}
-        className="relative curosr-pointer"
-      >
+      <div onClick={refreshPage} className="relative curosr-pointer">
         <h1 className="text-3xl md:text-4xl lg:text-3xl font-bold bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 bg-clip-text text-transparent group-hover:from-pink-500 group-hover:via-purple-500 group-hover:to-pink-400 transition-all duration-500 transform group-hover:scale-105 sour-gummy">
           {name}
         </h1>
-
-        <div className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-pink-500 to-purple-500 group-hover:w-full group-hover:left-0 transition-all duration-700 ease-out"></div>
       </div>
     </div>
   );
