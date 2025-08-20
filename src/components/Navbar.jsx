@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import logo from "../assets/Images/sweet-tooth-logo.png";
 import { NavLink, Link } from "react-router-dom";
-import { FaShoppingCart, FaBars, FaTimes, FaBell } from "react-icons/fa";
+import {
+  FaShoppingCart,
+  FaBars,
+  FaTimes,
+  FaBell,
+  FaSearch,
+} from "react-icons/fa";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
@@ -30,7 +36,7 @@ const Navbar = () => {
       : "text-gray-700 hover:text-pink-600 hover:bg-pink-50 px-4 py-2 rounded-full transition-all duration-300 relative";
   };
 
-  const mobileNavClass = ({ isActive }) => 
+  const mobileNavClass = ({ isActive }) =>
     `block px-4 py-3 text-lg font-medium rounded-lg transition-all duration-300 ${
       isActive
         ? "text-pink-600 bg-pink-50 font-bold"
@@ -40,9 +46,7 @@ const Navbar = () => {
   return (
     <nav
       className={`bg-white/95 backdrop-blur-md fixed right-0 left-0 top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "shadow-lg border-b border-gray-100 py-2"
-          : "shadow-sm py-4"
+        scrolled ? "shadow-lg border-b border-gray-100 py-2" : "shadow-sm py-4"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -79,37 +83,27 @@ const Navbar = () => {
             </NavLink>
           </div>
 
-          <div className="flex items-center space-x-6">
-            <div className="hidden md:flex items-center relative">
+          <div className="flex items-center gap-6">
+            <div className="hidden xl:flex items-center relative">
               <input
                 type="text"
                 placeholder="Search treats..."
                 className="w-48 pl-4 pr-10 py-2 text-sm bg-gray-50 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-transparent transition-all duration-300"
               />
-              <div className="absolute right-3 text-gray-400">
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
-                </svg>
+              <div className="absolute right-3 text-gray-400 cursor-pointer">
+                <FaSearch />
               </div>
             </div>
 
-            {/* Notifications */}
+            <div className="flex xl:hidden items-center relative text-gray-700 cursor-pointer">
+              <FaSearch />
+            </div>
+
             <button className="hidden md:flex relative p-2 rounded-full hover:bg-pink-50 transition-all duration-300 group cursor-pointer">
               <FaBell className="text-xl text-gray-700 group-hover:text-pink-600 transition-colors duration-300" />
               <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></div>
             </button>
 
-            {/* Cart */}
             <Link
               onClick={refreshPage}
               to="/Cart"
@@ -124,18 +118,16 @@ const Navbar = () => {
               <div className="absolute inset-0 rounded-full bg-pink-200 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
             </Link>
 
-            {/* CTA Button - Desktop */}
-            <div className="hidden lg:block">
+            <div className="hidden lg:flex items-center justify-center">
               <Link
                 onClick={refreshPage}
                 to="/Services"
-                className="bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white px-6 py-2.5 rounded-full font-medium text-sm transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-0.5"
+                className="bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white px-4 py-2.5 rounded-full font-medium text-sm transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-0.5"
               >
                 ORDER NOW
               </Link>
             </div>
 
-            {/* Mobile Menu Button - FIXED */}
             <button
               className="lg:hidden relative p-2 rounded-full hover:bg-pink-50 transition-all duration-300 group z-10"
               onClick={(e) => {
@@ -155,7 +147,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile  Menu */}
       <div
         className={`lg:hidden transition-all duration-300 ease-in-out ${
           isOpen
@@ -213,4 +204,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
