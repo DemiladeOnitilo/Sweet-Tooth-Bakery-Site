@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import marker from '../../assets/Images/icon-location.svg'
 import { MapContainer, TileLayer, Marker, } from 'react-leaflet'
 import L from 'leaflet'

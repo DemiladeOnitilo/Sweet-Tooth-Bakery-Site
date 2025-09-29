@@ -33,7 +33,7 @@ const PastrySection = ({ onPage = true, category }) => {
               </div>
             ) : (
               <div className="mb-4">
-                <h1 className="text-4xl lg:text-5xl font-bold  pb-2">
+                <h1 className="text-4xl lg:text-5xl font-bold pb-2">
                   <span className="bg-gradient-to-r from-pink-600 to-pink-400 bg-clip-text text-transparent">
                     {product.name}
                   </span>

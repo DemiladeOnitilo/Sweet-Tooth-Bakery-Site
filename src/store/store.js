@@ -19,8 +19,8 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE', 'REGISTER'], // Add 'REGISTER' action here if needed
-        ignoredPaths: ['register'], // Optionally, ignore paths that contain non-serializable data
+        ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE', 'REGISTER'], 
+        ignoredPaths: ['register'], 
       },
     }),
 });

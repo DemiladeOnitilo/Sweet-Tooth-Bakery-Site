@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import logo from "../assets/Images/sweet-tooth-logo.png";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import {
   FaShoppingCart,
   FaBars,
@@ -9,12 +9,29 @@ import {
   FaSearch,
 } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import { products } from "./products";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [showSearchResults, setShowSearchResults] = useState(false);
+  const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
+
+  const searchRef = useRef(null);
+  const mobileSearchRef = useRef(null);
+  const navigate = useNavigate();
 
   const { amount } = useSelector((state) => state.cart);
+  const { currency } = useSelector((state) => state.cart);
+
+  const allProducts = products.flatMap((category) =>
+    category.types.map((product) => ({
+      ...product,
+      categoryName: category.name,
+    }))
+  );
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,9 +43,67 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (searchQuery.length > 0) {
+      const filtered = allProducts
+        .filter(
+          (product) =>
+            product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            product.description
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase()) ||
+            product.categoryName
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase()) ||
+            (product.ingredients &&
+              product.ingredients.some((ingredient) =>
+                ingredient.toLowerCase().includes(searchQuery.toLowerCase())
+              ))
+        )
+        .slice(0, 6);
+
+      setSearchResults(filtered);
+      setShowSearchResults(true);
+    } else {
+      setSearchResults([]);
+      setShowSearchResults(false);
+    }
+  }, [searchQuery]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setShowSearchResults(false);
+      }
+      if (
+        mobileSearchRef.current &&
+        !mobileSearchRef.current.contains(event.target)
+      ) {
+        setIsMobileSearchOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   function refreshPage() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
+
+  const handleSearchSelect = (productId) => {
+    setSearchQuery("");
+    setShowSearchResults(false);
+    setIsMobileSearchOpen(false);
+    navigate(`/products/${productId}`);
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchResults.length > 0) {
+      handleSearchSelect(searchResults[0].id);
+    }
+  };
 
   const active = ({ isActive }) => {
     return isActive
@@ -84,19 +159,66 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center gap-6">
-            <div className="hidden xl:flex items-center relative">
-              <input
-                type="text"
-                placeholder="Search treats..."
-                className="w-48 pl-4 pr-10 py-2 text-sm bg-gray-50 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-transparent transition-all duration-300"
-              />
-              <div className="absolute right-3 text-gray-400 cursor-pointer">
-                <FaSearch />
-              </div>
+            <div
+              className="hidden md:flex lg:hidden xl:flex items-center relative"
+              ref={searchRef}
+            >
+              <form onSubmit={handleSearchSubmit} className="relative">
+                <input
+                  type="text"
+                  placeholder="Search treats..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-48 pl-4 pr-10 py-2 text-sm bg-gray-50 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-transparent transition-all duration-300"
+                />
+                <button
+                  type="submit"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 cursor-pointer hover:text-pink-600 transition-colors duration-300"
+                >
+                  <FaSearch />
+                </button>
+              </form>
+
+              {showSearchResults && searchResults.length > 0 && (
+                <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg max-h-80 overflow-y-auto z-50">
+                  {searchResults.map((product) => (
+                    <div
+                      key={product.id}
+                      onClick={() => handleSearchSelect(product.id)}
+                      className="flex items-center p-3 hover:bg-pink-50 cursor-pointer border-b last:border-b-0 transition-colors duration-200"
+                    >
+                      <img
+                        src={product.img}
+                        alt={product.name}
+                        className="w-10 h-10 object-cover rounded-full mr-3"
+                      />
+                      <div className="flex-1">
+                        <h4 className="font-medium text-gray-800 text-sm">
+                          {product.name}
+                        </h4>
+                        <p className="text-xs text-gray-500">
+                          {product.categoryName}
+                        </p>
+                        <p className="text-xs  font-semibold">
+                          <span className="bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
+                            {currency}
+                            {product.price}
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
-            <div className="flex xl:hidden items-center relative text-gray-700 cursor-pointer">
-              <FaSearch />
+            <div className="flex md:hidden lg:flex xl:hidden items-center relative">
+              <button
+                onClick={() => setIsMobileSearchOpen(!isMobileSearchOpen)}
+                className="text-gray-700 cursor-pointer hover:text-pink-600 p-2 rounded-full hover:bg-pink-50 transition-all duration-300"
+              >
+                <FaSearch />
+              </button>
             </div>
 
             <button className="hidden md:flex relative p-2 rounded-full hover:bg-pink-50 transition-all duration-300 group cursor-pointer">
@@ -145,6 +267,69 @@ const Navbar = () => {
             </button>
           </div>
         </div>
+
+        {isMobileSearchOpen && (
+          <div
+            className="md:hidden lg:block xl:hidden mt-4 pb-4"
+            ref={mobileSearchRef}
+          >
+            <div className="relative">
+              <form onSubmit={handleSearchSubmit} className="relative">
+                <input
+                  type="text"
+                  placeholder="Search treats..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-4 pr-10 py-3 text-sm bg-gray-50 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-transparent transition-all duration-300"
+                  autoFocus
+                />
+                <button
+                  type="submit"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 cursor-pointer hover:text-pink-600"
+                >
+                  <FaSearch />
+                </button>
+              </form>
+
+              {showSearchResults && searchResults.length > 0 && (
+                <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg max-h-64 overflow-y-auto z-50">
+                  {searchResults.map((product) => (
+                    <div
+                      key={product.id}
+                      onClick={() => handleSearchSelect(product.id)}
+                      className="flex items-center p-3 hover:bg-pink-50 cursor-pointer border-b last:border-b-0 transition-colors duration-200"
+                    >
+                      <img
+                        src={product.img}
+                        alt={product.name}
+                        className="w-8 h-8 object-cover rounded-full mr-3"
+                      />
+                      <div className="flex-1">
+                        <h4 className="font-medium text-gray-800 text-sm">
+                          {product.name}
+                        </h4>
+                        <p className="text-xs text-gray-500">
+                          {product.categoryName}
+                        </p>
+                        <p className="text-xs  font-semibold">
+                          <span className="bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
+                            {currency}
+                            {product.price}
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                  {searchQuery && searchResults.length === 0 && (
+                    <div className="p-4 text-center text-gray-500 text-sm">
+                      No products found for "{searchQuery}"
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </div>
 
       <div
