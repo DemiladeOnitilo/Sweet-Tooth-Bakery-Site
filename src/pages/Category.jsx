@@ -1,21 +1,33 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import ServicesHero from '../components/Services/ServicesHero';
-import PastrySection from '../components/Services/PastrySection';
-import ServiceSelection from '../components/Services/ServiceSelection';
+import React from "react";
+import { useParams, Link } from "react-router-dom";
+import { FaChevronRight } from "react-icons/fa";
+import ServicesHero from "../components/Services/ServicesHero";
+import PastrySection from "../components/Services/PastrySection";
+import ServiceSelection from "../components/Services/ServiceSelection";
+import Carousel from "../components/Carousel";
+import { products } from "../components/products";
 
 const Category = () => {
   const { id } = useParams();
+  const category = products.find(
+    (cat) => cat.id === id || cat.name.toLowerCase() === id?.toLowerCase(),
+  );
 
   return (
-    <div className='flex flex-col gap-20'>
+    <div className="flex flex-col">
       <ServicesHero />
-      <PastrySection 
-        onPage={false}
-        category={id} 
+
+      <PastrySection onPage={false} category={id} />
+
+      <Carousel />
+
+      <ServiceSelection
+        excludeId={category?.id}
+        badge="🧁 Keep Exploring"
+        title="OTHER"
+        highlight="CATEGORIES"
+        subtitle="Loved this? Here's everything else we bake fresh, daily."
       />
-      <div className='bg-[url(https://static.vecteezy.com/system/resources/previews/046/630/849/non_2x/pattern-sweet-food-dessert-birthday-cake-with-candle-and-ice-cream-set-of-cute-icons-cartoon-holiday-attributes-drawing-doodles-seamless-background-vector.jpg)] bg-no-repeat bg-center bg-cover h-[30vh] mt-20'></div>
-      <ServiceSelection />
     </div>
   );
 };

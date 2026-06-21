@@ -88,7 +88,7 @@ const Sliders = ({ onPage, main }) => {
       </div>
     </div>
   ) : (
-    <div className="grid grid-row-2 grid-cols-2 gap-5 lg:flex lg:flex-wrap justify-center lg:gap-5 p-4">
+    <div className="grid grid-cols-2 lg:grid-cols-3 gap-5 justify-center p-4">
       {main.map((item, index) => {
         return <CakeCard key={index} {...item} onPage={true} />;
       })}

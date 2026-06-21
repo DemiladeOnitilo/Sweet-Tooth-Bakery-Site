@@ -31,14 +31,16 @@ const ServicesHero = ({ scrollToSection }) => {
             </span>
           </h1>
         </div>
-        <div >
-          <MainButton
-            name="Explore"
-            onClick={scrollToSection}
-            variant="primary"
-            direction="down"
-          />
-        </div>
+        {window.location.pathname === "/services" && (
+          <div>
+            <MainButton
+              name="Explore"
+              onClick={scrollToSection}
+              variant="primary"
+              direction="down"
+            />
+          </div>
+        )}
       </div>
     </div>
   );

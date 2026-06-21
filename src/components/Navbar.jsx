@@ -147,13 +147,13 @@ const Navbar = () => {
           </div>
 
           <div className="hidden lg:flex items-center space-x-2 bg-gray-50 rounded-full p-2 shadow-inner">
-            <NavLink onClick={refreshPage} to="/About" className={active}>
+            <NavLink onClick={refreshPage} to="/about" className={active}>
               About
             </NavLink>
-            <NavLink onClick={refreshPage} to="/Services" className={active}>
+            <NavLink onClick={refreshPage} to="/services" className={active}>
               Services
             </NavLink>
-            <NavLink onClick={refreshPage} to="/Contact" className={active}>
+            <NavLink onClick={refreshPage} to="/contact" className={active}>
               Contact
             </NavLink>
           </div>
@@ -243,7 +243,7 @@ const Navbar = () => {
             <div className="hidden lg:flex items-center justify-center">
               <Link
                 onClick={refreshPage}
-                to="/Services"
+                to="/services"
                 className="bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white px-4 py-2.5 rounded-full font-medium text-sm transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-0.5"
               >
                 ORDER NOW
@@ -345,7 +345,7 @@ const Navbar = () => {
               refreshPage();
               setIsOpen(false);
             }}
-            to="/About"
+            to="/about"
             className={mobileNavClass}
           >
             About
@@ -355,7 +355,7 @@ const Navbar = () => {
               refreshPage();
               setIsOpen(false);
             }}
-            to="/Services"
+            to="/services"
             className={mobileNavClass}
           >
             Services
@@ -365,7 +365,7 @@ const Navbar = () => {
               refreshPage();
               setIsOpen(false);
             }}
-            to="/Contact"
+            to="/contact"
             className={mobileNavClass}
           >
             Contact
@@ -376,7 +376,7 @@ const Navbar = () => {
                 refreshPage();
                 setIsOpen(false);
               }}
-              to="/Services"
+              to="/services"
               className="block w-full text-center bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white px-6 py-3 rounded-full font-medium transition-all duration-300 shadow-lg"
             >
               ORDER NOW

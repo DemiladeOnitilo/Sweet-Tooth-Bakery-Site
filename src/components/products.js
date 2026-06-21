@@ -83,7 +83,7 @@ export const products = [
         name: "Cookies",
         types: [
             {
-                id: "cookies-ChoclateChipCookie",
+                id: "cookies-ChocolateChipCookie",
                 img: "https://bakingamoment.com/wp-content/uploads/2016/09/IMG_0316-chocolate-chip-cookies-1.jpg",
                 name: "Chocolate Chip Cookies",
                 price: "500",

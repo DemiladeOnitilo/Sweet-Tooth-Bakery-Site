@@ -15,7 +15,7 @@ const Services = () => {
   };
 
   return (
-    <div className="flex flex-col gap-y-5">
+    <div className="flex flex-col">
       <ServicesHero scrollToSection={scrollToSection} />
       <div id="target-section">
         <ServiceSelection />

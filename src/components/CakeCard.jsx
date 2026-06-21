@@ -12,7 +12,7 @@ const CakeCard = ({ id, img, name, price, description, onPage, isHome }) => {
   return (
     <>
       {onPage ? (
-        <div className="group bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:scale-105 hover:-translate-y-2 max-w-sm mx-auto cursor-pointer">
+        <div className="group bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:scale-101 hover:-translate-y-2 max-w-sm mx-auto cursor-pointer">
           <Link
             to={`/products/${id}`}
             onClick={refreshPage}
@@ -55,7 +55,7 @@ const CakeCard = ({ id, img, name, price, description, onPage, isHome }) => {
               <Link
                 to={`/products/${id}`}
                 onClick={refreshPage}
-                className="group/btn relative px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-full hover:from-pink-600 hover:to-purple-700 transition-all duration-300 text-sm font-medium transform hover:scale-105 hover:-translate-y-1 shadow-lg hover:shadow-xl overflow-hidden"
+                className="group/btn relative px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-full hover:from-pink-600 hover:to-purple-700 transition-all duration-300 text-sm font-medium transform hover:scale-103 shadow-lg hover:shadow-xl overflow-hidden"
               >
                 <span className="relative z-10">View Details</span>
 
@@ -67,7 +67,7 @@ const CakeCard = ({ id, img, name, price, description, onPage, isHome }) => {
       ) : (
         <div className="group flex flex-col items-center gap-4 p-2 cursor-pointer">
           <Link
-            to={isHome ? `/category/${id}` : `/products/${id}`}
+            to={isHome ? `/services/category/${id}` : `/products/${id}`}
             onClick={refreshPage}
             className="relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-700 transform group-hover:-translate-y-2"
           >
@@ -90,7 +90,7 @@ const CakeCard = ({ id, img, name, price, description, onPage, isHome }) => {
 
           <div className="text-center max-w-[200px] md:max-w-[220px] lg:max-w-[250px]">
             <Link
-              to={isHome ? `/category/${id}` : `/products/${id}`}
+              to={isHome ? `/services/category/${id}` : `/products/${id}`}
               onClick={refreshPage}
               className="relative inline-block"
             >

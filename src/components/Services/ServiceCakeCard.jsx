@@ -23,7 +23,7 @@ const ServiceCakeCard = ({ name, img }) => {
         </div>
       </div>
 
-      <div onClick={refreshPage} className="relative curosr-pointer">
+      <div onClick={refreshPage} className="relative cursor-pointer">
         <h1 className="text-3xl md:text-4xl lg:text-3xl font-bold bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 bg-clip-text text-transparent group-hover:from-pink-500 group-hover:via-purple-500 group-hover:to-pink-400 transition-all duration-500 transform group-hover:scale-105 sour-gummy">
           {name}
         </h1>
