@@ -2,7 +2,13 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { removeFromCart, updateQuantity } from "../store/cartSlice";
-import { FaTrash, FaMinus, FaPlus, FaShoppingBag, FaArrowRight } from "react-icons/fa";
+import {
+  FaTrash,
+  FaMinus,
+  FaPlus,
+  FaShoppingBag,
+  FaArrowRight,
+} from "react-icons/fa";
 import { toast } from "react-toastify";
 
 const GradientButton = ({ children, onClick, className = "" }) => (
@@ -11,7 +17,7 @@ const GradientButton = ({ children, onClick, className = "" }) => (
     className={`group relative px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-full hover:from-pink-600 hover:to-purple-700 transition-all duration-500 cursor-pointer text-lg font-medium transform hover:scale-103 shadow-lg hover:shadow-2xl overflow-hidden flex items-center justify-center gap-3 ${className}`}
   >
     <span className="relative z-10 flex items-center gap-2">{children}</span>
-    <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:translate-x-full transition-transform duration-700 ease-out"></div>
+    <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:translate-x-full transition-transform duration-700 ease-out" />
   </button>
 );
 
@@ -20,34 +26,46 @@ const Cart = () => {
   const navigate = useNavigate();
 
   const { cartItems, total, amount, currency, delivery_fee } = useSelector(
-    (state) => state.cart
+    (state) => state.cart,
   );
 
-  const removeItem = (productId, productName) => {
-    dispatch(removeFromCart(productId));
-    toast.info(`${productName} removed from cart`, {
+  function refreshPage() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  const removeItem = (productId, selectedSize, productName) => {
+    dispatch(removeFromCart({ id: productId, selectedSize }));
+    toast.info(`${productName} (${selectedSize}) removed from cart`, {
       position: "top-right",
       autoClose: 2000,
     });
   };
 
-  const handleQuantityIncrease = (productId) => {
-    const item = cartItems.find((item) => item.id === productId);
-    if (item) {
-      dispatch(updateQuantity({ productId, newQuantity: item.quantity + 1 }));
-    }
+  const handleQuantityIncrease = (productId, selectedSize, currentQuantity) => {
+    dispatch(
+      updateQuantity({
+        productId,
+        selectedSize,
+        newQuantity: currentQuantity + 1,
+      }),
+    );
   };
 
-  const handleQuantityDecrease = (productId) => {
-    const item = cartItems.find((item) => item.id === productId);
-    if (item && item.quantity > 1) {
-      dispatch(updateQuantity({ productId, newQuantity: item.quantity - 1 }));
+  const handleQuantityDecrease = (productId, selectedSize, currentQuantity) => {
+    if (currentQuantity > 1) {
+      dispatch(
+        updateQuantity({
+          productId,
+          selectedSize,
+          newQuantity: currentQuantity - 1,
+        }),
+      );
     }
   };
 
   const handleImageError = (e) => {
     e.target.onerror = null;
-    e.target.src = "/images/pastry-placeholder.jpg"; // swap for an actual fallback asset
+    e.target.src = "/images/pastry-placeholder.jpg";
   };
 
   if (!cartItems || amount < 1) {
@@ -98,24 +116,31 @@ const Cart = () => {
               <div className="flex justify-between items-center text-lg">
                 <span className="text-gray-600">Subtotal:</span>
                 <span className="font-semibold text-gray-800">
-                  {currency}{(Number(total) || 0).toFixed(2)}
+                  {currency}
+                  {(Number(total) || 0).toFixed(2)}
                 </span>
               </div>
               <div className="flex justify-between items-center text-lg">
                 <span className="text-gray-600">Delivery Fee:</span>
                 <span className="font-semibold text-gray-800">
-                  {currency}{(Number(delivery_fee) || 0).toFixed(2)}
+                  {currency}
+                  {(Number(delivery_fee) || 0).toFixed(2)}
                 </span>
               </div>
-              <div className="h-px bg-gradient-to-r from-pink-200 via-purple-200 to-pink-200 my-2"></div>
+              <div className="h-px bg-gradient-to-r from-pink-200 via-purple-200 to-pink-200 my-2" />
               <div className="flex justify-between items-center text-2xl font-bold">
                 <span className="text-gray-800">Total:</span>
                 <span className="bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
                   {currency}
-                  {((Number(total) || 0) + (Number(delivery_fee) || 0)).toFixed(2)}
+                  {((Number(total) || 0) + (Number(delivery_fee) || 0)).toFixed(
+                    2,
+                  )}
                 </span>
               </div>
-              <GradientButton className="w-full mt-6" onClick={() => navigate("/checkout")}>
+              <GradientButton
+                className="w-full mt-6"
+                onClick={() => navigate("/checkout")}
+              >
                 Proceed to Checkout
                 <FaArrowRight />
               </GradientButton>
@@ -128,12 +153,15 @@ const Cart = () => {
           {cartItems.map((item) => {
             const price = Number(item.price) || 0;
             const quantity = Number(item.quantity) || 1;
+            const itemSize = item.selectedSize || "Standard Size";
+            const uniqueItemKey = `${item.id}-${itemSize}`;
 
             return (
               <div
                 className="group flex flex-col sm:flex-row items-start gap-6 w-full bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 p-6 border border-gray-100 overflow-hidden"
-                key={item.id}
+                key={uniqueItemKey}
               >
+                {/* Image Container - Fixed height on multi-columns */}
                 <div className="relative w-full sm:w-48 h-48 flex-shrink-0 overflow-hidden rounded-2xl">
                   <img
                     src={item.img}
@@ -142,21 +170,38 @@ const Cart = () => {
                     onError={handleImageError}
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
 
-                <div className="flex flex-col gap-4 flex-grow w-full">
+                {/* Details */}
+                <div className="flex flex-col gap-15 flex-grow w-full">
                   <div className="flex justify-between items-start gap-4">
                     <div className="flex flex-col gap-2 flex-grow">
                       <h2 className="text-2xl lg:text-3xl font-bold text-gray-800">
                         {item.name}
                       </h2>
-                      <p className="text-base lg:text-lg text-gray-600 line-clamp-2">
+
+                      <div className="flex items-center gap-2 flex-wrap">
+                        {/* Variant tag */}
+                        <span className="w-fit text-xs font-semibold px-3 py-1 bg-gradient-to-r from-pink-50 to-purple-50 text-pink-600 border border-pink-200/40 rounded-full">
+                          Option: {itemSize}
+                        </span>
+
+                        {/* Inscription / custom note — only shown if present */}
+                        {item.customNotes && (
+                          <span className="w-fit text-xs font-medium px-3 py-1 bg-yellow-50 text-yellow-700 border border-yellow-200/50 rounded-full">
+                            ✏️ {item.customNotes}
+                          </span>
+                        )}
+                      </div>
+
+                      {/* <p className="text-base lg:text-lg text-gray-600 line-clamp-2">
                         {item.description}
-                      </p>
+                      </p> */}
                     </div>
+
                     <button
-                      onClick={() => removeItem(item.id, item.name)}
+                      onClick={() => removeItem(item.id, itemSize, item.name)}
                       className="group/btn w-10 h-10 rounded-full bg-gradient-to-r from-red-50 to-pink-50 hover:from-red-100 hover:to-pink-100 flex items-center justify-center transition-all duration-300 cursor-pointer hover:scale-110 flex-shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400"
                       aria-label={`Remove ${item.name} from cart`}
                     >
@@ -166,25 +211,31 @@ const Cart = () => {
 
                   <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mt-auto">
                     <div className="flex flex-col gap-1">
-                      <p className="text-sm text-gray-500">Price per item</p>
+                      <p className="text-sm text-gray-500">Price per option</p>
                       <p className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
-                        {currency}{price.toFixed(2)}
+                        {currency}
+                        {price.toFixed(2)}
                       </p>
                     </div>
 
-                    <div className="flex items-center gap-3 bg-gradient-to-r from-pink-50 to-purple-50 rounded-full px-4 py-2">
+                    {/* Quantity Controls */}
+                    <div className="flex items-center gap-3 bg-gradient-to-r from-pink-50 to-purple-50 rounded-full p-2">
                       {quantity === 1 ? (
                         <button
-                          onClick={() => removeItem(item.id, item.name)}
-                          className="w-10 h-10 rounded-full bg-white shadow-md hover:shadow-lg flex items-center justify-center text-red-500 hover:text-red-600 transition-all duration-300 cursor-pointer hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400"
+                          onClick={() =>
+                            removeItem(item.id, itemSize, item.name)
+                          }
+                          className="w-10 h-10 rounded-full bg-white shadow-md hover:shadow-lg flex items-center justify-center text-red-500 hover:text-red-600 transition-all duration-300 cursor-pointer hover:scale-110 focus:outline-none"
                           aria-label="Remove item"
                         >
                           <FaTrash className="text-sm" />
                         </button>
                       ) : (
                         <button
-                          onClick={() => handleQuantityDecrease(item.id)}
-                          className="w-10 h-10 rounded-full bg-white shadow-md hover:shadow-lg flex items-center justify-center text-pink-600 hover:text-pink-700 transition-all duration-300 cursor-pointer hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-400"
+                          onClick={() =>
+                            handleQuantityDecrease(item.id, itemSize, quantity)
+                          }
+                          className="w-10 h-10 rounded-full bg-white shadow-md hover:shadow-lg flex items-center justify-center text-pink-600 hover:text-pink-700 transition-all duration-300 cursor-pointer hover:scale-110 focus:outline-none"
                           aria-label="Decrease quantity"
                         >
                           <FaMinus className="text-sm" />
@@ -196,8 +247,10 @@ const Cart = () => {
                       </span>
 
                       <button
-                        onClick={() => handleQuantityIncrease(item.id)}
-                        className="w-10 h-10 rounded-full bg-white shadow-md hover:shadow-lg flex items-center justify-center text-pink-600 hover:text-pink-700 transition-all duration-300 cursor-pointer hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-400"
+                        onClick={() =>
+                          handleQuantityIncrease(item.id, itemSize, quantity)
+                        }
+                        className="w-10 h-10 rounded-full bg-white shadow-md hover:shadow-lg flex items-center justify-center text-pink-600 hover:text-pink-700 transition-all duration-300 cursor-pointer hover:scale-110 focus:outline-none"
                         aria-label="Increase quantity"
                       >
                         <FaPlus className="text-sm" />
@@ -207,7 +260,8 @@ const Cart = () => {
                     <div className="flex flex-col gap-1 items-end">
                       <p className="text-sm text-gray-500">Item total</p>
                       <p className="text-2xl font-bold text-gray-800">
-                        {currency}{(price * quantity).toFixed(2)}
+                        {currency}
+                        {(price * quantity).toFixed(2)}
                       </p>
                     </div>
                   </div>
@@ -218,7 +272,7 @@ const Cart = () => {
         </div>
 
         <div className="flex justify-center mt-6">
-          <Link to="/services">
+          <Link onClick={refreshPage} to="/services">
             <button className="group text-lg text-gray-600 hover:text-pink-600 transition-colors duration-300 cursor-pointer flex items-center gap-2">
               <span>Continue Shopping</span>
               <FaArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />

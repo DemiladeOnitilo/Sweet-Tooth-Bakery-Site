@@ -26,13 +26,13 @@ const GoalsCards = (props) => {
         </div>
 
         <div className="space-y-4">
-          <h3 className="text-2xl lg:text-3xl font-bold">
+          <h3 className="text-2xl md:text-3xl lg:text-3xl font-bold">
             <span className="bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent group-hover:from-pink-500 group-hover:to-purple-500 transition-all duration-500">
               {props.main}
             </span>
           </h3>
 
-          <p className="text-gray-700 text-base lg:text-lg leading-relaxed group-hover:text-gray-800 transition-colors duration-300">
+          <p className="text-gray-700 text-base md:text-2xl lg:text-lg leading-relaxed group-hover:text-gray-800 transition-colors duration-300">
             {props.content}
           </p>
         </div>

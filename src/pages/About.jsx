@@ -6,7 +6,7 @@ import Goals from '../components/Goals'
 
 const About = () => {
   return (
-    <div className='flex flex-col gap-y-30'>
+    <div className='flex flex-col '>
       <AboutHero />
       <AboutMain />
       <AboutValues /> 

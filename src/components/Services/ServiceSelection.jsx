@@ -18,6 +18,7 @@ const ServiceSelection = ({
   const visibleProducts = excludeId
     ? products.filter((pastry) => pastry.id !== excludeId)
     : products;
+
   return (
     <div className="w-full flex flex-col gap-5 items-center justify-center text-center py-10">
       <div className="max-w-3xl mx-auto flex flex-col items-center">
@@ -33,7 +34,7 @@ const ServiceSelection = ({
         <p className="text-lg text-gray-600 max-w-xl">{subtitle}</p>
       </div>
       <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-5 lg:gap-4 justify-center">
-        {products.map((pastry) => {
+        {visibleProducts.map((pastry) => {
           return (
             <div key={pastry.id}>
               <Link

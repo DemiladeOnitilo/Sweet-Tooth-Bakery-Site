@@ -18,10 +18,10 @@ const Services = () => {
     <div className="flex flex-col">
       <ServicesHero scrollToSection={scrollToSection} />
       <div id="target-section">
-        <ServiceSelection />
+        <PastrySection />
       </div>
-      <CTASection isServices={true}/>
-      <PastrySection />
+      <CTASection isServices={true} />
+      <ServiceSelection />
     </div>
   );
 };

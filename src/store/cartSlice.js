@@ -8,74 +8,76 @@ const initialState = {
   currency: "₦",
 };
 
+// Recalculates total and amount from scratch after every mutation.
+// Prevents floating point drift from incremental add/subtract operations.
+const recalculate = (state) => {
+  state.total = state.cartItems.reduce(
+    (sum, item) => sum + parseFloat(item.price) * item.quantity,
+    0
+  );
+  state.amount = state.cartItems.reduce(
+    (sum, item) => sum + item.quantity,
+    0
+  );
+};
+
 const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      const productToAdd = action.payload;
+      const { product, selectedSize, price, quantity, customNotes } = action.payload;
 
       const existingProduct = state.cartItems.find(
-        (item) => item.id === productToAdd.id
+        (item) => item.id === product.id && item.selectedSize === selectedSize
       );
 
       if (existingProduct) {
-        existingProduct.quantity += 1;
+        existingProduct.quantity += quantity;
       } else {
-        state.cartItems.push({ ...productToAdd, quantity: 1 });
+        state.cartItems.push({
+          ...product,
+          price,
+          selectedSize,
+          quantity,
+          customNotes: customNotes || null, // inscription/custom note now stored
+        });
       }
 
-      state.amount += 1;
-      state.total += parseFloat(productToAdd.price);
+      recalculate(state);
     },
+
     removeFromCart: (state, action) => {
-      const productIdToRemove = action.payload;
-      const productToRemove = state.cartItems.find(
-        (item) => item.id === productIdToRemove
+      const { id, selectedSize } = action.payload;
+
+      state.cartItems = state.cartItems.filter(
+        (item) => !(item.id === id && item.selectedSize === selectedSize)
       );
 
-      if (productToRemove) {
-        state.cartItems = state.cartItems.filter(
-          (item) => item.id !== productIdToRemove
-        );
-
-        state.amount -= productToRemove.quantity;
-        state.total -=
-          productToRemove.quantity * parseFloat(productToRemove.price);
-      }
+      recalculate(state);
     },
-    updateTotal: (state) => {
-      let newTotal = 0;
-      let newAmount = 0;
 
-      state.items.forEach((item) => {
-        newTotal += parseFloat(item.price) * item.quantity;
-        newAmount += item.quantity;
-      });
-      state.total = newTotal;
-      state.amount = newAmount;
-    },
     updateQuantity: (state, action) => {
-      const { productId, newQuantity } = action.payload;
+      const { productId, selectedSize, newQuantity } = action.payload;
       const productToUpdate = state.cartItems.find(
-        (item) => item.id === productId
+        (item) => item.id === productId && item.selectedSize === selectedSize
       );
 
       if (productToUpdate) {
         productToUpdate.quantity = newQuantity;
-        state.total = state.cartItems.reduce(
-          (acc, item) => acc + item.price * item.quantity,
-          0
-        );
-        state.amount = state.cartItems.reduce(
-          (acc, item) => acc + item.quantity,
-          0
-        );
+        recalculate(state);
       }
+    },
+
+    // Required by Checkout.jsx on order completion
+    clearCart: (state) => {
+      state.cartItems = [];
+      state.amount = 0;
+      state.total = 0;
     },
   },
 });
 
-export const { addToCart, removeFromCart, updateTotal, updateQuantity } =
+export const { addToCart, removeFromCart, updateQuantity, clearCart } =
   cartSlice.actions;
 export default cartSlice.reducer;
