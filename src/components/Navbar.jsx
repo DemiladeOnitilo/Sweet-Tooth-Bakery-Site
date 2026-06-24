@@ -10,6 +10,7 @@ import {
 } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { products } from "./products";
+import NotificationBell from "./NotificationBell";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,7 +31,7 @@ const Navbar = () => {
     category.types.map((product) => ({
       ...product,
       categoryName: category.name,
-    }))
+    })),
   );
 
   useEffect(() => {
@@ -57,8 +58,8 @@ const Navbar = () => {
               .includes(searchQuery.toLowerCase()) ||
             (product.ingredients &&
               product.ingredients.some((ingredient) =>
-                ingredient.toLowerCase().includes(searchQuery.toLowerCase())
-              ))
+                ingredient.toLowerCase().includes(searchQuery.toLowerCase()),
+              )),
         )
         .slice(0, 6);
 
@@ -158,7 +159,7 @@ const Navbar = () => {
             </NavLink>
           </div>
 
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-0 md:gap-6">
             <div
               className="hidden md:flex lg:hidden xl:flex items-center relative"
               ref={searchRef}
@@ -212,33 +213,25 @@ const Navbar = () => {
               )}
             </div>
 
-            <div className="flex md:hidden lg:flex xl:hidden items-center relative">
-              <button
-                onClick={() => setIsMobileSearchOpen(!isMobileSearchOpen)}
-                className="text-gray-700 cursor-pointer hover:text-pink-600 p-2 rounded-full hover:bg-pink-50 transition-all duration-300"
-              >
-                <FaSearch />
-              </button>
+            <div className="flex items-center justify-center">
+              <NotificationBell />
             </div>
 
-            <button className="hidden md:flex relative p-2 rounded-full hover:bg-pink-50 transition-all duration-300 group cursor-pointer">
-              <FaBell className="text-xl text-gray-700 group-hover:text-pink-600 transition-colors duration-300" />
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></div>
-            </button>
-
-            <Link
-              onClick={refreshPage}
-              to="/Cart"
-              className="relative p-2 rounded-full hover:bg-pink-50 transition-all duration-300 group"
-            >
-              <FaShoppingCart className="text-xl text-gray-700 group-hover:text-pink-600 transition-colors duration-300" />
-              {amount > 0 && (
-                <div className="absolute -top-1 -right-1 bg-gradient-to-r from-pink-500 to-pink-600 text-white w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold shadow-lg animate-pulse">
-                  {amount > 99 ? "99+" : amount}
-                </div>
-              )}
-              <div className="absolute inset-0 rounded-full bg-pink-200 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-            </Link>
+            <div className="hidden md:flex items-center justify-center">
+              <Link
+                onClick={refreshPage}
+                to="/Cart"
+                className="relative p-2 rounded-full hover:bg-pink-50 transition-all duration-300 group"
+              >
+                <FaShoppingCart className="text-xl text-gray-700 group-hover:text-pink-600 transition-colors duration-300" />
+                {amount > 0 && (
+                  <div className="absolute -top-1 -right-1 bg-gradient-to-r from-pink-500 to-pink-600 text-white w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold shadow-lg animate-pulse">
+                    {amount > 99 ? "99+" : amount}
+                  </div>
+                )}
+                <div className="absolute inset-0 rounded-full bg-pink-200 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+              </Link>
+            </div>
 
             <div className="hidden lg:flex items-center justify-center">
               <Link
@@ -335,11 +328,81 @@ const Navbar = () => {
       <div
         className={`lg:hidden transition-all duration-300 ease-in-out ${
           isOpen
-            ? "max-h-64 opacity-100 border-t border-gray-100"
+            ? "max-h-full opacity-100 border-t border-gray-100 bg-white/95 backdrop-blur-md"
             : "max-h-0 opacity-0 overflow-hidden"
         }`}
       >
-        <div className="px-4 pt-4 pb-6 space-y-3 bg-white/95 backdrop-blur-md">
+        <div className="flex md:hidden justify-between items-center px-4 pt-4 pb-2 border-b border-gray-100">
+          <div
+            className="flex md:hidden w-full items-center relative"
+            ref={searchRef}
+          >
+            <form onSubmit={handleSearchSubmit} className="relative">
+              <input
+                type="text"
+                placeholder="Search treats..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-4 pr-10 py-2 text-sm bg-gray-50 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-transparent transition-all duration-300"
+              />
+              <button
+                type="submit"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 cursor-pointer hover:text-pink-600 transition-colors duration-300"
+              >
+                <FaSearch />
+              </button>
+            </form>
+
+            {showSearchResults && searchResults.length > 0 && (
+              <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg max-h-80 overflow-y-auto z-50">
+                {searchResults.map((product) => (
+                  <div
+                    key={product.id}
+                    onClick={() => handleSearchSelect(product.id)}
+                    className="flex items-center p-3 hover:bg-pink-50 cursor-pointer border-b last:border-b-0 transition-colors duration-200"
+                  >
+                    <img
+                      src={product.img}
+                      alt={product.name}
+                      className="w-10 h-10 object-cover rounded-full mr-3"
+                    />
+                    <div className="flex-1">
+                      <h4 className="font-medium text-gray-800 text-sm">
+                        {product.name}
+                      </h4>
+                      <p className="text-xs text-gray-500">
+                        {product.categoryName}
+                      </p>
+                      <p className="text-xs  font-semibold">
+                        <span className="bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
+                          {currency}
+                          {product.price}
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+          <div className="flex items-center gap-4 ">
+            <Link
+              onClick={refreshPage}
+              to="/Cart"
+              className="relative p-2 rounded-full hover:bg-pink-50 transition-all duration-300 group"
+            >
+              <FaShoppingCart className="text-2xl lg:text-xl text-gray-700 group-hover:text-pink-600 transition-colors duration-300" />
+              {amount > 0 && (
+                <div className="absolute -top-1 -right-1 bg-gradient-to-r from-pink-500 to-pink-600 text-white w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold shadow-lg animate-pulse">
+                  {amount > 99 ? "99+" : amount}
+                </div>
+              )}
+              <div className="absolute inset-0 rounded-full bg-pink-200 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+            </Link>
+          </div>
+        </div>
+
+        <div className="px-4 pt-4 pb-6 space-y-3 ">
           <NavLink
             onClick={() => {
               refreshPage();
@@ -370,6 +433,7 @@ const Navbar = () => {
           >
             Contact
           </NavLink>
+
           <div className="pt-3">
             <Link
               onClick={() => {

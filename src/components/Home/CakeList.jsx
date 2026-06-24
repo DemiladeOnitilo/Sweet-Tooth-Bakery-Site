@@ -3,11 +3,17 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
+import { FaArrowRight } from "react-icons/fa";
 import CakeCard from "../CakeCard";
 import { products } from "../products";
 import MainButton from "../MainButton";
+import { Link } from "react-router-dom";
 
 const CakeList = () => {
+  const refreshPage = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const SamplePrevArrow = (props) => {
     const { className, onClick } = props;
     return (
@@ -90,9 +96,9 @@ const CakeList = () => {
   };
 
   return (
-    <div className="flex flex-col gap-10 justify-center items-center min-h-[70vh] py-10 px-4 lg:px-8">
-      <div className="flex flex-col relative justify-center items-center gap-8 text-center max-w-4xl">
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold">
+    <div className="flex flex-col gap-2 justify-center items-center min-h-[70vh] py-10 px-4 lg:px-8">
+      <div className="flex flex-col relative justify-center items-center gap-4 text-center max-w-4xl">
+        <h2 className="text-3xl md:text-5xl lg:text-6xl font-black">
           <span className="bg-gradient-to-r from-pink-600 via-purple-600 to-pink-500 bg-clip-text text-transparent">
             Our Service
           </span>
@@ -101,11 +107,19 @@ const CakeList = () => {
           Discover our most beloved pastries, crafted with love and the finest
           ingredients
         </p>
-        <MainButton link="/services" name="View All" />
       </div>
 
-      <div className="w-full max-w-7xl relative">
-        <div className="px-8 md:px-12">
+      <div className="flex flex-col gap-2 w-full max-w-7xl relative">
+        <Link
+          to="/services"
+          onClick={refreshPage}
+          className="flex justify-end items-center gap-1 md:mr-6 text-pink-600 font-semibold text-md md:text-lg 
+                 hover:gap-2.5 transition-all duration-200 whitespace-nowrap pb-1 group"
+        >
+          View All
+          <FaArrowRight className="text-xs group-hover:translate-x-0.5 transition-transform duration-200" />
+        </Link>
+        <div className="w-full">
           <Slider {...settings}>
             {products.map((pastry) => (
               <div key={pastry.id} className="px-2">

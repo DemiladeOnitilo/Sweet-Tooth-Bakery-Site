@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'; 
 import cartReducer from './cartSlice';
 import productReducer from './productSlice';
+import notificationReducer from './notificationSlice';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
@@ -15,6 +16,7 @@ export const store = configureStore({
   reducer: {
     cart: persistedCartReducer,
     product: productReducer,
+    notifications: notificationReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

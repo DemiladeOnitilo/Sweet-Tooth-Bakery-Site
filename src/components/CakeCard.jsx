@@ -91,7 +91,7 @@ const CakeCard = ({ id, img, name, price, description, onPage, isHome }) => {
             <img
               src={img}
               alt={name}
-              className="h-[250px] w-[200px] md:h-[280px] md:w-[220px] lg:h-[300px] lg:w-[250px] object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              className="h-[250px] w-[300px] md:h-[280px] md:w-[300px] lg:h-[300px] lg:w-[450px] object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:translate-x-full transition-transform duration-[1500ms] ease-out" />

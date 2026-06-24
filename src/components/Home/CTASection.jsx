@@ -22,6 +22,7 @@ const CTASection = ({ isServices }) => {
         }
       }
     };
+    
 
     window.addEventListener("scroll", handleScroll);
     handleScroll();
@@ -32,7 +33,7 @@ const CTASection = ({ isServices }) => {
     <section
       ref={sectionRef}
       className={` ${
-        isServices ? "h-[60vh]" : "h-screen"
+        isServices ? "h-[60vh]" : "h-[60vh] lg:h-screen"
       } relative flex items-center justify-center overflow-hidden`}
     >
       <div
@@ -45,8 +46,8 @@ const CTASection = ({ isServices }) => {
       />
 
       <div className="absolute inset-0 bg-gradient-to-r from-pink-900/40 to-purple-900/40" />
-      <div className="relative z-10 text-center px-4">
-        <h1 className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold mb-8 text-white leading-tight">
+      <div className="flex flex-col gap-5 relative z-10 text-center px-4">
+        <h1 className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white leading-tight">
           CRAFTING SWEET
           <br />
           <span className="bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
@@ -54,13 +55,13 @@ const CTASection = ({ isServices }) => {
           </span>
         </h1>
         {!isServices && (
-          <div>
-            <p className="text-lg md:text-xl text-white/90 mb-10 max-w-2xl mx-auto">
+          <div className="flex flex-col gap-5 items-center">
+            <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
               From birthday celebrations to everyday treats, we create moments
               that taste as good as they feel
             </p>
             <MainButton
-              link="/Order"
+              link="/services"
               name="START YOUR ORDER"
               variant="primary"
             />{" "}

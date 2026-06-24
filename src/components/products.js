@@ -122,7 +122,7 @@ export const products = [
         name: "Cake Slices",            
         types: [
             {
-                id: "cakes-VanillaCakeSlice",
+                id: "cakeSlice-VanillaCakeSlice",
                 img: VanillaCakeSlice,
                 name: "Vanilla Cake Slice",
                 price: "5000",
@@ -130,7 +130,7 @@ export const products = [
                 ingredients: ["Flour", "Butter", "Sugar", "Eggs", "Vanilla extract", "Milk"]
             },
             {
-                id: "cakes-ChocolateCakeSlice",
+                id: "cakeSlice-ChocolateCakeSlice",
                 img: ChocolateCakeSlice,
                 name: "Chocolate Cake Slice",
                 price: "5500",
@@ -138,7 +138,7 @@ export const products = [
                 ingredients: ["Cocoa powder", "Flour", "Butter", "Sugar", "Eggs", "Milk"]
             },
             {
-                id: "cakes-RedVelvetCakeSlice",
+                id: "cakeSlice-RedVelvetCakeSlice",
                 img: RedVelvetCakeSlice,
                 name: "Red Velvet Cake Slice",
                 price: "6000",
@@ -146,7 +146,7 @@ export const products = [
                 ingredients: ["Flour", "Butter", "Sugar", "Eggs", "Cocoa powder", "Red food coloring", "Cream cheese"]
             },
             {
-                id: "cakes-LemonCakeSlice",
+                id: "cakeSlice-LemonCakeSlice",
                 img: LemonCakeSlice,
                 name: "Lemon Cake Slice",
                 price: "5500",
@@ -154,7 +154,7 @@ export const products = [
                 ingredients: ["Flour", "Butter", "Sugar", "Eggs", "Lemon juice", "Lemon zest", "Milk"]
             },
             {
-                id: "cakes-MarbleCakeSlice",
+                id: "cakeSlice-MarbleCakeSlice",
                 img: MarbleCakeSlice,
                 name: "Marble Cake Slice",
                 price: "5500",
@@ -162,7 +162,7 @@ export const products = [
                 ingredients: ["Flour", "Cocoa powder", "Butter", "Sugar", "Eggs", "Milk", "Vanilla extract"]
             },
             {
-                id: "cakes-RaisinCakeSlice",
+                id: "cakeSlice-RaisinCakeSlice",
                 img: RaisinCakeSlice,
                 name: "Raisin Cake Slice",
                 price: "5000",
@@ -410,25 +410,25 @@ export const products = [
         name: "Parfait",
         types: [
             {
-                id: "parfait-VanillaParfait",
+                id: "parfait-VanillaCakeParfait",
                 img: VanillaParfait,
-                name: "Vanilla Parfait",
+                name: "Vanilla Cake Parfait",
                 price: "4500",
                 description: "Layered luxury featuring smooth vanilla yogurt, fresh fruit compote, and crunchy granola.",
                 ingredients: ["Yogurt", "Granola", "Honey", "Vanilla extract", "Fresh fruits"]
             },
             {
-                id: "parfait-ChocolateParfait",
+                id: "parfait-ChocolateCakeParfait",
                 img: ChocolateParfait,
-                name: "Chocolate Parfait",
+                name: "Chocolate Cake Parfait",
                 price: "5000",
                 description: "Decadent chocolate parfait with layers of rich mousse and whipped cream toppings.",
                 ingredients: ["Chocolate mousse", "Whipped cream", "Chocolate shavings"]
             },
             {
-                id: "parfait-RedVelvetParfait",
+                id: "parfait-RedVelvetCakeParfait",
                 img: RedVelvetParfait,
-                name: "Red Velvet Parfait",
+                name: "Red Velvet CakeParfait",
                 price: "5500",
                 description: "Stunning dessert jars containing red velvet cake crumbs layered with luxurious cream cheese whip.",
                 ingredients: ["Red velvet cake crumbs", "Cream cheese frosting", "Whipped cream"]

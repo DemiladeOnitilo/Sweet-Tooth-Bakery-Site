@@ -11,8 +11,10 @@ const Hero = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+ 
+
   return (
-    <div className="relative min-h-screen flex justify-center items-center mt-24 lg:mt-14 overflow-hidden">
+    <div className="relative h-140 md:h-220 lg:min-h-screen w-full flex justify-center items-center mt-10 overflow-hidden">
       <div
         className="absolute inset-0 bg-[url(https://img.freepik.com/free-photo/chocolate-coffee-vanilla-gluten-free-marble-cake-homemade-pound-cake_114579-5318.jpg?t=st=1742464082~exp=1742467682~hmac=35508b9f6533510ab2c05708264f07ee4568683b419bc5b60a7f3543b2ec9918&w=996)] 
         bg-no-repeat bg-cover bg-center transition-transform duration-300 ease-out"
@@ -31,13 +33,13 @@ const Hero = () => {
         style={{ animation: "6s ease-in-out infinite" }}
       />
 
-      <div className="relative z-10 max-w-4xl mx-auto md:px-10 text-center ">
-        <div className="md:bg-white/10 md:backdrop-blur-lg md:border border-white/20 md:rounded-3xl p-8 md:p-12 md:shadow-2xl md:transform md:over:scale-105 transition-all duration-500">
-          <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-pink-500/20 to-purple-500/20 backdrop-blur-sm border border-pink-300/30 rounded-full text-white text-sm font-medium mb-6 animate-pulse">
+      <div className="relative z-10 max-w-4xl mt-10 mx-auto md:px-10 text-center ">
+        <div className="flex flex-col gap-8 items-center md:bg-white/10 md:backdrop-blur-lg md:border border-white/20 md:rounded-3xl p-8 md:p-12 md:shadow-2xl md:transform md:over:scale-105 transition-all duration-500">
+          <div className="inline-flex justify-center items-center w-fit px-4 py-2 bg-gradient-to-r from-pink-500/20 to-purple-500/20 backdrop-blur-sm border border-pink-300/30 rounded-full text-white text-xs lg:text-sm font-medium animate-pulse">
             ✨ Premium Bakery Experience
           </div>
 
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+          <h1 className="text-2xl md:text-5xl lg:text-6xl font-black text-white leading-tight">
             Welcome to <br />
             <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-pink-300 bg-clip-text text-transparent animate-pulse">
               Sweet Tooth Bakery
@@ -45,7 +47,7 @@ const Hero = () => {
             <br />
           </h1>
 
-          <p className="text-lg md:text-xl text-pink-100 mb-8 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-md md:text-xl text-pink-100 max-w-2xl mx-auto leading-relaxed">
             Indulge in top notch pastries crafted with love, where every bite
             tells a story of
             <span className="text-pink-300 font-semibold">
@@ -59,40 +61,42 @@ const Hero = () => {
             </span>
           </p>
 
-          <div className="flex flex-wrap justify-center gap-6 mb-8">
+          <div className="flex justify-center gap-4">
             <div className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-pink-300">
+              <div className="text-lg md:text-3xl font-bold text-pink-300">
                 10K+
               </div>
-              <div className="text-sm text-pink-200">Happy Customers</div>
+              <div className="text-xs md:text-sm text-pink-200">
+                Happy Customers
+              </div>
             </div>
-            <div className="w-px h-12 bg-pink-300/30" />
+            <div className="w-px h-12 md:h-16 bg-pink-300/30" />
             <div className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-purple-300">
+              <div className="text-lg md:text-3xl font-bold text-purple-300">
                 50+
               </div>
-              <div className="text-sm text-purple-200">Unique Recipes</div>
+              <div className="text-xs md:text-sm text-purple-200">
+                Unique Recipes
+              </div>
             </div>
-            <div className="w-px h-12 bg-pink-300/30" />
+            <div className="w-px h-12 md:h-16 bg-pink-300/30" />
             <div className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-yellow-300">
+              <div className="text-lg md:text-3xl font-bold text-yellow-300">
                 5★
               </div>
-              <div className="text-sm text-yellow-200">Premium Quality</div>
+              <div className="text-xs md:text-sm text-yellow-200">
+                Premium Quality
+              </div>
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-10 justify-center items-center">
+          <div className="flex gap-2 md:gap-10 justify-center items-center">
             <MainButton
               name="EXPLORE MENU"
-              link="/Services"
+              link="/services"
               variant="primary"
             />
-            <MainButton
-              name="WATCH OUR STORY"
-              link="/About"
-              variant="secondary"
-            />
+            <MainButton name="OUR STORY" link="/about" variant="secondary" />
           </div>
         </div>
 

@@ -9,10 +9,10 @@ const GoalsCards = (props) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="relative h-[450px] md:h-[480px] lg:h-[500px] bg-white/70 backdrop-blur-sm border border-white/50 rounded-3xl p-8 text-center shadow-lg hover:shadow-2xl transform hover:scale-105 hover:-translate-y-2 transition-all duration-500 flex flex-col">
-        <div className="absolute inset-0 bg-gradient-to-r from-pink-200/50 via-purple-200/50 to-pink-200/50 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
+      <div className="flex flex-col gap-4 relative h-fit bg-white/70 backdrop-blur-sm border border-white/50 rounded-3xl px-8 py-12 text-center shadow-lg hover:shadow-2xl transform hover:scale-[1.05] hover:-translate-y-2 transition-all duration-500 cursor-pointer">
+        <div className="absolute inset-0 bg-gradient-to-r from-pink-200/50 via-purple-200/50 to-pink-200/50 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 " />
 
-        <div className="relative mb-8">
+        <div className="relative">
           <div className="relative overflow-hidden rounded-full w-48 h-48 mx-auto">
             <img
               src={props.img}
@@ -26,13 +26,13 @@ const GoalsCards = (props) => {
         </div>
 
         <div className="space-y-4">
-          <h3 className="text-2xl md:text-3xl lg:text-3xl font-bold">
+          <h3 className="text-2xl md:text-3xl font-bold">
             <span className="bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent group-hover:from-pink-500 group-hover:to-purple-500 transition-all duration-500">
               {props.main}
             </span>
           </h3>
 
-          <p className="text-gray-700 text-base md:text-2xl lg:text-lg leading-relaxed group-hover:text-gray-800 transition-colors duration-300">
+          <p className="text-gray-700 text-sm md:text-lg leading-relaxed font-medium group-hover:text-gray-800 transition-colors duration-300">
             {props.content}
           </p>
         </div>
