@@ -48,7 +48,7 @@ import BananaNutMuffins from "../assets/Images/Sweet tooth pastries list/Muffins
 import PlainMadeleines from "../assets/Images/Sweet tooth pastries list/Madeleines/Plain Madeleines.jpg"
 import ChocolateMadeleines from "../assets/Images/Sweet tooth pastries list/Madeleines/Chocolate madeleines.jpg"
 import LemonMadeleines from "../assets/Images/Sweet tooth pastries list/Madeleines/Lemon madeleines.jpg"    
-import MarbleMadeleines from "../assets/Images/Sweet tooth pastries list/Madeleines/Marble Madeleines.jpg"
+import MarbleMadeleines from "../assets/Images/Sweet tooth pastries list/Madeleines/marble Madeleines.jpg"
 //Pastries
 import Doughnuts from "../assets/Images/Sweet tooth pastries list/Pastries/Doughnuts.jpg"
 import MeatPie from "../assets/Images/Sweet tooth pastries list/Pastries/Meat Pie.jpg"
