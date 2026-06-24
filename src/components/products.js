@@ -30,7 +30,7 @@ import ChocolateChipCookies from "../assets/Images/Sweet tooth pastries list/Coo
 //Cupcakes
 import VanillaCupcakes from "../assets/Images/Sweet tooth pastries list/Cupcakes/Vanilla Cupcakes.jpg"
 import ChocolateCupcakes from "../assets/Images/Sweet tooth pastries list/Cupcakes/Chocolate cupcakes.webp"
-import RedVelvetCupcakes from "../assets/Images/Sweet tooth pastries list/Cupcakes/RedVelvet Cupcake.jpg"
+import RedVelvetCupcakes from "../assets/Images/Sweet tooth pastries list/Cupcakes/Redvelvet Cupcake.jpg"
 import MarbleCupcakes from "../assets/Images/Sweet tooth pastries list/Cupcakes/Marble Cupcake.jpg"
 import LemonCupcakes from "../assets/Images/Sweet tooth pastries list/Cupcakes/Lemon Cupcake.jpg"
 import RaisinCupcakes from "../assets/Images/Sweet tooth pastries list/Cupcakes/Raisin Cupcake.jpg"
