@@ -36,7 +36,7 @@ import LemonCupcakes from "../assets/Images/Sweet tooth pastries list/Cupcakes/L
 import RaisinCupcakes from "../assets/Images/Sweet tooth pastries list/Cupcakes/Raisin Cupcake.jpg"
 //Parfait
 import ChocolateParfait from "../assets/Images/Sweet tooth pastries list/Parfait/Chocolate-Parfait-20.jpg"
-import RedVelvetParfait from "../assets/Images/Sweet tooth pastries list/Parfait/Red Velvet Parfait.png"
+import RedVelvetParfait from "../assets/Images/Sweet tooth pastries list/Parfait/Red velvet Parfait.png"
 import VanillaParfait from "../assets/Images/Sweet tooth pastries list/Parfait/Vanilla Parfait.png"
 //Muffins
 import PlainMuffins from "../assets/Images/Sweet tooth pastries list/Muffins/Plain Muffin.jpg"
@@ -46,8 +46,8 @@ import DoubleChocolateMuffins from "../assets/Images/Sweet tooth pastries list/M
 import BananaNutMuffins from "../assets/Images/Sweet tooth pastries list/Muffins/Banana Nut Muffin.jpg"
 //Madeleines
 import PlainMadeleines from "../assets/Images/Sweet tooth pastries list/Madeleines/Plain Madeleines.jpg"
-import ChocolateMadeleines from "../assets/Images/Sweet tooth pastries list/Madeleines/Chocolate Madeleines.jpg"
-import LemonMadeleines from "../assets/Images/Sweet tooth pastries list/Madeleines/Lemon Madeleines.jpg"    
+import ChocolateMadeleines from "../assets/Images/Sweet tooth pastries list/Madeleines/Chocolate madeleines.jpg"
+import LemonMadeleines from "../assets/Images/Sweet tooth pastries list/Madeleines/Lemon madeleines.jpg"    
 import MarbleMadeleines from "../assets/Images/Sweet tooth pastries list/Madeleines/Marble Madeleines.jpg"
 //Pastries
 import Doughnuts from "../assets/Images/Sweet tooth pastries list/Pastries/Doughnuts.jpg"
