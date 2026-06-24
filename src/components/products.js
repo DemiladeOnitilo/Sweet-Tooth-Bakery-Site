@@ -11,7 +11,7 @@ import ChocolateCakeSlice from "../assets/Images/Sweet tooth pastries list/Cake 
 import RedVelvetCakeSlice from "../assets/Images/Sweet tooth pastries list/Cake Slices/Red Velvet Cake slices.jpg"
 import MarbleCakeSlice from "../assets/Images/Sweet tooth pastries list/Cake Slices/Marble Cake Slice.jpg"
 import LemonCakeSlice from "../assets/Images/Sweet tooth pastries list/Cake Slices/Lemon Cake Slices.jpg"
-import RaisinCakeSlice from "../assets/Images/Sweet tooth pastries list/Cake Slices/Raisin Cake Slices.jpg"
+import RaisinCakeSlice from "../assets/Images/Sweet tooth pastries list/Cake Slices/Raisin cake Slices.jpg"
 //Cake Loaves
 import VanillaCakeLoaf from "../assets/Images/Sweet tooth pastries list/Cake Loaves/Vanilla Cake loaf.jpg"
 import ChocolateCakeLoaf from "../assets/Images/Sweet tooth pastries list/Cake Loaves/Chocolate Cake Loaf.jpg"
