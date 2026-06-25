@@ -37,7 +37,6 @@ const Home = () => {
   return (
     <div className="flex flex-col">
       <Hero />
-      {/* Mobile-only bestsellers strip */}
       <div className="block lg:hidden bg-white">
         <p className="px-4 pt-3 pb-1 text-xs md:text-lg font-semibold tracking-widest text-gray-400 uppercase">
           Bestsellers
@@ -46,8 +45,9 @@ const Home = () => {
           {bestsellers.map((item) => (
             <Link
               key={item.id}
+              onClick={refreshPage}
               to={`/products/${item.id}`}
-               className="flex-none w-25 md:w-30 rounded-xl border border-gray-100 overflow-hidden active:scale-95 transition-transform"
+              className="flex-none w-25 md:w-30 rounded-xl border border-gray-100 overflow-hidden active:scale-95 transition-transform"
             >
               <img
                 src={item.img}
@@ -64,7 +64,7 @@ const Home = () => {
                   </p>
                 ) : (
                   <p className="text-[9px] md:text-xs text-purple-500 font-semibold mt-0.5">
-                    Consultaion Only
+                    Consultation Only
                   </p>
                 )}
               </div>
