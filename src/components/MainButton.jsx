@@ -20,7 +20,7 @@ const MainButton = ({ link, name, variant, direction, onClick }) => {
     <Link
       onClick={handleClick}
       to={link}
-      className={`group inline-flex items-center justify-center gap-1 rounded-full font-semibold text-md md:text-lg transition-all duration-300 hover:scale-105 hover:-translate-y-1 transform ${
+      className={`group inline-flex items-center justify-center gap-1 rounded-full font-semibold text-sm md:text-lg transition-all duration-300 hover:scale-105 hover:-translate-y-1 transform ${
         variant === "secondary"
           ? "bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 text-white hover:shadow-lg p-4 md:px-8 md:py-4"
           : variant === "primary"

@@ -33,8 +33,8 @@ const Hero = () => {
         style={{ animation: "6s ease-in-out infinite" }}
       />
 
-      <div className="relative z-10 max-w-4xl mt-10 mx-auto md:px-10 text-center ">
-        <div className="flex flex-col gap-8 items-center md:bg-white/10 md:backdrop-blur-lg md:border border-white/20 md:rounded-3xl p-8 md:p-12 md:shadow-2xl md:transform md:over:scale-105 transition-all duration-500">
+      <div className="relative z-10 max-w-4xl mt-10 md:px-10 text-center ">
+        <div className="flex flex-col gap-8 items-center md:bg-white/10 md:backdrop-blur-lg md:border border-white/20 md:rounded-3xl p-4 md:p-12 md:shadow-2xl md:transform md:over:scale-105 transition-all duration-500">
           <div className="inline-flex justify-center items-center w-fit px-4 py-2 bg-gradient-to-r from-pink-500/20 to-purple-500/20 backdrop-blur-sm border border-pink-300/30 rounded-full text-white text-xs lg:text-sm font-medium animate-pulse">
             ✨ Premium Bakery Experience
           </div>
