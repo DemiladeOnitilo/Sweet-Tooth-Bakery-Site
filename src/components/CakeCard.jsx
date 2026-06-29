@@ -64,9 +64,7 @@ const CakeCard = ({ id, img, name, price, description, onPage, isHome }) => {
                   }`}
                 >
                   {isNumericPrice && currency}
-                  {isNumericPrice
-                    ? Number(price).toLocaleString()
-                    : price}
+                  {isNumericPrice ? Number(price).toLocaleString() : price}
                 </p>
               )}
               <Link
@@ -82,11 +80,11 @@ const CakeCard = ({ id, img, name, price, description, onPage, isHome }) => {
         </div>
       ) : (
         // ── Category/slider card: image + name only ──
-        <div className="group flex flex-col items-center gap-4 p-2 cursor-pointer w-full">
+        <div className="group flex flex-col items-center gap-4 p-2 pt-4 cursor-pointer w-full overflow-visible">
           <Link
             to={isHome ? `/services/category/${id}` : `/products/${id}`}
             onClick={refreshPage}
-            className="relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-700 transform group-hover:-translate-y-2"
+            className="relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-700 transform group-hover:-translate-y-2 block"
           >
             <img
               src={img}
@@ -107,7 +105,7 @@ const CakeCard = ({ id, img, name, price, description, onPage, isHome }) => {
               to={isHome ? `/services/category/${id}` : `/products/${id}`}
               onClick={refreshPage}
             >
-              <h3 className="text-lg md:text-xl font-bold bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 bg-clip-text text-transparent group-hover:from-pink-500 group-hover:via-purple-500 group-hover:to-pink-400 transition-all duration-500 sour-gummy line-clamp-2">
+              <h3 className="text-lg lg:text-xl font-bold bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 bg-clip-text text-transparent group-hover:from-pink-500 group-hover:via-purple-500 group-hover:to-pink-400 transition-all duration-500 sour-gummy line-clamp-2">
                 {name}
               </h3>
             </Link>

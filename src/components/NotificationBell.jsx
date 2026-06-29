@@ -1,9 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { FaBell, FaShoppingCart, FaCheckCircle, FaTag, FaStar } from "react-icons/fa";
+import {
+  FaBell,
+  FaShoppingCart,
+  FaCheckCircle,
+  FaTag,
+  FaStar,
+} from "react-icons/fa";
 import { markAllRead, markOneRead } from "../store/notificationSlice";
 import { getActiveProductNotifications } from "./notification";
+
 
 const typeIcon = {
   new_arrival: <FaStar className="text-pink-500" />,
@@ -29,22 +36,15 @@ const NotificationBell = () => {
   const dispatch = useDispatch();
 
   const { cartNotifications, readIds } = useSelector(
-    (state) => state.notifications
+    (state) => state.notifications,
   );
 
   const productNotifs = getActiveProductNotifications();
-
-  // Merge: product notifications first, then cart events
-  const allNotifications = [
-    ...productNotifs,
-    ...cartNotifications,
-  ];
-
+  const allNotifications = [...productNotifs, ...cartNotifications];
   const unreadCount = allNotifications.filter(
-    (n) => !readIds.includes(n.id)
+    (n) => !readIds.includes(n.id),
   ).length;
 
-  // Close panel on outside click
   useEffect(() => {
     const handler = (e) => {
       if (panelRef.current && !panelRef.current.contains(e.target)) {
@@ -54,10 +54,6 @@ const NotificationBell = () => {
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, []);
-
-  const handleOpen = () => {
-    setIsOpen((prev) => !prev);
-  };
 
   const handleMarkAllRead = () => {
     dispatch(markAllRead(allNotifications.map((n) => n.id)));
@@ -77,7 +73,7 @@ const NotificationBell = () => {
     <div className="relative" ref={panelRef}>
       {/* Bell button */}
       <button
-        onClick={handleOpen}
+        onClick={() => setIsOpen((prev) => !prev)}
         className="relative p-2 rounded-full hover:bg-pink-50 transition-all duration-300 group cursor-pointer"
         aria-label="Notifications"
       >
@@ -89,10 +85,9 @@ const NotificationBell = () => {
         )}
       </button>
 
-      {/* Dropdown panel */}
+      {/* Desktop dropdown — hidden on mobile */}
       {isOpen && (
-        <div className="absolute right-[-40px] md:right-0 top-12 md:top-full mt-3 w-90 lg:w-80 bg-white border border-gray-100 rounded-2xl shadow-2xl z-50 overflow-hidden">
-          {/* Header */}
+        <div className="hidden md:block absolute right-0 top-full mt-3 w-80 bg-white border border-gray-100 rounded-2xl shadow-2xl z-50 overflow-hidden">
           <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-pink-50 to-purple-50 border-b border-gray-100">
             <h3 className="font-bold text-gray-800 text-sm">Notifications</h3>
             {unreadCount > 0 && (
@@ -104,8 +99,6 @@ const NotificationBell = () => {
               </button>
             )}
           </div>
-
-          {/* List */}
           <div className="max-h-80 overflow-y-auto divide-y divide-gray-50">
             {allNotifications.length === 0 ? (
               <div className="py-10 text-center">
@@ -124,10 +117,14 @@ const NotificationBell = () => {
                     }`}
                   >
                     <div className="mt-0.5 text-base flex-shrink-0">
-                      {typeIcon[notif.type] || <FaBell className="text-gray-400" />}
+                      {typeIcon[notif.type] || (
+                        <FaBell className="text-gray-400" />
+                      )}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className={`text-sm font-semibold text-gray-800 ${!isRead ? "text-pink-700" : ""}`}>
+                      <p
+                        className={`text-sm font-semibold text-gray-800 ${!isRead ? "text-pink-700" : ""}`}
+                      >
                         {notif.title}
                       </p>
                       <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">
@@ -145,12 +142,79 @@ const NotificationBell = () => {
               })
             )}
           </div>
-
-          {/* Footer */}
           {allNotifications.length > 0 && (
             <div className="px-4 py-2 bg-gray-50 border-t border-gray-100">
               <p className="text-[10px] text-gray-400 text-center">
-                Product alerts expire automatically · Cart events reset each session
+                Product alerts expire automatically · Cart events reset each
+                session
+              </p>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Mobile inline panel — shown only on mobile when open */}
+      {isOpen && (
+        <div className="md:hidden fixed left-4 right-4 top-20 bg-white border border-gray-100 rounded-2xl shadow-2xl z-50 overflow-hidden">
+          <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-pink-50 to-purple-50 border-b border-gray-100">
+            <h3 className="font-bold text-gray-800 text-sm">Notifications</h3>
+            {unreadCount > 0 && (
+              <button
+                onClick={handleMarkAllRead}
+                className="text-xs text-pink-600 hover:text-pink-800 font-medium transition-colors"
+              >
+                Mark all read
+              </button>
+            )}
+          </div>
+          <div className="max-h-72 overflow-y-auto divide-y divide-gray-50">
+            {allNotifications.length === 0 ? (
+              <div className="py-8 text-center">
+                <FaBell className="text-3xl text-gray-200 mx-auto mb-2" />
+                <p className="text-sm text-gray-400">No notifications yet</p>
+              </div>
+            ) : (
+              allNotifications.map((notif) => {
+                const isRead = readIds.includes(notif.id);
+                return (
+                  <button
+                    key={notif.id}
+                    onClick={() => handleNotifClick(notif)}
+                    className={`w-full text-left flex items-start gap-3 px-4 py-3 hover:bg-pink-50 transition-colors duration-200 ${
+                      !isRead ? "bg-pink-50/40" : ""
+                    }`}
+                  >
+                    <div className="mt-0.5 text-base flex-shrink-0">
+                      {typeIcon[notif.type] || (
+                        <FaBell className="text-gray-400" />
+                      )}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p
+                        className={`text-sm font-semibold ${!isRead ? "text-pink-700" : "text-gray-800"}`}
+                      >
+                        {notif.title}
+                      </p>
+                      <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">
+                        {notif.message}
+                      </p>
+                      <p className="text-[10px] text-gray-400 mt-1">
+                        {timeAgo(notif.createdAt)}
+                      </p>
+                    </div>
+                    {!isRead && (
+                      <div className="w-2 h-2 bg-pink-500 rounded-full mt-1.5 flex-shrink-0" />
+                    )}
+                  </button>
+                );
+              })
+            )}
+          </div>
+          {allNotifications.length > 0 && (
+            <div className="px-4 py-2 bg-gray-50 border-t border-gray-100">
+              <p className="text-[10px] text-gray-400 text-center">
+                Product alerts expire automatically · Cart events reset each
+                session
               </p>
             </div>
           )}

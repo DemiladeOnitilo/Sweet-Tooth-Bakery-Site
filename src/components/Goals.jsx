@@ -14,8 +14,8 @@ const Goals = ({ isHome = false }) => {
           </div>
 
           <div className="flex flex-col gap-2 items-center text-center">
-            <h2 className="text-3xl md:text-5xl lg:text-6xl font-black">
-              <span className="bg-gradient-to-r from-pink-600 via-purple-600 to-pink-500 bg-clip-text text-transparent">
+            <h2 className="text-2xl md:text-5xl lg:text-6xl font-black">
+              <span className="bg-gradient-to-r from-pink-600 via-purple-600 to-pink-500 bg-clip-text text-transparent uppercase">
                 Our Goals
               </span>
             </h2>
@@ -36,7 +36,7 @@ const Goals = ({ isHome = false }) => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
           {Goals.map((goal, index) => (
             <GoalsCards
               key={goal.id}

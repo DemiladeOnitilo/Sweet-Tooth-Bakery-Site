@@ -34,12 +34,12 @@ const Hero = () => {
       />
 
       <div className="relative z-10 max-w-4xl mt-10 md:px-10 text-center ">
-        <div className="flex flex-col gap-8 items-center md:bg-white/10 md:backdrop-blur-lg md:border border-white/20 md:rounded-3xl p-4 md:p-12 md:shadow-2xl md:transform md:over:scale-105 transition-all duration-500">
+        <div className="flex flex-col gap-6 items-center md:bg-white/10 md:backdrop-blur-lg md:border border-white/20 md:rounded-3xl p-4 md:p-12 md:shadow-2xl md:transform md:over:scale-105 transition-all duration-500">
           <div className="inline-flex justify-center items-center w-fit px-4 py-2 bg-gradient-to-r from-pink-500/20 to-purple-500/20 backdrop-blur-sm border border-pink-300/30 rounded-full text-white text-xs lg:text-sm font-medium animate-pulse">
             ✨ Premium Bakery Experience
           </div>
 
-          <h1 className="text-2xl md:text-5xl lg:text-6xl font-black text-white leading-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight">
             Welcome to <br />
             <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-pink-300 bg-clip-text text-transparent animate-pulse">
               Sweet Tooth Bakery
@@ -96,7 +96,7 @@ const Hero = () => {
               link="/services"
               variant="primary"
             />
-            <MainButton name="OUR STORY" link="/about" variant="secondary" />
+            <MainButton name="OUR STORY" link="/about" />
           </div>
         </div>
 

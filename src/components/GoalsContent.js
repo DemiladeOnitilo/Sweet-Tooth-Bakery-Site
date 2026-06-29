@@ -8,7 +8,7 @@ const GoalsContent= [
     {
         id: '2',
         img: 'https://img.freepik.com/premium-photo/close-up-baker-holding-cake-showing-it-camera-while-standing-supermarket_232070-20316.jpg',
-        main: 'BRINGING YOU QUALITY CAKES',
+        main: 'QUALITY CAKES',
         content: 'All our cakes are made by the best chefs and are high in quality'
     },
     {

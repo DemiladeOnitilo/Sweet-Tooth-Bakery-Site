@@ -65,6 +65,7 @@ export const products = [
         id: "brownies",
         img: ChocolateBrownies,
         name: "Brownies",
+        description: "Rich, Fudgy and impossible to share. Baked fresh every morning",
         types: [
             {
                 id: "brownies-ChocolateBrownie",
@@ -119,7 +120,8 @@ export const products = [
     {
         id: "cakesSlices",
         img: VanillaCakeSlice,
-        name: "Cake Slices",            
+        name: "Cake Slices", 
+        description: "Every slice tells a story — moist layers, bold frosting, made for any occasion.",           
         types: [
             {
                 id: "cakeSlice-VanillaCakeSlice",
@@ -175,6 +177,7 @@ export const products = [
         id: "cakeLoaves",
         img: VanillaCakeLoaf,
         name: "Cake Loaves",
+        description: "Golden, dense, and deeply satisfying. Perfect for sharing over tea or gifting whole.",
         types: [
             {
                 id: "loaves-VanillaCakeLoaf",
@@ -260,6 +263,7 @@ export const products = [
         id: "cookies",
         img: ChocolateChipCookies,
         name: "Cookies",
+        description: "Crispy edges, chewy centres. The kind you hide from everyone else.",
         types: [
             {
                 id: "cookies-PlainCookies",
@@ -322,7 +326,7 @@ export const products = [
    {   
         id: "cupcakes",
         img: VanillaCupcakes,
-        name: "Cupcakes",
+        name: "Cupcakes",description: "Little towers of joy — fluffy sponge, generous frosting, endlessly giftable.",
         types: [
             {
                 id: "cupcakes-VanillaCupcakes",
@@ -408,6 +412,7 @@ export const products = [
         id: "parfait",
         img: VanillaParfait,
         name: "Parfait",
+        description: "Layered elegance in a jar. Cool, creamy, and built to impress at first glance.",
         types: [
             {
                 id: "parfait-VanillaCakeParfait",
@@ -439,6 +444,7 @@ export const products = [
         id: "muffins",
         img: BananaNutMuffins,
         name: "Muffins",
+        description: "Domed, golden, and packed with flavour. Morning comfort you'll look forward to.",
         types: [
             {
                 id: "muffins-PlainMuffins",
@@ -511,6 +517,7 @@ export const products = [
         id: "madeleines",
         img: PlainMadeleines,
         name: "Madeleines",
+        description: "Shell-shaped French classics with a buttery crumb. Delicate, refined, and gone too fast.",
         types: [
             {
                 id: "madeleines-PlainMadeleines",
@@ -550,6 +557,7 @@ export const products = [
         id: "pastries",
         img: MeatPie,
         name: "Pastries",
+        description: "Flaky, golden, and savory. The kind of snack that disappears at every gathering.",
         types: [
             {
                 id: "pastries-MeatPie",
@@ -590,6 +598,7 @@ export const products = [
     id: "customCakes",
     img: WeddingCake,
     name: "Custom Cakes",
+    description: "Your vision, our craft. From grand wedding tiers to personal birthday creations — built for your moment.",
     types: [
         {
             id: "custom-WeddingCake",
