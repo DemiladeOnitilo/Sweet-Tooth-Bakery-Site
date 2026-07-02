@@ -64,6 +64,7 @@ const PastrySection = ({ onPage = true, category, indexes, altOffset }) => {
                 </span>
               </nav>
             )}
+            
             <div className="flex flex-col justify-center items-center gap-3 w-full max-w-7xl px-4 text-center">
               {onPage && (
                 <div className="inline-flex items-center px-4 py-1.5 bg-gradient-to-r from-pink-100 to-purple-100 border border-pink-200/50 rounded-full text-pink-700 text-xs md:text-sm font-medium">

@@ -96,8 +96,8 @@ const CakeList = () => {
   };
 
   return (
-    <div className="flex flex-col gap-2 justify-center items-center min-h-[70vh] py-10 px-4 lg:px-8">
-      <div className="flex flex-col relative justify-center items-center gap-4 text-center max-w-4xl">
+    <div className="flex flex-col gap-2 justify-center items-center min-h-[70vh] py-10  lg:px-8">
+      <div className="flex flex-col relative justify-center items-center gap-4 text-center px-4 max-w-4xl">
         <h2 className="text-3xl md:text-5xl lg:text-6xl font-black">
           <span className="bg-gradient-to-r from-pink-600 via-purple-600 to-pink-500 bg-clip-text text-transparent">
             Our Service
@@ -114,7 +114,7 @@ const CakeList = () => {
           to="/services"
           onClick={refreshPage}
           className="flex justify-end items-center gap-1 md:mr-6 text-pink-600 font-semibold text-md md:text-lg 
-                 hover:gap-2.5 transition-all duration-200 whitespace-nowrap pb-1 group"
+                 hover:gap-2.5 transition-all duration-200 whitespace-nowrap pb-1 pr-5 group"
         >
           View All
           <FaArrowRight className="text-xs group-hover:translate-x-0.5 transition-transform duration-200" />
@@ -122,7 +122,7 @@ const CakeList = () => {
         <div className="w-full">
           <Slider {...settings}>
             {products.map((pastry) => (
-              <div key={pastry.id} className="px-2">
+              <div key={pastry.id} className="">
                 <div className="transform transition-all duration-300 hover:scale-105">
                   <CakeCard {...pastry} isHome={true} />
                 </div>

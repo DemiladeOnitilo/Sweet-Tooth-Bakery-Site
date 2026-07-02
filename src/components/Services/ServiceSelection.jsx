@@ -20,7 +20,7 @@ const ServiceSelection = ({
     : products;
 
   return (
-    <div className="w-full flex flex-col gap-5 items-center justify-center text-center py-10">
+    <div className="w-full flex flex-col gap-5 items-center justify-center text-center py-10 px-5">
       <div className="flex flex-col gap-4 items-center text-center max-w-4xl mx-auto">
         <div className="inline-flex gap-2 justify-center items-center w-fit px-4 py-2 bg-gradient-to-r from-pink-100 to-purple-100 border border-pink-200/50 rounded-full text-pink-700 text-xs lg:text-sm font-medium">
           {badge}

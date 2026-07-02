@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../store/cartSlice";
 import Carousel from "../components/Carousel";
 import { toast, ToastContainer } from "react-toastify";
+import Sliders from "../components/Sliders";
 
 const Products = () => {
   const { id } = useParams();
@@ -134,10 +135,10 @@ const Products = () => {
   if (!category || !category.types) return null;
 
   return (
-    <div className="flex flex-col lg:mt-40 mt-20">
+    <div className="flex flex-col mt-30 lg:mt-40">
       {/* ── Breadcrumb + Product Card ── */}
       <div className="flex flex-col gap-6 px-4 lg:px-16 max-w-7xl mx-auto w-full">
-        <nav className="flex items-center gap-2 text-sm text-gray-500">
+        <nav className="flex flex-wrap items-center gap-2 text-sm text-gray-500">
           <Link
             to="/"
             className="hover:text-pink-600 transition-colors duration-300"
@@ -166,7 +167,7 @@ const Products = () => {
           <span className="text-gray-800 font-medium">{product.name}</span>
         </nav>
 
-        <div className="flex flex-col lg:flex-row gap-10 bg-white rounded-3xl shadow-xl p-8">
+        <div className="flex flex-col lg:flex-row gap-10 bg-white rounded-3xl shadow-xl p-4 md:p-8">
           {/* Left: Image */}
           <div className="flex items-center justify-center w-full lg:w-1/2 relative group">
             <div className="relative overflow-hidden rounded-3xl shadow-xl w-full">
@@ -189,13 +190,13 @@ const Products = () => {
           </div>
 
           {/* Right: Configuration Panel */}
-          <div className="w-full lg:w-1/2 flex flex-col gap-6">
+          <div className="w-full lg:w-1/2 flex flex-col gap-2 md:gap-6">
             {/* Category label + Name */}
             <div>
               <span className="text-pink-600 text-sm font-semibold uppercase tracking-wide">
                 {category.name}
               </span>
-              <h1 className="text-4xl font-bold text-gray-800">
+              <h1 className="text-3xl md:text-4xl font-bold text-gray-800">
                 {product.name}
               </h1>
             </div>
@@ -384,8 +385,8 @@ const Products = () => {
                 products.
             ───────────────────────────────────────────── */}
             {!product.isConsultationOnly && (
-              <div className="flex gap-4 border-t border-gray-100 pt-6 mt-auto">
-                <div className="flex items-center gap-3 bg-gradient-to-r from-pink-50 to-purple-50 rounded-full px-4 py-2 w-fit flex-shrink-0">
+              <div className="flex flex-col md:flex-row  gap-4 border-t border-gray-100 pt-6 mt-auto">
+                <div className="flex justify-center items-center gap-3 bg-gradient-to-r from-pink-50 to-purple-50 rounded-full px-4 py-2 w-fit flex-shrink-0">
                   <button
                     onClick={decrementQuantity}
                     className="w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center text-pink-600 hover:text-pink-700 transition-all duration-300 cursor-pointer hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-400"
@@ -427,7 +428,7 @@ const Products = () => {
 
       {/* Related Offers */}
       {relatedProducts.length > 0 && (
-        <div className="flex flex-col items-center gap-10 w-full py-16 bg-gradient-to-br from-gray-50 via-pink-50/30 to-purple-50/30">
+        <div className="flex flex-col items-center gap-5 w-full pb-14 lg:py-16">
           <div className="flex flex-col items-center gap-3 text-center px-4">
             <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-pink-100 to-purple-100 border border-pink-200/50 rounded-full text-pink-700 text-sm font-medium">
               🍰 More from {category.name}
@@ -438,7 +439,7 @@ const Products = () => {
               </span>
             </h2>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 px-4 max-w-7xl w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 lg:gap-5 px-4 max-w-7xl w-full">
             {relatedProducts.map((item) => (
               <div
                 key={item.id}
@@ -451,11 +452,14 @@ const Products = () => {
         </div>
       )}
 
+      {/* Y
+      )}
+
       {/* You Might Also Like — fixed: was isHome={true} which links to category URLs
           using individual product ids, producing broken /services/category/brownies-ChocolateBrownie
           routes. onPage={true} correctly links to /products/${id} */}
       {recommendedItems.length > 0 && (
-        <div className="flex flex-col items-center gap-10 w-full pb-20 px-4 pt-16">
+        <div className="flex flex-col items-center gap-5 w-full pb-20">
           <div className="flex flex-col items-center gap-3 text-center">
             <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-pink-100 to-purple-100 border border-pink-200/50 rounded-full text-pink-700 text-sm font-medium">
               ✨ Discover More
@@ -466,15 +470,8 @@ const Products = () => {
               </span>
             </h2>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl w-full">
-            {recommendedItems.map((item) => (
-              <div
-                key={item.id}
-                className="h-full transform transition-all duration-300 hover:scale-105"
-              >
-                <CakeCard {...item} onPage={true} />
-              </div>
-            ))}
+          <div className="w-full max-w-7xl">
+            <Sliders main={recommendedItems} onPage={true} autoPlay={true} />
           </div>
         </div>
       )}
