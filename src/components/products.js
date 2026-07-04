@@ -636,7 +636,8 @@ export const products = [
             flavors: ["Vanilla", "Chocolate", "Red Velvet", "Marble", "Lemon"],
             icings: ["Buttercream", "Fondant", "Whipped Cream"],
             ingredients: ["Flour", "Butter", "Sugar", "Eggs", "Milk", "Flavour choices"],
-            inscription: ""
+            inscription: "",
+            inscriptionStyle: ["Icing", "Topper" ]
         }
     ]
 }

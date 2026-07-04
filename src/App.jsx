@@ -15,11 +15,21 @@ import MainLayout from "./layout/MainLayout";
 import Cart from "./pages/Cart";
 import Products from "./pages/Products";
 import Category from "./pages/Category";
+import ScrollToTop from "./components/ScrollToTop";
+
+const RootLayout = () => {
+  return (
+    <>
+      <ScrollToTop />
+      <MainLayout />
+    </>
+  );
+};
 
 const App = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<MainLayout />}>
+      <Route path="/" element={<RootLayout />}>
         <Route index element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />

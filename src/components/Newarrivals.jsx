@@ -22,9 +22,6 @@ const daysLeft = (expiresAt) => {
 
 const NewArrivals = () => {
   
-  const refreshPage = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
 
   const arrivals = getActiveProductNotifications().filter(
     (n) => n.type === "new_arrival" && n.productId,
@@ -66,7 +63,6 @@ const NewArrivals = () => {
               <Link
                 key={notif.id}
                 to={`/products/${notif.productId}`}
-                onClick={refreshPage}
                 className="group relative bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100"
               >
                 {/* Timer badge */}

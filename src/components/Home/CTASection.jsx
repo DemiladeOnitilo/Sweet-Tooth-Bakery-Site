@@ -40,7 +40,7 @@ const CTASection = ({ isServices }) => {
         className="absolute inset-0 bg-[url(https://img.freepik.com/free-photo/close-up-hand-preparing-dessert_23-2148972041.jpg?t=st=1742476676~exp=1742480276~hmac=1db6886fba8af4069a7157b4569efe5aa330f96fa1aeceb70601921460e540a9&w=900)] 
         bg-no-repeat bg-center bg-cover transition-transform duration-300 ease-out"
         style={{
-          transform: `translateY(${scrollY * 0.3}px) scale(1.1)`,
+          transform: `translateY(${scrollY * 0.1}px) scale(1.1)`,
           filter: "brightness(0.4)",
         }}
       />

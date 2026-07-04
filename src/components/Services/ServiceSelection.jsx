@@ -11,9 +11,6 @@ const ServiceSelection = ({
   highlight = "SELECTIONS",
   subtitle = "From rich cakes to delicate pastries, find the perfect treat for every occasion.",
 }) => {
-  function refreshPage() {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
 
   const visibleProducts = excludeId
     ? products.filter((pastry) => pastry.id !== excludeId)
@@ -43,7 +40,6 @@ const ServiceSelection = ({
             <div key={pastry.id}>
               <Link
                 to={`/services/category/${pastry.id}`}
-                onClick={refreshPage}
                 className="flex flex-col gap-2 justify-center items-center"
               >
                 <ServiceCakeCard {...pastry} />

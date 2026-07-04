@@ -23,7 +23,7 @@ const Map = () => {
         dragging={false}
         doubleClickZoom={false}
         zoomControl={false}
-        style={{ height: '100%', width: '100%' }}
+        style={{ height: '100%', width: '100%', zIndex: 0 }}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

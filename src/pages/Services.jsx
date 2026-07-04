@@ -6,13 +6,10 @@ import { scroller } from "react-scroll";
 import CTASection from "../components/Home/CTASection";
 import { products } from "../components/products";
 import ViewAll from "../components/ViewAll";
+import BentoServiceGrid from "../components/Services/BentoServiceGrid";
+import SingleCardService from "../components/Services/SingleCardService";
 
 const Services = ({ category }) => {
-  const heroProduct = products[0];
-  const heroProductTypes = heroProduct.types;
-  const bentoProduct = products[5];
-  const bentoProductTypes = bentoProduct.types;
-
   const scrollToSection = () => {
     scroller.scrollTo("target-section", {
       duration: 500,
@@ -23,61 +20,15 @@ const Services = ({ category }) => {
 
   return (
     <div className="flex flex-col">
-
       <ServicesHero scrollToSection={scrollToSection} />
 
-      <div className="flex justify-center items-center w-full px-6 py-16 mx-auto bg-white ">
-        <div className="flex flex-col md:flex-row rounded-3xl max-w-7xl overflow-hidden border border-pink-100 shadow-lg group hover:shadow-2xl transition-all duration-500 transform group-hover:-translate-y-2 cursor-pointer">
-          <div className="w-full md:w-1/2 h-64 md:h-auto min-h-[220px] relative overflow-hidden">
-            <img
-              src={heroProduct.img}
-              alt={heroProduct.name}
-              className="w-full h-full object-cover transition-transform duration-700 ease-out"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:translate-x-full transition-transform duration-1500 ease-out"></div>
-          </div>
-          <div className="w-full md:w-1/2 flex flex-col justify-center items-start gap-4 p-8 lg:p-12 bg-white">
-            <div className="inline-flex items-center px-4 py-1.5 bg-gradient-to-r from-pink-100 to-purple-100 border border-pink-200/50 rounded-full text-pink-700 text-xs md:text-sm font-medium">
-              01 / {String(products.length).padStart(2, "0")}
-            </div>
-            <div className="flex flex-col gap-2">
-              <h1 className="text-4xl lg:text-5xl font-bold">
-                <span className="bg-gradient-to-r from-pink-600 via-purple-600 to-pink-500 bg-clip-text text-transparent">
-                  {heroProduct.name}
-                </span>
-              </h1>
+      <SingleCardService
+        singleProduct={products[0]}
+        singleProductTypes={products[0].types}
+        productNumber="01"
+      />
 
-              <div className="h-1 w-26 rounded-full bg-gradient-to-r from-pink-400 to-purple-400" />
-            </div>
-
-            <div className="text-gray-400 italic text-xl leading-relaxed">
-              {heroProduct.description}
-            </div>
-            <div className="flex flex-col">
-              <h3 className="text-gray-700 text-md font-medium leading-relaxed">
-                Types
-              </h3>
-              <div className="flex flex-wrap text-gray-400 italic text-md leading-relaxed">
-                {heroProductTypes.map((items, index) => (
-                  <React.Fragment key={index}>
-                    <span>{items.name.replace(/Brownies/gi, "").trim()}</span>
-                    {index !== heroProductTypes.length - 1 && (
-                      <span className="mx-2">•</span>
-                    )}
-                  </React.Fragment>
-                ))}
-              </div>
-            </div>
-
-            <div className="items-end mt-2">
-              <ViewAll to={`/services/category/${heroProduct.id}`} />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <PastrySection indexes={[1, 2]} altOffset={2, 3} />
+      <PastrySection indexes={[1, 2]} altOffset={2} />
 
       <div className="w-full bg-gradient-to-r from-pink-50 to-purple-50 py-12 px-6 border-y border-gray-100">
         <p className="text-center text-xs font-medium text-gray-400 tracking-widest uppercase mb-8">
@@ -167,65 +118,28 @@ const Services = ({ category }) => {
         </div>
       </div>
 
-      <PastrySection indexes={[3, 4]} />
+      <SingleCardService
+        singleProduct={products[3]}
+        singleProductTypes={products[3].types}
+        productNumber="04"
+      />
+
+      <PastrySection indexes={[4]} />
 
       {/* BentoGrid Product */}
-      <div className="flex w-full py-12 px-6 mx-auto bg-white">
-        <div className="flex flex-col gap-4 w-full max-w-7xl mx-auto"> 
-        <div className="flex flex-col gap-1 items-center text-center">
-          <div className="inline-flex items-center px-4 py-1.5 bg-gradient-to-r from-pink-100 to-purple-100 border border-pink-200/50 rounded-full text-pink-700 text-xs md:text-sm font-medium">
-            06 / {String(products.length).padStart(2, "0")}
-          </div>
-          <div className="flex flex-col items-center gap-2">
-            <h1 className="text-4xl lg:text-5xl font-bold">
-              <span className="bg-gradient-to-r from-pink-600 via-purple-600 to-pink-500 bg-clip-text text-transparent">
-                {bentoProduct.name}
-              </span>
-            </h1>
+      <BentoServiceGrid
+        bentoProduct={products[5]}
+        bentoProductTypes={products[5].types}
+        productNumber="06"
+      />
 
-            <div className="h-1 w-26 rounded-full bg-gradient-to-r from-pink-400 to-purple-400" />
-          </div>
+      <PastrySection indexes={[6]} altOffset={1} />
 
-          <div className="text-gray-400 italic text-xl leading-relaxed">
-            {bentoProduct.description}
-          </div>
-          <div className="mt-2">
-            <ViewAll to={`/services/category/${heroProduct.id}`} />
-          </div>
-        </div>
-
-        <div className="flex flex-col md:grid grid-cols-2 grid-rows-2 gap-3 h-[800px] md:h-[420px]">
-          <div className="row-span-2 relative rounded-2xl overflow-hidden group cursor-pointer">
-            <img
-              src={bentoProductTypes[0].img}
-              alt={bentoProductTypes[0].name}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
-              <p className="text-white text-md font-medium">
-                {bentoProductTypes[0].name}
-              </p>
-              <p className="text-white/70 text-sm">Featured</p>
-            </div>
-          </div>
-          {bentoProductTypes.slice(1, 3).map((items, index) => (
-            <div
-              key={index}
-              className="relative rounded-2xl overflow-hidden group cursor-pointer h-1/2 md:h-full"
-            >
-              <img
-                src={items.img}
-                alt={items.name}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent p-3">
-                <p className="text-white text-sm font-medium">{items.name}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-        </div>
-      </div>
+      <SingleCardService
+        singleProduct={products[7]}
+        singleProductTypes={products[7].types}
+        productNumber="08"
+      />
 
       <div className="w-full bg-gradient-to-r from-pink-50 to-purple-50 py-16 px-6 border-y border-pink-100/50">
         <p className="text-center text-xs font-medium text-purple-600 tracking-widest uppercase mb-10">
@@ -253,7 +167,13 @@ const Services = ({ category }) => {
         </div>
       </div>
 
-      <PastrySection indexes={[6, 7, 8, 9]} />
+      <PastrySection indexes={[8]} />
+
+      <BentoServiceGrid
+        bentoProduct={products[9]}
+        bentoProductTypes={products[9].types}
+        productNumber="10"
+      />
 
       <CTASection isServices={true} />
       <div id="target-section">

@@ -32,6 +32,7 @@ const Products = () => {
   const [selectedIcing, setSelectedIcing] = useState("");
   const [cakeColor, setCakeColor] = useState("White / Standard");
   const [inscription, setInscription] = useState("");
+  const [inscriptionStyle, setInscriptionStyle] = useState("Icing");
 
   const category = products.find((cat) =>
     cat.types.find((item) => item.id === id),
@@ -53,6 +54,7 @@ const Products = () => {
         setSelectedIcing(product.icings?.[0] || "Buttercream");
         setCakeColor("White / Standard");
         setInscription("");
+        setInscriptionStyle("Icing");
       }
     }
   }, [product, id]);
@@ -64,7 +66,7 @@ const Products = () => {
     .filter((cat) => cat.name !== category?.name)
     .flatMap((cat) => cat.types)
     .sort(() => Math.random() - 0.5)
-    .slice(0, 4);
+    .slice(0, 8);
 
   // Safe price calculation — consultation products have no price field
   const activePrice =
@@ -82,7 +84,7 @@ const Products = () => {
   );
 
   const handleConsultationRedirect = () => {
-    const businessNumber = "2349044269908";
+    const businessNumber = "2348033226430";
     const message = `Hello Sweet Tooth Bakery! I would love to schedule a consultation regarding a "${product.name}".`;
     window.open(
       `https://wa.me/${businessNumber}?text=${encodeURIComponent(message)}`,
@@ -100,7 +102,7 @@ const Products = () => {
         price: activePrice,
         quantity,
         customNotes: inscription.trim()
-          ? `Inscription: "${inscription.trim()}"`
+          ? `Inscription: "${inscription.trim()}" | Style: ${inscriptionStyle}`
           : null,
       }),
     );
@@ -204,7 +206,7 @@ const Products = () => {
             {/* Price — consultation shows badge, regular shows gradient price */}
             {product.isConsultationOnly ? (
               <p className="text-2xl font-extrabold text-pink-600 bg-pink-50 w-fit px-4 py-2 border border-pink-100 rounded-2xl">
-                By Consultation Only
+                Consultation Only
               </p>
             ) : (
               <p className="text-3xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
@@ -225,8 +227,8 @@ const Products = () => {
             ───────────────────────────────────────────── */}
             {product.isConsultationOnly && (
               <div className="border-t border-gray-100 pt-6">
-                <div className="bg-gradient-to-r from-pink-50/60 to-purple-50/60 border border-pink-100/60 rounded-2xl p-5 space-y-4">
-                  <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2">
+                <div className="bg-gradient-to-r from-pink-50/60 to-purple-50/60 border border-pink-100/60 rounded-2xl p-3 md:p-5 space-y-4">
+                  <h3 className="text-md md:text-lg font-bold text-gray-800 flex items-center gap-2">
                     <FaExclamationCircle className="text-pink-500" />
                     Professional Consultation Booking
                   </h3>
@@ -239,7 +241,7 @@ const Products = () => {
                   </p>
                   <button
                     onClick={handleConsultationRedirect}
-                    className="w-full flex items-center justify-center gap-3 bg-emerald-500 hover:bg-emerald-600 text-white font-medium py-4 rounded-full shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 cursor-pointer text-lg"
+                    className="w-full flex items-center justify-center gap-3 bg-emerald-500 hover:bg-emerald-600 text-white font-medium px-2 py-4 rounded-full shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 cursor-pointer text-sm md:text-lg"
                   >
                     <FaWhatsapp size={24} />
                     Chat With Our Baker via WhatsApp
@@ -333,7 +335,25 @@ const Products = () => {
                 <div className="flex flex-col gap-1.5">
                   <label className="text-xs font-bold text-gray-700 flex items-center gap-1.5">
                     <FaPencilAlt size={11} className="text-pink-500" />
-                    4. Cake Inscription Message (Optional):
+                    4. Inscription Style (OptIonal):
+                  </label>
+                  <select
+                    value={inscriptionStyle}
+                    onChange={(e) => setInscriptionStyle(e.target.value)}
+                    className="p-2.5 border border-gray-200 bg-white rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-pink-400 text-gray-700 font-medium"
+                  >
+                    {product.inscriptionStyle?.map((style) => (
+                      <option key={style} value={style}>
+                        {style}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-xs font-bold text-gray-700 flex items-center gap-1.5">
+                    <FaPencilAlt size={11} className="text-pink-500" />
+                    5. Cake Inscription Message (Optional):
                   </label>
                   <input
                     type="text"
@@ -428,7 +448,7 @@ const Products = () => {
 
       {/* Related Offers */}
       {relatedProducts.length > 0 && (
-        <div className="flex flex-col items-center gap-5 w-full pb-14 lg:py-16">
+        <div className="flex flex-col items-center gap-5 w-full py-14 lg:py-16">
           <div className="flex flex-col items-center gap-3 text-center px-4">
             <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-pink-100 to-purple-100 border border-pink-200/50 rounded-full text-pink-700 text-sm font-medium">
               🍰 More from {category.name}

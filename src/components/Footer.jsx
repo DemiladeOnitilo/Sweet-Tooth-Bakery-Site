@@ -12,9 +12,6 @@ import {
 } from "react-icons/fa";
 
 const Footer = () => {
-  const refreshPage = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
 
   return (
     <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-300 py-14 px-8 md:px-16 lg:px-24">
@@ -22,7 +19,6 @@ const Footer = () => {
         <div className="space-y-5 col-span-2 md:col-span-2 lg:col-span-2">
           <Link
             to="/"
-            onClick={refreshPage}
             className="flex items-center gap-3"
           >
             <img
@@ -78,7 +74,6 @@ const Footer = () => {
               <li key={index}>
                 <Link
                   to={`/${item}`}
-                  onClick={refreshPage}
                   className="hover:text-pink-400 transition-colors relative group"
                 >
                   {item}

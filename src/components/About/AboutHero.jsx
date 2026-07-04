@@ -14,7 +14,7 @@ const AboutHero = () => {
       <div
         className="absolute inset-0 bg-[url(https://s.hdnux.com/photos/01/41/75/66/25681283/3/rawImage.jpg)] bg-no-repeat bg-cover bg-center transition-transform duration-300 ease-out"
         style={{
-          transform: `translateY(${scrollY * 0.3}px)`,
+          transform: `translateY(${scrollY * 0.1}px)`,
           filter: "brightness(0.5)",
         }}
       />

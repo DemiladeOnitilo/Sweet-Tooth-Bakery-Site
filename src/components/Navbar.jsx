@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import logo from "../assets/Images/sweet-tooth-logo.png";
-import { NavLink, Link, useNavigate } from "react-router-dom";
+import { NavLink, Link, useNavigate, useLocation } from "react-router-dom";
 import {
   FaShoppingCart,
   FaBars,
@@ -20,9 +20,11 @@ const Navbar = () => {
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
 
+  const navRef = useRef(null);
   const searchRef = useRef(null);
   const mobileSearchRef = useRef(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const { amount } = useSelector((state) => state.cart);
   const { currency } = useSelector((state) => state.cart);
@@ -34,16 +36,24 @@ const Navbar = () => {
     })),
   );
 
+  // 1. Close menu and search when the route (page) changes
+  useEffect(() => {
+    setIsOpen(false);
+    setShowSearchResults(false);
+    setIsMobileSearchOpen(false);
+    setSearchQuery("");
+  }, [location.pathname]);
+
+  // 2. Handle background scrolling style
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 10;
-      setScrolled(isScrolled);
+      setScrolled(window.scrollY > 10);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // 3. Handle search logic
   useEffect(() => {
     if (searchQuery.length > 0) {
       const filtered = allProducts
@@ -71,8 +81,10 @@ const Navbar = () => {
     }
   }, [searchQuery]);
 
+  // 4. Handle clicks outside of dropdowns and mobile menu
   useEffect(() => {
     const handleClickOutside = (event) => {
+      // Close search results if clicking outside search bar
       if (searchRef.current && !searchRef.current.contains(event.target)) {
         setShowSearchResults(false);
       }
@@ -82,15 +94,15 @@ const Navbar = () => {
       ) {
         setIsMobileSearchOpen(false);
       }
+      // Close mobile menu if clicking outside the entire nav area
+      if (navRef.current && !navRef.current.contains(event.target) && isOpen) {
+        setIsOpen(false);
+      }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  function refreshPage() {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
+  }, [isOpen]);
 
   const handleSearchSelect = (productId) => {
     setSearchQuery("");
@@ -121,7 +133,8 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`bg-white/95 backdrop-blur-md fixed right-0 left-0 top-0 z-50 transition-all duration-300 ${
+      ref={navRef}
+      className={`bg-white/95 backdrop-blur-md fixed right-0 left-0 top-0 z-9999 transition-all duration-300 ${
         scrolled ? "shadow-lg border-b border-gray-100 py-2" : "shadow-sm py-4"
       }`}
     >
@@ -129,7 +142,6 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center space-x-3">
             <Link
-              onClick={refreshPage}
               to="/"
               className="flex items-center space-x-3 group transition-transform duration-300 hover:scale-105"
             >
@@ -148,13 +160,13 @@ const Navbar = () => {
           </div>
 
           <div className="hidden lg:flex items-center space-x-2 bg-gray-50 rounded-full p-2 shadow-inner">
-            <NavLink onClick={refreshPage} to="/about" className={active}>
+            <NavLink to="/about" className={active}>
               About
             </NavLink>
-            <NavLink onClick={refreshPage} to="/services" className={active}>
+            <NavLink to="/services" className={active}>
               Services
             </NavLink>
-            <NavLink onClick={refreshPage} to="/contact" className={active}>
+            <NavLink to="/contact" className={active}>
               Contact
             </NavLink>
           </div>
@@ -200,7 +212,7 @@ const Navbar = () => {
                         <p className="text-xs text-gray-500">
                           {product.categoryName}
                         </p>
-                        <p className="text-xs  font-semibold">
+                        <p className="text-xs font-semibold">
                           <span className="bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
                             {currency}
                             {product.price}
@@ -219,7 +231,6 @@ const Navbar = () => {
 
             <div className="hidden md:flex items-center justify-center">
               <Link
-                onClick={refreshPage}
                 to="/Cart"
                 className="relative p-2 rounded-full hover:bg-pink-50 transition-all duration-300 group"
               >
@@ -235,7 +246,6 @@ const Navbar = () => {
 
             <div className="hidden lg:flex items-center justify-center">
               <Link
-                onClick={refreshPage}
                 to="/services"
                 className="bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white px-4 py-2.5 rounded-full font-medium text-sm transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-0.5"
               >
@@ -304,7 +314,7 @@ const Navbar = () => {
                         <p className="text-xs text-gray-500">
                           {product.categoryName}
                         </p>
-                        <p className="text-xs  font-semibold">
+                        <p className="text-xs font-semibold">
                           <span className="bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
                             {currency}
                             {product.price}
@@ -313,11 +323,6 @@ const Navbar = () => {
                       </div>
                     </div>
                   ))}
-                  {searchQuery && searchResults.length === 0 && (
-                    <div className="p-4 text-center text-gray-500 text-sm">
-                      No products found for "{searchQuery}"
-                    </div>
-                  )}
                 </div>
               )}
             </div>
@@ -328,7 +333,7 @@ const Navbar = () => {
       <div
         className={`lg:hidden transition-all duration-300 ease-in-out ${
           isOpen
-            ? "max-h-full opacity-100 border-t border-gray-100 bg-white/95 backdrop-blur-md"
+            ? "max-h-screen opacity-100 border-t border-gray-100 bg-white/95 backdrop-blur-md overflow-y-auto"
             : "max-h-0 opacity-0 overflow-hidden"
         }`}
       >
@@ -337,7 +342,7 @@ const Navbar = () => {
             className="flex md:hidden w-full items-center relative"
             ref={searchRef}
           >
-            <form onSubmit={handleSearchSubmit} className="relative">
+            <form onSubmit={handleSearchSubmit} className="relative w-full">
               <input
                 type="text"
                 placeholder="Search treats..."
@@ -373,7 +378,7 @@ const Navbar = () => {
                       <p className="text-xs text-gray-500">
                         {product.categoryName}
                       </p>
-                      <p className="text-xs  font-semibold">
+                      <p className="text-xs font-semibold">
                         <span className="bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
                           {currency}
                           {product.price}
@@ -385,9 +390,9 @@ const Navbar = () => {
               </div>
             )}
           </div>
-          <div className="flex items-center gap-4 ">
+
+          <div className="flex items-center gap-4 ml-4">
             <Link
-              onClick={refreshPage}
               to="/Cart"
               className="relative p-2 rounded-full hover:bg-pink-50 transition-all duration-300 group"
             >
@@ -397,49 +402,26 @@ const Navbar = () => {
                   {amount > 99 ? "99+" : amount}
                 </div>
               )}
-              <div className="absolute inset-0 rounded-full bg-pink-200 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
             </Link>
           </div>
         </div>
 
-        <div className="px-4 pt-4 pb-6 space-y-3 ">
-          <NavLink
-            onClick={() => {
-              refreshPage();
-              setIsOpen(false);
-            }}
-            to="/about"
-            className={mobileNavClass}
-          >
+        <div className="px-4 pt-4 pb-6 space-y-3">
+          <NavLink to="/" className={mobileNavClass}>
+            Home
+          </NavLink>
+          <NavLink to="/about" className={mobileNavClass}>
             About
           </NavLink>
-          <NavLink
-            onClick={() => {
-              refreshPage();
-              setIsOpen(false);
-            }}
-            to="/services"
-            className={mobileNavClass}
-          >
+          <NavLink to="/services" className={mobileNavClass}>
             Services
           </NavLink>
-          <NavLink
-            onClick={() => {
-              refreshPage();
-              setIsOpen(false);
-            }}
-            to="/contact"
-            className={mobileNavClass}
-          >
+          <NavLink to="/contact" className={mobileNavClass}>
             Contact
           </NavLink>
 
           <div className="pt-3">
             <Link
-              onClick={() => {
-                refreshPage();
-                setIsOpen(false);
-              }}
               to="/services"
               className="block w-full text-center bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white px-6 py-3 rounded-full font-medium transition-all duration-300 shadow-lg"
             >

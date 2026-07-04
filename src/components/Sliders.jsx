@@ -31,6 +31,8 @@ const Sliders = ({ onPage, main, autoPlay }) => {
     slidesToShow: 4,
     slidesToScroll: 1,
     swipe: true,
+    autoplay: autoPlay,
+    autoplaySpeed: 2500,
     touchMove: true,
     nextArrow: <SampleNextArrow to="next" />,
     prevArrow: <SamplePrevArrow to="prev" />,
@@ -40,8 +42,6 @@ const Sliders = ({ onPage, main, autoPlay }) => {
         settings: {
           slidesToShow: 4,
           slidesToScroll: 1,
-          autoplay: autoPlay,
-          autoplaySpeed: 2500,
         },
       },
       {
@@ -49,8 +49,6 @@ const Sliders = ({ onPage, main, autoPlay }) => {
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
-          autoplay: autoPlay,
-          autoplaySpeed: 2500,
         },
       },
       {
@@ -59,8 +57,6 @@ const Sliders = ({ onPage, main, autoPlay }) => {
           slidesToShow: 3,
           slidesToScroll: 1,
           arrows: false,
-          autoplay: autoPlay,
-          autoplaySpeed: 2500,
         },
       },
       {
@@ -71,8 +67,6 @@ const Sliders = ({ onPage, main, autoPlay }) => {
           arrows: false,
           centerMode: true,
           centerPadding: "40px",
-          autoplay: autoPlay,
-          autoplaySpeed: 2500,
         },
       },
     ],

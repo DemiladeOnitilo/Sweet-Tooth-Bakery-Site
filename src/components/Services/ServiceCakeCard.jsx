@@ -1,16 +1,9 @@
 import React from "react";
 
 const ServiceCakeCard = ({ name, img }) => {
-  function refreshPage() {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
-
   return (
     <div className="flex flex-col gap-y-3 justify-center items-center group">
-      <div
-        onClick={refreshPage}
-        className="relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 transform group-hover:-translate-y-2 cursor-pointer"
-      >
+      <div className="relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 transform group-hover:-translate-y-2 cursor-pointer">
         <div className="relative">
           <img
             src={img}
@@ -23,7 +16,7 @@ const ServiceCakeCard = ({ name, img }) => {
         </div>
       </div>
 
-      <div onClick={refreshPage} className="relative cursor-pointer">
+      <div className="relative cursor-pointer">
         <h1 className="text-lg md:text-xl font-bold bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 bg-clip-text text-transparent group-hover:from-pink-500 group-hover:via-purple-500 group-hover:to-pink-400 transition-all duration-500 transform group-hover:scale-105 sour-gummy">
           {name}
         </h1>

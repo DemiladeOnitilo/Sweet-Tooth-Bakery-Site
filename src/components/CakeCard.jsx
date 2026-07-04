@@ -3,9 +3,6 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const CakeCard = ({ id, img, name, price, description, onPage, isHome }) => {
-  const refreshPage = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
 
   const { currency } = useSelector((state) => state.cart);
 
@@ -20,7 +17,6 @@ const CakeCard = ({ id, img, name, price, description, onPage, isHome }) => {
           <div className="group flex lg:hidden flex-row items-center gap-3 bg-white rounded-2xl shadow-sm border border-gray-100 p-3 cursor-pointer w-full">
             <Link
               to={`/products/${id}`}
-              onClick={refreshPage}
               className="flex-shrink-0"
             >
               <img
@@ -30,7 +26,7 @@ const CakeCard = ({ id, img, name, price, description, onPage, isHome }) => {
               />
             </Link>
             <div className="flex flex-col flex-1 gap-1 min-w-0">
-              <Link to={`/products/${id}`} onClick={refreshPage}>
+              <Link to={`/products/${id}`} >
                 <h3 className="text-sm md:text-xl font-bold text-gray-800 line-clamp-1 sour-gummy">
                   {name}
                 </h3>
@@ -49,7 +45,6 @@ const CakeCard = ({ id, img, name, price, description, onPage, isHome }) => {
                 )}
                 <Link
                   to={`/products/${id}`}
-                  onClick={refreshPage}
                   className="text-xs md:text-lg px-3 py-1.5 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-full font-medium flex-shrink-0"
                 >
                   View
@@ -62,7 +57,6 @@ const CakeCard = ({ id, img, name, price, description, onPage, isHome }) => {
           <div className="group bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:scale-101 hover:-translate-y-2 w-full h-full flex-col cursor-pointer hidden lg:flex">
             <Link
               to={`/products/${id}`}
-              onClick={refreshPage}
               className="block relative overflow-hidden flex-shrink-0"
             >
               <img
@@ -74,7 +68,7 @@ const CakeCard = ({ id, img, name, price, description, onPage, isHome }) => {
               <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:translate-x-full transition-transform duration-[1500ms] ease-out" />
             </Link>
             <div className="p-5 flex flex-col flex-1 gap-3">
-              <Link to={`/products/${id}`} onClick={refreshPage}>
+              <Link to={`/products/${id}`}>
                 <h3 className="text-lg lg:text-xl font-bold bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 bg-clip-text text-transparent group-hover:from-pink-500 group-hover:via-purple-500 group-hover:to-pink-400 transition-all duration-500 sour-gummy line-clamp-2">
                   {name}
                 </h3>
@@ -97,7 +91,6 @@ const CakeCard = ({ id, img, name, price, description, onPage, isHome }) => {
                 )}
                 <Link
                   to={`/products/${id}`}
-                  onClick={refreshPage}
                   className="group/btn relative px-5 py-2.5 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-full hover:from-pink-600 hover:to-purple-700 transition-all duration-300 text-sm font-medium transform hover:scale-103 shadow-md hover:shadow-lg overflow-hidden flex-shrink-0"
                 >
                   <span className="relative z-10">View Details</span>
@@ -112,7 +105,6 @@ const CakeCard = ({ id, img, name, price, description, onPage, isHome }) => {
         <div className="group flex flex-col items-center gap-4 p-2 pt-4 cursor-pointer w-full overflow-visible">
           <Link
             to={isHome ? `/services/category/${id}` : `/products/${id}`}
-            onClick={refreshPage}
             className="relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-700 transform group-hover:-translate-y-2 block"
           >
             <img
@@ -132,7 +124,6 @@ const CakeCard = ({ id, img, name, price, description, onPage, isHome }) => {
           <div className="text-center max-w-[200px] md:max-w-[220px] lg:max-w-[250px]">
             <Link
               to={isHome ? `/services/category/${id}` : `/products/${id}`}
-              onClick={refreshPage}
             >
               <h3 className="text-lg lg:text-xl font-bold bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 bg-clip-text text-transparent group-hover:from-pink-500 group-hover:via-purple-500 group-hover:to-pink-400 transition-all duration-500 sour-gummy line-clamp-2">
                 {name}

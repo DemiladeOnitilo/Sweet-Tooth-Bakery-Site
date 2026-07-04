@@ -10,9 +10,6 @@ import MainButton from "../MainButton";
 import { Link } from "react-router-dom";
 
 const CakeList = () => {
-  const refreshPage = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
 
   const SamplePrevArrow = (props) => {
     const { className, onClick } = props;
@@ -112,7 +109,6 @@ const CakeList = () => {
       <div className="flex flex-col gap-2 w-full max-w-7xl relative">
         <Link
           to="/services"
-          onClick={refreshPage}
           className="flex justify-end items-center gap-1 md:mr-6 text-pink-600 font-semibold text-md md:text-lg 
                  hover:gap-2.5 transition-all duration-200 whitespace-nowrap pb-1 pr-5 group"
         >

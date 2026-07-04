@@ -16,7 +16,7 @@ const ServicesHero = ({scrollToSection}) => {
         className="absolute inset-0 bg-[url(https://img.freepik.com/free-photo/dessert-sweet-cake-tasty-bakery-soft_53876-30292.jpg?t=st=1742491335~exp=1742494935~hmac=8b0938dca842249a12314d57c7863b8f47410b7b91bcb13b12617d5f4fdd2d8c&w=900)] 
       bg-no-repeat bg-cover bg-center transition-transform duration-300 ease-out"
         style={{
-          transform: `translateY(${scrollY * 0.3}px)`,
+          transform: `translateY(${scrollY * 0.1}px)`,
           filter: "brightness(0.5)",
         }}
       />

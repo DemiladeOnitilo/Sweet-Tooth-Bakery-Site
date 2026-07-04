@@ -10,9 +10,6 @@ import NewArrivals from "../components/Newarrivals";
 import { products } from "../components/products";
 
 const Home = () => {
-  const refreshPage = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
 
   const { cartItems, total, amount, currency, delivery_fee } = useSelector(
     (state) => state.cart,
@@ -45,7 +42,6 @@ const Home = () => {
           {bestsellers.map((item) => (
             <Link
               key={item.id}
-              onClick={refreshPage}
               to={`/products/${item.id}`}
               className="flex-none w-25 md:w-30 rounded-xl border border-gray-100 overflow-hidden active:scale-95 transition-transform"
             >

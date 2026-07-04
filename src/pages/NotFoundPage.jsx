@@ -3,10 +3,6 @@ import { FaExclamationTriangle, FaHome } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const NotFoundPage = () => {
-  const refreshPage = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   return (
     <div className="flex flex-col items-center justify-center min-h-screen w-full p-8 bg-gradient-to-br from-pink-50 via-purple-50 to-white">
       <div className="flex flex-col items-center gap-8 text-center max-w-2xl">
@@ -27,7 +23,7 @@ const NotFoundPage = () => {
           Looks like this page got eaten before we could serve it!
         </p>
 
-        <Link  to="/" onClick={refreshPage}>
+        <Link to="/">
           <button className="group relative px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-full hover:from-pink-600 hover:to-purple-700 transition-all duration-500 cursor-pointer text-lg font-medium transform hover:scale-103 shadow-lg hover:shadow-2xl overflow-hidden flex items-center gap-3">
             <FaHome className="relative z-10" />
             <span className="relative z-10">Go Back Home</span>

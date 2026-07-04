@@ -3,7 +3,7 @@ import React from "react";
 const Carousel = () => {
   return (
     <div
-      className="relative w-full h-24 overflow-hidden bg-gradient-to-r from-pink-50 via-white to-pink-50 flex items-center my-16"
+      className="relative w-full h-24 overflow-hidden bg-gradient-to-r from-pink-50 via-white to-pink-50 flex items-center mt-16"
       aria-hidden="true"
     >
       <div className="flex gap-12 animate-marquee whitespace-nowrap motion-reduce:animate-none">

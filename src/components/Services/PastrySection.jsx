@@ -73,7 +73,7 @@ const PastrySection = ({ onPage = true, category, indexes, altOffset }) => {
                 </div>
               )}
               <div className="flex flex-col items-center gap-1 md:gap-3">
-                <h1 className="text-4xl lg:text-5xl font-bold">
+                <h1 className="text-2xl md:text-3xl lg:text-5xl font-bold">
                   <span className="bg-gradient-to-r from-pink-600 via-purple-600 to-pink-500 bg-clip-text text-transparent">
                     {product.name}
                   </span>

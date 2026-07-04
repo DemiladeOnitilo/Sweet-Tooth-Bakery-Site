@@ -7,14 +7,8 @@ const MainButton = ({ link, name, variant, direction, onClick }) => {
     if (onClick) {
       e.preventDefault();
       onClick();
-    } else {
-      refreshPage();
     }
   };
-
-  function refreshPage() {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
 
   return (
     <Link
