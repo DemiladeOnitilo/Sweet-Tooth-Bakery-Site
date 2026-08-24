@@ -4,8 +4,8 @@ import Hero from "../components/Home/Hero";
 import CakeList from "../components/Home/CakeList";
 import Goals from "../components/Goals";
 import CTASection from "../components/Home/CTASection";
-import NewArrivals from "../components/Newarrivals";
-import BestSellers from "../components/BestSellers";
+import NewArrivals from "../components/Home/Newarrivals";
+import BestSellers from "../components/Home/BestSellers";
 
 const Home = () => {
   return (

@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaArrowRight, FaClock } from "react-icons/fa";
-import { getActiveProductNotifications } from "./notification";
-import { products } from "./products"; // adjust path as needed
+import { getActiveProductNotifications } from "../notification";
+import { products } from "../products"; // adjust path as needed
 
 const findProduct = (productId) => {
   if (!productId) return null;

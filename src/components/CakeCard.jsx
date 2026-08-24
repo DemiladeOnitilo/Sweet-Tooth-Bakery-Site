@@ -1,49 +1,49 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { FaArrowRight } from "react-icons/fa";
 
 const CakeCard = ({ id, img, name, price, description, size, onPage, isHome }) => {
   const { currency } = useSelector((state) => state.cart);
 
   const isNumericPrice = price && !isNaN(Number(price.toString().replace(/,/g, "")));
-
-  // Safely extract the base size label (e.g. "Pack of 4") if the size array exists
   const baseSizeLabel = Array.isArray(size) && size.length > 0 ? size[0].label : null;
 
   return (
     <>
       {onPage ? (
         <>
-          {/* ── Mobile: horizontal list row ── */}
-          <div className="group flex lg:hidden flex-row items-center gap-3 bg-white rounded-2xl shadow-sm border border-gray-100 p-3 cursor-pointer w-full">
-            <Link to={`/products/${id}`} className="flex-shrink-0">
+          <div className="group flex lg:hidden flex-row items-center gap-4 bg-white rounded-2xl shadow-sm border border-gray-100 p-3 cursor-pointer w-full hover:shadow-md transition-shadow">
+            <Link to={`/products/${id}`} className="flex-shrink-0 relative overflow-hidden rounded-xl w-24 h-24 sm:w-32 sm:h-32">
               <img
                 src={img}
                 alt={name}
-                className="w-25 h-25 md:w-35 md:h-35 object-cover rounded-xl"
+                className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
               />
             </Link>
-            <div className="flex flex-col flex-1 gap-1 min-w-0">
+            
+            <div className="flex flex-col flex-1 min-w-0 py-1">
               <Link to={`/products/${id}`}>
-                <h3 className="text-sm md:text-xl font-bold text-gray-800 line-clamp-1 sour-gummy">
+                <h3 className="heading-text text-base sm:text-lg font-bold text-gray-900 line-clamp-1 group-hover:text-[#BE185D] transition-colors">
                   {name}
                 </h3>
               </Link>
+              
               {description && (
-                <p className="text-xs md:text-lg text-gray-500 leading-relaxed line-clamp-2">
+                <p className="body-text text-xs sm:text-sm text-gray-500 mt-1 line-clamp-2 leading-relaxed">
                   {description}
                 </p>
               )}
-              <div className="flex items-center justify-between mt-1">
+              
+              <div className="flex items-center justify-between mt-auto pt-2">
                 {price && (
                   <div className="flex items-baseline gap-1">
-                    <p className="text-sm md:text-lg font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
+                    <p className="body-text text-sm sm:text-base font-bold text-[#BE185D]">
                       {isNumericPrice && currency}
                       {isNumericPrice ? Number(price).toLocaleString() : price}
                     </p>
-                    {/* Render Base Size on Mobile */}
                     {baseSizeLabel && isNumericPrice && (
-                      <span className="text-[10px] md:text-xs text-gray-400 font-medium">
+                      <span className="body-text text-[10px] sm:text-xs text-gray-400 font-medium">
                         / {baseSizeLabel}
                       </span>
                     )}
@@ -51,7 +51,7 @@ const CakeCard = ({ id, img, name, price, description, size, onPage, isHome }) =
                 )}
                 <Link
                   to={`/products/${id}`}
-                  className="text-xs md:text-lg px-3 py-1.5 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-full font-medium flex-shrink-0"
+                  className="body-text text-xs sm:text-sm px-4 py-1.5 bg-[#BE185D] text-white rounded-full font-medium hover:bg-[#9D174D] transition-colors"
                 >
                   View
                 </Link>
@@ -59,91 +59,78 @@ const CakeCard = ({ id, img, name, price, description, size, onPage, isHome }) =
             </div>
           </div>
 
-          {/* ── Desktop: original card ── */}
-          <div className="group bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:scale-101 hover:-translate-y-2 w-full h-full flex-col cursor-pointer hidden lg:flex">
-            <Link
-              to={`/products/${id}`}
-              className="block relative overflow-hidden flex-shrink-0"
-            >
+          <div className="group hidden lg:flex flex-col bg-white rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-500 overflow-hidden transform hover:-translate-y-1 w-full h-full cursor-pointer">
+            <Link to={`/products/${id}`} className="block relative overflow-hidden aspect-[4/3] w-full bg-gray-50">
               <img
                 src={img}
                 alt={name}
-                className="w-full h-48 md:h-56 object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:translate-x-full transition-transform duration-[1500ms] ease-out" />
+              <div className="absolute inset-0 bg-[#BE185D]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
             </Link>
-            <div className="p-5 flex flex-col flex-1 gap-3">
+            
+            <div className="p-6 flex flex-col flex-1">
               <Link to={`/products/${id}`}>
-                <h3 className="text-lg lg:text-xl font-bold bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 bg-clip-text text-transparent group-hover:from-pink-500 group-hover:via-purple-500 group-hover:to-pink-400 transition-all duration-500 sour-gummy line-clamp-2">
+                <h3 className="heading-text text-xl font-bold text-gray-900 group-hover:text-[#BE185D] transition-colors line-clamp-1">
                   {name}
                 </h3>
               </Link>
+              
               {description && (
-                <p className="text-gray-600 text-sm leading-relaxed line-clamp-3 flex-1">
+                <p className="body-text text-gray-500 text-sm leading-relaxed mt-2 line-clamp-2">
                   {description}
                 </p>
               )}
-              <div
-                className={`flex ${
-                  price ? "justify-between" : "justify-center"
-                } items-center gap-3 pt-4 border-t border-gray-100 mt-auto`}
-              >
+              
+              <div className="flex items-center justify-between mt-auto pt-6 border-t border-gray-50">
                 {price && (
                   <div className="flex items-baseline gap-1.5">
-                    <p
-                      className={`font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent ${
-                        isNumericPrice
-                          ? "text-lg lg:text-xl"
-                          : "text-sm lg:text-base text-center"
-                      }`}
-                    >
+                    <p className="body-text font-bold text-xl text-[#BE185D]">
                       {isNumericPrice && currency}
                       {isNumericPrice ? Number(price).toLocaleString() : price}
                     </p>
-                    {/* Render Base Size on Desktop */}
                     {baseSizeLabel && isNumericPrice && (
-                      <span className="text-xs lg:text-sm text-gray-400 font-medium">
+                      <span className="body-text text-xs text-gray-400 font-medium">
                         / {baseSizeLabel}
                       </span>
                     )}
                   </div>
                 )}
+                
                 <Link
                   to={`/products/${id}`}
-                  className="group/btn relative px-5 py-2.5 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-full hover:from-pink-600 hover:to-purple-700 transition-all duration-300 text-sm font-medium transform hover:scale-103 shadow-md hover:shadow-lg overflow-hidden flex-shrink-0"
+                  className="body-text text-sm font-semibold text-gray-800 flex items-center gap-2 group-hover:text-[#BE185D] transition-colors"
                 >
-                  <span className="relative z-10">View Details</span>
-                  <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover/btn:translate-x-full transition-transform duration-700 ease-out" />
+                  Details <FaArrowRight className="text-xs group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
             </div>
           </div>
         </>
       ) : (
-        // ── Category/slider card: image + name only ──
-        <div className="group flex flex-col items-center gap-4 p-2 pt-4 cursor-pointer w-full overflow-visible">
+
+        <div className="group flex flex-col w-full h-full cursor-pointer">
           <Link
             to={isHome ? `/services/category/${id}` : `/products/${id}`}
-            className="relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-700 transform group-hover:-translate-y-2 block"
+            className="relative overflow-hidden rounded-3xl shadow-sm hover:shadow-xl transition-all duration-500 transform group-hover:-translate-y-1 block aspect-[4/3] bg-gray-50"
           >
             <img
               src={img}
               alt={name}
-              className="h-[250px] w-[300px] md:h-[280px] md:w-[300px] lg:h-[300px] lg:w-[450px] object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:translate-x-full transition-transform duration-[1500ms] ease-out" />
+            <div className="absolute inset-0 bg-gray-900/20 group-hover:bg-gray-900/40 transition-colors duration-500" />
+            
             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500">
-              <span className="bg-white/90 backdrop-blur-sm text-gray-800 px-4 py-2 rounded-full text-sm font-medium shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+              <span className="body-text bg-white/95 backdrop-blur-sm text-[#BE185D] px-6 py-2.5 rounded-full text-sm font-bold shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
                 {isHome ? "View Category" : "View Product"}
               </span>
             </div>
           </Link>
 
-          <div className="text-center max-w-[200px] md:max-w-[220px] lg:max-w-[250px]">
+          <div className="text-center mt-5">
             <Link to={isHome ? `/services/category/${id}` : `/products/${id}`}>
-              <h3 className="text-lg lg:text-xl font-bold bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 bg-clip-text text-transparent group-hover:from-pink-500 group-hover:via-purple-500 group-hover:to-pink-400 transition-all duration-500 sour-gummy line-clamp-2">
+              <h3 className="heading-text text-xl lg:text-2xl font-bold text-gray-900 group-hover:text-[#BE185D] transition-colors">
                 {name}
               </h3>
             </Link>

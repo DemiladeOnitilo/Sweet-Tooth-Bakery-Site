@@ -6,23 +6,21 @@ import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { FaArrowRight } from "react-icons/fa";
 import CakeCard from "../CakeCard";
 import { products } from "../products";
-import MainButton from "../MainButton";
 import { Link } from "react-router-dom";
 
 const CakeList = () => {
-
   const SamplePrevArrow = (props) => {
     const { className, onClick } = props;
     return (
       <div
         onClick={onClick}
-        className={`arrow ${className} !flex !items-center !justify-center !w-12 !h-12 !bg-white !rounded-full !shadow-lg hover:!bg-gray-50 !border-2 !border-gray-200 !z-10 !cursor-pointer`}
+        className={`arrow ${className} !flex !items-center !justify-center !w-12 !h-12 !bg-white !rounded-full !shadow-md hover:!shadow-lg hover:!scale-105 !border !border-gray-100 !z-10 !cursor-pointer transition-all duration-300`}
         style={{
-          left: "-25px",
+          left: "-20px",
           transform: "translateY(-50%)",
         }}
       >
-        <MdChevronLeft className="!text-2xl !text-gray-700" />
+        <MdChevronLeft className="!text-3xl !text-[#BE185D]" />
       </div>
     );
   };
@@ -32,13 +30,13 @@ const CakeList = () => {
     return (
       <div
         onClick={onClick}
-        className={`arrow ${className} !flex !items-center !justify-center !w-12 !h-12 !bg-white !rounded-full !shadow-lg hover:!bg-gray-50 !border-2 !border-gray-200 !z-10 !cursor-pointer`}
+        className={`arrow ${className} !flex !items-center !justify-center !w-12 !h-12 !bg-white !rounded-full !shadow-md hover:!shadow-lg hover:!scale-105 !border !border-gray-100 !z-10 !cursor-pointer transition-all duration-300`}
         style={{
-          right: "-25px",
+          right: "-20px",
           transform: "translateY(-50%)",
         }}
       >
-        <MdChevronRight className="!text-2xl !text-gray-700" />
+        <MdChevronRight className="!text-3xl !text-[#BE185D]" />
       </div>
     );
   };
@@ -46,89 +44,84 @@ const CakeList = () => {
   const settings = {
     dots: false,
     infinite: true,
-    speed: 500,
-    slidesToShow: 5,
+    speed: 600,
+    slidesToShow: 4,
     slidesToScroll: 1,
     swipe: true,
     touchMove: true,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 3500,
     pauseOnHover: true,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
     responsive: [
       {
         breakpoint: 1280,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 1,
-        },
+        settings: { slidesToShow: 4 },
       },
       {
         breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          arrows: false,
-          slidesToScroll: 1,
-        },
+        settings: { slidesToShow: 3, arrows: false },
       },
       {
         breakpoint: 768,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          arrows: false,
-        },
+        settings: { slidesToShow: 2, arrows: false },
       },
       {
         breakpoint: 640,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1,
           arrows: false,
           centerMode: true,
-          centerPadding: "40px",
+          centerPadding: "10%",
         },
       },
     ],
   };
 
   return (
-    <div className="flex flex-col gap-2 justify-center items-center min-h-[70vh] py-10 px-8 lg:px-12">
-      <div className="flex flex-col relative justify-center items-center gap-4 text-center px-4 max-w-4xl">
-        <h2 className="text-3xl md:text-5xl lg:text-6xl font-black">
-          <span className="bg-gradient-to-r from-pink-600 via-purple-600 to-pink-500 bg-clip-text text-transparent">
-            Our Service
-          </span>
-        </h2>
-        <p className="text-lg md:text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto">
-          Discover our most beloved pastries, crafted with love and the finest
-          ingredients
-        </p>
-      </div>
+    <section className="py-16 md:py-24 px-6 md:px-12 lg:px-10 bg-white overflow-hidden">
+      <div className="max-w-7xl mx-auto flex flex-col gap-10">
+        
+ 
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div className="max-w-2xl">
+            <h2 className="heading-text text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+              Our <span className="text-[#BE185D] italic">Menu</span>
+            </h2>
+            <p className="body-text text-base md:text-lg text-gray-600 mt-3">
+              Discover our most beloved pastries, crafted with love and the finest ingredients.
+            </p>
+          </div>
+          
+          <Link
+            to="/services"
+            className="body-text hidden md:flex items-center gap-2 text-[#BE185D] font-semibold text-base hover:text-[#9D174D] hover:gap-3 transition-all duration-300 whitespace-nowrap"
+          >
+            Explore All
+            <FaArrowRight className="text-sm" />
+          </Link>
+        </div>
 
-      <div className="flex flex-col gap-2 w-full max-w-7xl relative">
-        <Link
-          to="/services"
-          className="flex justify-end items-center gap-1 md:mr-6 text-pink-600 font-semibold text-md md:text-lg 
-                 hover:gap-2.5 transition-all duration-200 whitespace-nowrap pb-1 pr-5 group"
-        >
-          View All
-          <FaArrowRight className="text-xs group-hover:translate-x-0.5 transition-transform duration-200" />
-        </Link>
-        <div className="w-full">
-          <Slider {...settings}>
+        
+        <div className="w-full relative">
+          <Slider {...settings} className="px-2">
             {products.map((pastry) => (
-              <div key={pastry.id} className="">
-                <div className="transform transition-all duration-300 hover:scale-105">
-                  <CakeCard {...pastry} isHome={true} />
-                </div>
+              <div key={pastry.id} className="p-3">
+                <CakeCard {...pastry} isHome={true} />
               </div>
             ))}
           </Slider>
         </div>
+
+        <Link
+          to="/services"
+          className="body-text flex md:hidden items-center justify-center gap-2 text-[#BE185D] font-bold text-base mt-2"
+        >
+          View Full Menu <FaArrowRight className="text-sm" />
+        </Link>
       </div>
-    </div>
+    </section>
   );
 };
 

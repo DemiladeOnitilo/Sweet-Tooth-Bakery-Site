@@ -1,7 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { products } from "../components/products";
+import { FaArrowRight } from "react-icons/fa";
+import { products } from "../products";
 
 const BestSellers = () => {
   const { currency } = useSelector((state) => state.cart);
@@ -21,7 +22,7 @@ const BestSellers = () => {
   const bestsellers = products
     .flatMap((category) => category.types)
     .filter((item) => BESTSELLER_IDS.includes(item.id));
-    
+
   return (
     <div className="w-full max-w-7xl mx-auto py-12 px-6 md:px-12 lg:px-10">
       <div className="flex items-end justify-between mb-6 md:mb-8">
@@ -35,9 +36,9 @@ const BestSellers = () => {
         </div>
         <Link
           to="/services"
-          className="body-text hidden sm:flex text-[#BE185D] hover:text-[#9D174D] font-semibold text-sm transition-colors"
+          className="body-text hidden md:flex items-center gap-2 text-[#BE185D] font-semibold text-base hover:text-[#9D174D] hover:gap-3 transition-all duration-300 whitespace-nowrap"
         >
-          View Full Menu &rarr;
+          View Full Menu <FaArrowRight className="text-sm" />
         </Link>
       </div>
 
