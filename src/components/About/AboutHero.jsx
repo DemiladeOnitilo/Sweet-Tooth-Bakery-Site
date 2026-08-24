@@ -24,9 +24,9 @@ const AboutHero = () => {
 
       <div className="relative z-10 text-center max-w-3xl mx-auto px-6 mt-8">
         <h1 className="heading-text text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-tight mb-4">
-          Get To Know <span className="italic text-pink-200 font-medium">Us</span>
+          Get To Know <span className="italic text-[#BE185D] font-medium">Us</span>
         </h1>
-        <p className="body-text text-base md:text-xl text-white/90 leading-relaxed font-light">
+        <p className="body-text text-base md:text-xl text-white/90 leading-relaxed font-medium">
           Discover the heart and soul behind Sweet Tooth. From humble beginnings 
           to a lifelong passion for creating unforgettable desserts.
         </p>

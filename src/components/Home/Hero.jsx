@@ -26,9 +26,6 @@ const Hero = () => {
 
   return (
     <div className="relative h-[90vh] md:h-[100vh] lg:min-h-screen w-full flex items-center overflow-hidden transition-[height] duration-500 ease-in-out">
-      {/* Background image: no transition-transform here — scroll-linked
-          transforms should update instantly each frame (via rAF above),
-          not ease, or they'll perpetually chase a moving target and stutter. */}
       <div
         className="absolute inset-0 bg-no-repeat bg-cover bg-center"
         style={{

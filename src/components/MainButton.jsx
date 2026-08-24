@@ -5,34 +5,33 @@ import { FaArrowDown, FaArrowRight } from "react-icons/fa";
 const MainButton = ({
   link,
   name,
-  variant,
+  variant = "primary",
   direction,
   onClick,
   type = "button",
 }) => {
+  const isPrimary = variant.toLowerCase() === "primary";
+
   const content = (
     <>
       <span className="relative z-10">{name}</span>
       {direction === "down" && (
-        <FaArrowDown className="w-3 h-3 md:w-5 md:h-5 text-white" />
+        <FaArrowDown className="w-3 h-3 md:w-3.5 md:h-3.5 transition-transform duration-300 group-hover:translate-y-1" />
       )}
       {direction === "right" && (
-        <FaArrowRight
-          className={`w-3 h-3 md:w-4 md:h-4 ${
-            variant === "secondary" || variant === "primary"
-              ? "text-white"
-              : "text-black"
-          } group-hover:translate-x-1 transition-transform duration-500`}
-        />
+        <FaArrowRight className="w-3 h-3 md:w-3.5 md:h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
       )}
     </>
   );
 
-  const className = `group inline-flex items-center justify-center gap-3 rounded-xl font-medium body-text text-md md:text-lg text-[#ffffff] transition-all duration-500 hover:scale-102 transform shadow-lg hover:shadow-xl p-4 cursor-pointer ${
-    variant === "primary"
-      ? "bg-gradient-to-r from-pink-500 to-[#BE185D] hover:from-[#BE185D] hover:to-pink-700"
-      : "bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30"
-  }`;
+  const baseClasses =
+    "group inline-flex items-center justify-center gap-2.5 rounded-full body-text text-xs md:text-sm font-bold tracking-widest uppercase transition-all duration-300 px-8 py-3.5 cursor-pointer transform hover:-translate-y-0.5";
+
+  const variantClasses = isPrimary
+    ? "bg-[#BE185D] text-white hover:bg-[#9D174D] shadow-md hover:shadow-lg"
+    : "bg-white text-gray-900 border border-gray-200 hover:border-gray-900 hover:bg-gray-50 shadow-sm hover:shadow-md";
+
+  const className = `${baseClasses} ${variantClasses}`;
 
   if (link) {
     return (

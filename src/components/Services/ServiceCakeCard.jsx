@@ -2,26 +2,23 @@ import React from "react";
 
 const ServiceCakeCard = ({ name, img }) => {
   return (
-    <div className="flex flex-col gap-y-3 justify-center items-center group">
-      <div className="relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 transform group-hover:-translate-y-2 cursor-pointer">
-        <div className="relative">
-          <img
-            src={img}
-            alt={name}
-            className="h-44 w-44 md:h-72 md:w-72 lg:h-64 lg:w-64 object-cover transition-transform duration-700 ease-out"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-          <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:translate-x-full transition-transform duration-1500 ease-out"></div>
-        </div>
+    <div className="flex flex-col gap-y-4 justify-center items-center group w-full">
+      <div className="relative overflow-hidden rounded-3xl shadow-sm hover:shadow-xl transition-all duration-500 transform group-hover:-translate-y-2 cursor-pointer w-full aspect-square max-w-[200px] md:max-w-[260px] bg-gray-50 border border-gray-100">
+        <img
+          src={img}
+          alt={name}
+          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+        />
+        <div className="absolute inset-0 bg-[#BE185D]/0 group-hover:bg-[#BE185D]/10 transition-colors duration-500 pointer-events-none"></div>
       </div>
 
-      <div className="relative cursor-pointer">
-        <h1 className="text-lg md:text-xl font-bold bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 bg-clip-text text-transparent group-hover:from-pink-500 group-hover:via-purple-500 group-hover:to-pink-400 transition-all duration-500 transform group-hover:scale-105 sour-gummy">
+      <div className="text-center px-2">
+        <h3 className="heading-text text-lg md:text-xl lg:text-2xl font-bold text-gray-900 group-hover:text-[#BE185D] transition-colors duration-300">
           {name}
-        </h1>
+        </h3>
       </div>
     </div>
   );
 };
+
 export default ServiceCakeCard;

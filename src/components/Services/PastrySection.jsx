@@ -19,77 +19,67 @@ const PastrySection = ({ onPage = true, category, indexes, altOffset }) => {
     : filteredProducts.map((p, i) => ({ ...p, _globalIndex: i }));
 
   return (
-    <div className="flex flex-col ">
+    <div className="flex flex-col">
       {displayProducts.map((product, index) => {
         const isAlt = (index + (altOffset ?? 0)) % 2 === 1;
 
         return (
           <section
             key={index}
-            className={`flex flex-col justify-center items-center gap-2 w-full py-12 ${
-              isAlt
-                ? "bg-gradient-to-br from-gray-50 via-pink-50/30 to-purple-50/30"
-                : "bg-white"
+            className={`flex flex-col justify-center items-center gap-8 w-full py-16 md:py-20 ${
+              isAlt && "bg-[#BE185D]/10" 
             }`}
           >
             {!onPage && (
-              <nav className="w-full max-w-7xl px-4 flex items-center gap-2 text-sm text-gray-500">
-                <Link
-                  to="/"
-                  className="hover:text-pink-600 transition-colors duration-300"
-                >
+              <nav className="w-full max-w-7xl px-6 md:px-12 flex items-center gap-2 text-sm text-gray-500 body-text font-medium uppercase tracking-wider mb-4">
+                <Link to="/" className="hover:text-[#BE185D] transition-colors">
                   Home
                 </Link>
-                <FaChevronRight className="text-xs" />
+                <FaChevronRight className="text-[10px]" />
                 <Link
                   to="/services"
-                  className="hover:text-pink-600 transition-colors duration-300"
+                  className="hover:text-[#BE185D] transition-colors"
                 >
                   Services
                 </Link>
                 {category?.name && (
                   <>
-                    <FaChevronRight className="text-xs" />
+                    <FaChevronRight className="text-[10px]" />
                     <Link
                       to={`/services/category/${category.name}`}
-                      className="hover:text-pink-600 transition-colors duration-300"
+                      className="hover:text-[#BE185D] transition-colors"
                     >
                       {category.name}
                     </Link>
                   </>
                 )}
-                <FaChevronRight className="text-xs" />
-                <span className="text-gray-800 font-medium">
-                  {product.name}
-                </span>
+                <FaChevronRight className="text-[10px]" />
+                <span className="text-gray-900">{product.name}</span>
               </nav>
             )}
-            
-            <div className="flex flex-col justify-center items-center gap-3 w-full max-w-7xl px-4 text-center">
+
+            <div className="flex flex-col justify-center items-center gap-4 w-full max-w-7xl px-6 text-center">
               {onPage && (
-                <div className="inline-flex items-center px-4 py-1.5 bg-gradient-to-r from-pink-100 to-purple-100 border border-pink-200/50 rounded-full text-pink-700 text-xs md:text-sm font-medium">
+                <div className="body-text flex items-center gap-3 text-sm font-bold text-[#BE185D] tracking-widest uppercase">
+                  <span className="w-6 h-[1px] bg-[#BE185D]"></span>
                   {String(product._globalIndex + 1).padStart(2, "0")} /{" "}
                   {String(products.length).padStart(2, "0")}
+                  <span className="w-6 h-[1px] bg-[#BE185D]"></span>
                 </div>
               )}
-              <div className="flex flex-col items-center gap-1 md:gap-3">
-                <h1 className="text-2xl md:text-3xl lg:text-5xl font-bold">
-                  <span className="bg-gradient-to-r from-pink-600 via-purple-600 to-pink-500 bg-clip-text text-transparent">
-                    {product.name}
-                  </span>
-                </h1>
 
-                <div className="h-1 w-16 rounded-full bg-gradient-to-r from-pink-400 to-purple-400" />
-              </div>
+              <h2 className="heading-text text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">
+                {product.name}
+              </h2>
 
               {onPage && (
-                <div>
+                <div className="mt-2">
                   <ViewAll to={`/services/category/${product.id}`} />
                 </div>
               )}
             </div>
 
-            <div className="w-full max-w-7xl">
+            <div className="w-full max-w-7xl mt-4">
               <Sliders main={product.types} onPage={onPage} />
             </div>
           </section>

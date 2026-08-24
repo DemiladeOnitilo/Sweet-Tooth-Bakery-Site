@@ -5,7 +5,6 @@ import PastrySection from "../components/Services/PastrySection";
 import { scroller } from "react-scroll";
 import CTASection from "../components/Home/CTASection";
 import { products } from "../components/products";
-import ViewAll from "../components/ViewAll";
 import BentoServiceGrid from "../components/Services/BentoServiceGrid";
 import SingleCardService from "../components/Services/SingleCardService";
 
@@ -30,11 +29,11 @@ const Services = ({ category }) => {
 
       <PastrySection indexes={[1, 2]} altOffset={2} />
 
-      <div className="w-full bg-gradient-to-r from-pink-50 to-purple-50 py-12 px-6 border-y border-gray-100">
-        <p className="text-center text-xs font-medium text-gray-400 tracking-widest uppercase mb-8">
+      <div className="w-full bg-[#FCFBF9] py-20 px-6 border-y border-gray-100">
+        <p className="body-text text-center text-sm font-bold text-[#BE185D] tracking-widest uppercase mb-10">
           What our customers say
         </p>
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
             {
               initials: "TA",
@@ -42,7 +41,8 @@ const Services = ({ category }) => {
               area: "Victoria Island",
               date: "May 2026",
               rating: 5,
-              quote: "Best brownies in Lagos, full stop.",
+              quote:
+                "Best brownies in Lagos, full stop. The packaging was stunning.",
             },
             {
               initials: "CO",
@@ -50,7 +50,8 @@ const Services = ({ category }) => {
               area: "Lekki",
               date: "Jan 2026",
               rating: 5,
-              quote: "My wedding cake was absolutely a dream.",
+              quote:
+                "My wedding cake was an absolute dream. Tasted even better than it looked.",
             },
             {
               initials: "BK",
@@ -58,23 +59,24 @@ const Services = ({ category }) => {
               area: "Ikoyi",
               date: "Dec 2025",
               rating: 4.5,
-              quote: "Delivered on time, tasted perfect.",
+              quote:
+                "Delivered exactly on time, still warm, and tasted perfectly rich.",
             },
           ].map((items, index) => (
             <div
               key={index}
-              className="bg-white border border-gray-100 rounded-2xl p-5 flex flex-col gap-3 shadow-sm"
+              className="bg-white border border-gray-100 rounded-3xl p-8 flex flex-col gap-4 shadow-sm hover:shadow-lg transition-shadow duration-300"
             >
-              <div className="flex gap-0.5">
+              <div className="flex gap-1">
                 {[1, 2, 3, 4, 5].map((s) => (
                   <svg
                     key={s}
-                    width="13"
-                    height="13"
+                    width="16"
+                    height="16"
                     viewBox="0 0 24 24"
                     fill={
                       s <= Math.floor(items.rating)
-                        ? "#D4537E"
+                        ? "#BE185D"
                         : s - 0.5 === items.rating
                           ? "url(#half)"
                           : "#e5e7eb"
@@ -82,7 +84,7 @@ const Services = ({ category }) => {
                   >
                     <defs>
                       <linearGradient id="half">
-                        <stop offset="50%" stopColor="#D4537E" />
+                        <stop offset="50%" stopColor="#BE185D" />
                         <stop offset="50%" stopColor="#e5e7eb" />
                       </linearGradient>
                     </defs>
@@ -90,28 +92,26 @@ const Services = ({ category }) => {
                   </svg>
                 ))}
               </div>
-              <p className="text-sm text-gray-500 leading-relaxed flex-1 italic">
-                <span className="text-pink-400 text-lg leading-none mr-0.5">
-                  "
-                </span>
-                {items.quote}
-                <span className="text-pink-400 text-lg leading-none ml-0.5">
-                  "
-                </span>
+              <p className="body-text text-base text-gray-700 leading-relaxed flex-1 italic">
+                "{items.quote}"
               </p>
-              <div className="border-t border-gray-100 pt-3 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <div className="w-7 h-7 rounded-full bg-pink-50 flex items-center justify-center text-pink-700 text-xs font-medium">
+              <div className="border-t border-gray-50 pt-4 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-[#BE185D]/10 flex items-center justify-center text-[#BE185D] text-sm font-bold body-text">
                     {items.initials}
                   </div>
                   <div>
-                    <p className="text-xs font-medium text-gray-800">
+                    <p className="body-text text-sm font-bold text-gray-900">
                       {items.name}
                     </p>
-                    <p className="text-xs text-gray-400">{items.area}</p>
+                    <p className="body-text text-xs text-gray-500">
+                      {items.area}
+                    </p>
                   </div>
                 </div>
-                <p className="text-xs text-gray-400">{items.date}</p>
+                <p className="body-text text-xs text-gray-400 font-medium uppercase tracking-wider">
+                  {items.date}
+                </p>
               </div>
             </div>
           ))}
@@ -126,7 +126,6 @@ const Services = ({ category }) => {
 
       <PastrySection indexes={[4]} />
 
-      {/* BentoGrid Product */}
       <BentoServiceGrid
         bentoProduct={products[5]}
         bentoProductTypes={products[5].types}
@@ -141,25 +140,24 @@ const Services = ({ category }) => {
         productNumber="08"
       />
 
-      <div className="w-full bg-gradient-to-r from-pink-50 to-purple-50 py-16 px-6 border-y border-pink-100/50">
-        <p className="text-center text-xs font-medium text-purple-600 tracking-widest uppercase mb-10">
-          Why Lagos loves Sweet Tooth
-        </p>
-        <div className="max-w-2xl mx-auto flex flex-col md:flex-row justify-center items-center gap-10 text-center">
+      <div className="w-full bg-white py-20 px-6 border-y border-gray-100">
+        <div className="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12 text-center">
           {[
-            { icon: "🎂", title: "Baked fresh", sub: "Every single day" },
-            { icon: "🛵", title: "Lagos delivery", sub: "Island & Mainland" },
-            { icon: "✨", title: "100% real", sub: "No artificial flavours" },
+            { icon: "🎂", title: "Baked Fresh", sub: "Every single day" },
+            { icon: "🛵", title: "Lagos Delivery", sub: "Island & Mainland" },
+            { icon: "✨", title: "100% Real", sub: "No artificial flavors" },
           ].map((item, index) => (
             <div
               key={index}
-              className={`flex-1 ${index === 1 ? "md:border-x md:border-pink-200/60 md:px-10" : ""}`}
+              className={`flex-1 flex flex-col items-center w-full ${index === 1 ? "md:border-x md:border-gray-100 md:px-12" : ""}`}
             >
-              <div className="text-4xl md:text-5xl mb-3">{item.icon}</div>
-              <p className="text-sm md:text-base font-medium text-pink-700">
+              <div className="text-4xl md:text-5xl mb-4 grayscale grayscale-50">
+                {item.icon}
+              </div>
+              <p className="heading-text text-xl font-bold text-gray-900 mb-1">
                 {item.title}
               </p>
-              <p className="text-xs md:text-sm text-gray-500 mt-1">
+              <p className="body-text text-sm text-gray-500 uppercase tracking-widest">
                 {item.sub}
               </p>
             </div>
@@ -176,6 +174,7 @@ const Services = ({ category }) => {
       />
 
       <CTASection isServices={true} />
+
       <div id="target-section">
         <ServiceSelection />
       </div>
