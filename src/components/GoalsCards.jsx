@@ -1,34 +1,36 @@
 import React from "react";
 
-const GoalsCards = ({ img, main, content }) => {
+const GoalsCards = ({ img, main, content, index }) => {
+  const formattedNumber = String(index + 1).padStart(2, "0");
+
   return (
-    <div className="group relative flex flex-col h-full bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2 cursor-pointer">
+    <div className="group flex flex-col cursor-pointer h-full">
       
-      {/* Image Container - Clean circle with subtle shadow, replacing the heavy rings */}
-      <div className="relative w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden shadow-md group-hover:shadow-lg transition-all duration-500">
+      <div className="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden bg-gray-50 z-0">
         <img
           src={img}
           alt={main}
-          className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out"
+          className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-1000 ease-out"
         />
-        {/* Subtle premium overlay */}
-        <div className="absolute inset-0 bg-[#BE185D]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="absolute inset-0 bg-gray-900/0 group-hover:bg-gray-900/10 transition-colors duration-500" />
       </div>
 
-      {/* Text Content */}
-      <div className="flex flex-col flex-1 text-center">
-        <h3 className="heading-text text-xl lg:text-2xl font-bold text-gray-900 mb-3 group-hover:text-[#BE185D] transition-colors duration-300">
-          {main}
-        </h3>
+      <div className="relative z-10 flex-grow flex flex-col bg-white -mt-16 mx-4 md:mx-6 p-6 md:p-8 rounded-2xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)] group-hover:shadow-[0_20px_50px_-15px_rgba(190,24,93,0.15)] border border-gray-50 group-hover:-translate-y-2 transition-all duration-500">
         
-        <p className="body-text text-gray-600 text-sm md:text-base font-medium leading-relaxed flex-1">
+        <div className="flex items-start justify-between gap-4 mb-4">
+          <h3 className="heading-text text-xl md:text-2xl font-bold text-gray-900 group-hover:text-[#BE185D] transition-colors duration-300 line-clamp-2">
+            {main}
+          </h3>
+          <span className="heading-text text-3xl font-black text-pink-50 group-hover:text-pink-100 transition-colors duration-300">
+            {formattedNumber}
+          </span>
+        </div>
+
+        <p className="body-text text-gray-600 text-sm md:text-base leading-relaxed flex-grow">
           {content}
         </p>
-      </div>
 
-      {/* Minimalist decorative dot to replace the flashy gradient dot */}
-      <div className="mt-6 flex justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
-        <div className="w-1.5 h-1.5 rounded-full bg-[#BE185D]" />
+        <div className="w-0 h-[2px] bg-[#BE185D] mt-6 group-hover:w-full transition-all duration-700 ease-out" />
       </div>
       
     </div>

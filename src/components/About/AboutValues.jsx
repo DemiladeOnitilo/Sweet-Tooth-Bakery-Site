@@ -4,30 +4,29 @@ import ValuesContent from "./ValuesContent";
 
 const AboutValues = () => {
   return (
-    <section className="relative py-10 bg-gradient-to-br from-gray-50 via-pink-50/30 to-purple-50/30 overflow-hidden">
-      <div className="flex flex-col gap-6 md:gap-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col gap-6 items-center text-center max-w-4xl mx-auto">
-          <div className="inline-flex justify-center items-center w-fit px-4 py-2 bg-gradient-to-r from-pink-100 to-purple-100 border border-pink-200/50 rounded-full text-pink-700 text-xs lg:text-sm font-medium">
-            💖 Our Principles
-          </div>
-          <h2 className="text-2xl md:text-5xl lg:text-6xl font-bold">
-            THESE ARE SOME OF OUR{" "}
-            <span className="bg-gradient-to-r from-pink-600 via-purple-600 to-pink-500 bg-clip-text text-transparent ">
-              CORE VALUES
-            </span>
+    <section className="relative py-16 md:py-24 overflow-hidden ">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-10">
+        
+        <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16">
+          <p className="body-text text-sm md:text-base font-bold tracking-widest text-[#BE185D] uppercase mb-3">
+            Our Principles
+          </p>
+          <h2 className="heading-text text-3xl md:text-5xl font-bold text-gray-900 leading-tight">
+            What We Stand <span className="text-[#BE185D] italic">For</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-          {ValuesContent.map((values) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+          {ValuesContent.map((value) => (
             <Values
-              key={values.id}
-              img={values.img}
-              name={values.name}
-              content={values.content}
+              key={value.id}
+              img={value.img}
+              name={value.name}
+              content={value.content}
             />
           ))}
         </div>
+        
       </div>
     </section>
   );

@@ -1,40 +1,40 @@
-const GoalsContent= [
+import goalImgOne from "../assets/images/Goals-img-1.jpg"
+import goalImgTwo from "../assets/images/Goals-img-2.avif"
+import goalImgThree from "../assets/images/Goals-img-3.webp"
+import goalImgFour from "../assets/images/Goals-img-4.jpg"
+import goalImgFive from "../assets/images/Goals-img-5.jpg"
+
+const GoalsContent = [
     {
         id: '1',
-        img: 'https://images.ctfassets.net/pdf29us7flmy/7F5XUfHuv7dAW6joysWHxE/c5623a1d81518a813ad53b5020282bdb/GettyImages-583665183_optimized__1_.jpg',
-        main: 'MADE WITH LOVE',
-        content: 'Every cakes we make is made with love, by our highly skilled and experienced bakers'
+        img: goalImgOne,
+        main: 'Crafted with Love',
+        content: 'Every pastry that leaves our ovens is meticulously crafted with passion by our highly skilled artisan bakers.'
     },
     {
         id: '2',
-        img: 'https://img.freepik.com/premium-photo/close-up-baker-holding-cake-showing-it-camera-while-standing-supermarket_232070-20316.jpg',
-        main: 'QUALITY CAKES',
-        content: 'All our cakes are made by the best chefs and are high in quality'
+        img: goalImgTwo,
+        main: 'Uncompromising Quality',
+        content: 'We use only the finest, carefully sourced ingredients to ensure every slice delivers a premium, unforgettable flavor.'
     },
     {
         id: '3',
-        img: 'https://fruitbasket.limepack.com/blog/wp-content/uploads/2024/06/bakery-staff-attending-to-a-customer.png',
-        main: 'CUSTOMER SERVICE',
-        content: 'Demonstrate a dedication to providing excellent customer service and personalized experiences'
+        img: goalImgThree,
+        main: 'Exceptional Service',
+        content: 'We are dedicated to providing a warm, personalized experience, treating every guest like family from the moment they walk in.'
     },
     {
         id: '4',
-        img: 'https://obrownies.com/wp-content/uploads/2021/12/Custom-cake-17.jpg',
-        main: 'CUSTOM ORDERS',
-        content: 'We provide the ability to create custom cakes, pastries, or other baked goods for special events'
+        img: goalImgFour,
+        main: 'Bespoke Creations',
+        content: 'Bring your dream desserts to life. We specialize in custom designed cakes and pastries tailored perfectly to your special events.'
     },
     {
         id: '5',
-        img: 'https://www.nm.org//-/media/northwestern/healthbeat/images/healthy-tips/nutrition/nm-go-with-your-gut-4-facts-about-gluten-intolerance-preview.jpg',
-        main: 'DIETARY OPTIONS',
-        content: 'We offer gluten-free, vegan, or other allergy-friendly options'
-    },
-    {
-        id: '6',
-        img: 'https://media0.wedsociety.com/wp-content/uploads/2024/08/430861909_331766369333155_7880165226818195541_n.png',
-        main: 'CATERING FOR EVENTS',
-        content: 'We bake cakes, pastries and other baked goods for your various events'
+        img: goalImgFive,
+        main: 'Event Catering',
+        content: 'Elevate your gatherings with our curated dessert tables. We provide exquisite pastries and cakes for weddings, corporate events, and parties.'
     }
 ]
 
-export default GoalsContent
+export default GoalsContent;

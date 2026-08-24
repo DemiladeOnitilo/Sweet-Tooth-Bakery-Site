@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import aboutHero from "../../assets/Images/About-hero-bg.jpg";
 
 const AboutHero = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -10,33 +11,25 @@ const AboutHero = () => {
   }, []);
 
   return (
-    <div className="relative h-[60vh] md:h-[70vh] flex justify-center items-center mt-24 overflow-hidden transition-all duration-500">
+    <div className="relative h-[50vh] md:h-[70vh] flex justify-center items-center overflow-hidden transition-all duration-500">
       <div
-        className="absolute inset-0 bg-[url(https://s.hdnux.com/photos/01/41/75/66/25681283/3/rawImage.jpg)] bg-no-repeat bg-cover bg-center transition-transform duration-300 ease-out"
+        className="absolute inset-0 bg-no-repeat bg-cover bg-center transition-transform duration-300 ease-out"
         style={{
-          transform: `translateY(${scrollY * 0.1}px)`,
-          filter: "brightness(0.5)",
+          transform: `translateY(${scrollY * 0.15}px) scale(1.1)`,
+          backgroundImage: `url(${aboutHero})`,
         }}
       />
 
-      <div className="absolute inset-0 bg-gradient-to-br from-pink-900/30 via-purple-900/20 to-pink-800/30" />
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-900/70 via-gray-900/50 to-[#BE185D]/40" />
 
-      <div className="relative z-10 text-center max-w-xl mx-auto px-6">
-        <div className="flex flex-col gap-2 md:bg-white/10 md:backdrop-blur-md md:border border-white/20 md:rounded-3xl p-8 md:shadow-lg">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold">
-            <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-pink-300 bg-clip-text text-transparent">
-              Get To Know Us
-            </span>
-          </h1>
-          <p className="text-lg text-pink-100 leading-relaxed">
-            Discover the heart and soul behind{" "}
-            <span className="text-pink-300 font-semibold">Sweet Tooth</span>.
-            From humble beginnings to a passion for creating{" "}
-            <span className="text-purple-300 font-semibold">
-              unforgettable desserts
-            </span>.
-          </p>
-        </div>
+      <div className="relative z-10 text-center max-w-3xl mx-auto px-6 mt-8">
+        <h1 className="heading-text text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-tight mb-4">
+          Get To Know <span className="italic text-pink-200 font-medium">Us</span>
+        </h1>
+        <p className="body-text text-base md:text-xl text-white/90 leading-relaxed font-light">
+          Discover the heart and soul behind Sweet Tooth. From humble beginnings 
+          to a lifelong passion for creating unforgettable desserts.
+        </p>
       </div>
     </div>
   );
