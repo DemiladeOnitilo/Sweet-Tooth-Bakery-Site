@@ -5,7 +5,7 @@ export const productnotification = [
     title: "New Arrival 🎉",
     message: "Red Velvet Brownies are here — limited batch!",
     productId: "brownies-RedVelvetBrownies", 
-    expiresAt: "2026-08-01", 
+    expiresAt: "2026-12-01", 
     createdAt: "2026-01-01",
   },
   {
@@ -14,7 +14,7 @@ export const productnotification = [
     title: "Just Dropped 🍰",
     message: "Customizable Cakes!",
     productId: "custom-RegularCake", 
-    expiresAt: "2026-07-20",
+    expiresAt: "2026-12-20",
     createdAt: "2026-01-01",
   },
   {
@@ -23,7 +23,7 @@ export const productnotification = [
     title: "Limited Offer 🔥",
     message: "Order any 3 pastries and get free delivery this week.",
     productId: null, 
-    expiresAt: "2026-07-10",
+    expiresAt: "2026-12-10",
     createdAt: "2026-01-01",
   },
 ];

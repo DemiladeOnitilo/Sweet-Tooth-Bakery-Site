@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import logo from "../assets/Images/sweet-tooth-logo.png"; // Imported logo asset
+import AuthModal from "../components/AuthModal";
+import logo from "../assets/Images/sweet-tooth-logo.jpeg";
 import { motion, AnimatePresence } from "framer-motion";
 
 const MainLayout = () => {
@@ -92,6 +93,9 @@ const MainLayout = () => {
           <Footer />
         </motion.div>
       )}
+
+      {/* Auth Modal � rendered globally outside the loading gate */}
+      <AuthModal />
     </>
   );
 };

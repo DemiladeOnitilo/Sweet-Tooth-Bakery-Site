@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaStar, FaArrowRight, FaClock } from "react-icons/fa";
+import { FaArrowRight, FaClock } from "react-icons/fa";
 import { getActiveProductNotifications } from "./notification";
 import { products } from "./products"; // adjust path as needed
 
@@ -21,8 +21,6 @@ const daysLeft = (expiresAt) => {
 };
 
 const NewArrivals = () => {
-  
-
   const arrivals = getActiveProductNotifications().filter(
     (n) => n.type === "new_arrival" && n.productId,
   );
@@ -30,31 +28,26 @@ const NewArrivals = () => {
   if (arrivals.length === 0) return null;
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-pink-50 via-white to-purple-50">
-      <div className="flex flex-col justify-center items-center gap-4 max-w-7xl mx-auto">
-        {/* Section header */}
-        <div className="flex flex-col justify-center items-center gap-4 text-center">
-          <div className="inline-flex gap-2 justify-center items-center w-fit px-4 py-2 bg-gradient-to-r from-pink-100 to-purple-100 border border-pink-200/50 rounded-full text-pink-700 text-xs lg:text-sm font-medium">
-            <FaStar className="text-yellow-400" />
-            New Arrivals
-          </div>
+    <section className="py-16 md:py-24 px-6 md:px-12 lg:px-10">
+      <div className="flex flex-col gap-10 max-w-7xl mx-auto">
+        
+        {/* SECTION HEADER - Elegant & Clean */}
+        <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
+          <p className="body-text flex items-center justify-center gap-2 text-sm md:text-base font-bold tracking-widest text-[#BE185D] uppercase mb-3">
+             New Arrivals
+          </p>
 
-          <div className="flex flex-col gap-2 items-center text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-800">
-              Fresh from the{" "}
-              <span className="bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
-                Oven
-              </span>
-            </h2>
+          <h2 className="heading-text text-3xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+            Fresh from the <span className="text-[#BE185D] italic">Oven</span>
+          </h2>
 
-            <p className="text-gray-500 max-w-md mx-auto text-sm lg:text-md">
-              Limited-time drops!! Grab them before they're gone!
-            </p>
-          </div>
+          <p className="body-text text-gray-600 text-base md:text-lg">
+            Limited-time drops! Grab them before they're gone.
+          </p>
         </div>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* CARDS GRID */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {arrivals.map((notif) => {
             const product = findProduct(notif.productId);
             const remaining = daysLeft(notif.expiresAt);
@@ -63,64 +56,72 @@ const NewArrivals = () => {
               <Link
                 key={notif.id}
                 to={`/products/${notif.productId}`}
-                className="group relative bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100"
+                className="group relative bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border border-gray-100 flex flex-col"
               >
-                {/* Timer badge */}
-                {remaining !== null && (
-                  <div className="absolute top-3 right-3 z-10 flex items-center gap-1 bg-white/90 backdrop-blur-sm text-pink-600 text-xs font-bold px-2.5 py-1 rounded-full shadow">
-                    <FaClock className="text-[10px]" />
-                    {remaining === 0 ? "Last day!" : `${remaining}d left`}
+                {/* Image Container with precise aspect ratio */}
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-gray-50">
+                  
+                  {/* Timer Badge (Frosted Glass) */}
+                  {remaining !== null && (
+                    <div className="absolute top-4 right-4 z-10 flex items-center gap-1.5 bg-white/95 backdrop-blur-sm text-gray-800 text-xs font-bold px-3 py-1.5 rounded-full shadow-sm body-text">
+                      <FaClock className="text-[#BE185D]" />
+                      {remaining === 0 ? "Last day!" : `${remaining}d left`}
+                    </div>
+                  )}
+
+                  {/* "New" Tag (Premium Solid Pink) */}
+                  <div className="absolute top-4 left-4 z-10">
+                    <span className="bg-[#BE185D] text-white text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-widest shadow-sm body-text">
+                      New
+                    </span>
                   </div>
-                )}
 
-                {/* New badge */}
-                <div className="absolute top-3 left-3 z-10">
-                  <span className="bg-gradient-to-r from-pink-500 to-purple-600 text-white text-xs font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
-                    New
-                  </span>
-                </div>
-
-                {/* Image */}
-                {product?.img ? (
-                  <div className="h-70 overflow-hidden">
+                  {product?.img ? (
                     <img
                       src={product.img}
                       alt={product.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
                     />
-                  </div>
-                ) : (
-                  <div className="h-48 bg-gradient-to-br from-pink-100 to-purple-100 flex items-center justify-center">
-                    <FaStar className="text-4xl text-pink-300" />
-                  </div>
-                )}
+                  ) : (
+                    <div className="w-full h-full bg-gray-50 flex items-center justify-center">
+                      <FaStar className="text-4xl text-gray-200" />
+                    </div>
+                  )}
+                  {/* Subtle hover overlay to tie it to the Goals section */}
+                  <div className="absolute inset-0 bg-[#BE185D]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                </div>
 
-                {/* Content */}
-                <div className="p-4">
-                  <p className="text-xs md:text-md text-purple-500 font-semibold uppercase tracking-wide mb-1">
+                {/* Content Container */}
+                <div className="p-6 flex flex-col flex-grow">
+                  <p className="body-text text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">
                     {product?.categoryName || "Bakery"}
                   </p>
-                  <h3 className="text-lg font-bold text-gray-800 text-base group-hover:text-pink-600 transition-colors">
+                  
+                  <h3 className="heading-text text-xl font-bold text-gray-900 group-hover:text-[#BE185D] transition-colors line-clamp-1">
                     {product?.name || notif.message}
                   </h3>
+                  
                   {product?.description && (
-                    <p className="text-sm text-gray-500 mt-1 line-clamp-2">
+                    <p className="body-text text-sm text-gray-500 mt-2 line-clamp-2 leading-relaxed">
                       {product.description}
                     </p>
                   )}
 
-                  <div className="flex items-center justify-between text-center mt-4">
-                    {product?.price && (
-                      <span className="text-md font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent text-base">
-                        ₦{product.price.toLocaleString()}
+                  {/* Card Footer: Price & Action */}
+                  <div className="mt-auto pt-5 flex items-center justify-between border-t border-gray-50">
+                    {product?.price ? (
+                      <span className="body-text text-lg font-bold text-[#BE185D]">
+                        ₦{Number(product.price).toLocaleString()}
+                      </span>
+                    ) : (
+                      <span className="body-text text-sm font-semibold text-[#BE185D]">
+                        Custom Price
                       </span>
                     )}
-                    <span
-                      className="flex items-center gap-1.5 text-pink-600 font-semibold text-sm md:text-base 
-                                     hover:gap-2.5 transition-all duration-200 whitespace-nowrap pb-1 group"
-                    >
-                      View All
-                      <FaArrowRight className="text-xs group-hover:translate-x-0.5 transition-transform duration-200" />
+                    
+                    <span className="body-text flex items-center gap-2 text-gray-800 font-semibold text-sm group-hover:text-[#BE185D] transition-colors">
+                      View details
+                      <FaArrowRight className="text-xs group-hover:translate-x-1 transition-transform duration-300" />
                     </span>
                   </div>
                 </div>

@@ -2,12 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const CakeCard = ({ id, img, name, price, description, onPage, isHome }) => {
-
+const CakeCard = ({ id, img, name, price, description, size, onPage, isHome }) => {
   const { currency } = useSelector((state) => state.cart);
 
-  const isNumericPrice =
-    price && !isNaN(Number(price.toString().replace(/,/g, "")));
+  const isNumericPrice = price && !isNaN(Number(price.toString().replace(/,/g, "")));
+
+  // Safely extract the base size label (e.g. "Pack of 4") if the size array exists
+  const baseSizeLabel = Array.isArray(size) && size.length > 0 ? size[0].label : null;
 
   return (
     <>
@@ -15,10 +16,7 @@ const CakeCard = ({ id, img, name, price, description, onPage, isHome }) => {
         <>
           {/* ── Mobile: horizontal list row ── */}
           <div className="group flex lg:hidden flex-row items-center gap-3 bg-white rounded-2xl shadow-sm border border-gray-100 p-3 cursor-pointer w-full">
-            <Link
-              to={`/products/${id}`}
-              className="flex-shrink-0"
-            >
+            <Link to={`/products/${id}`} className="flex-shrink-0">
               <img
                 src={img}
                 alt={name}
@@ -26,7 +24,7 @@ const CakeCard = ({ id, img, name, price, description, onPage, isHome }) => {
               />
             </Link>
             <div className="flex flex-col flex-1 gap-1 min-w-0">
-              <Link to={`/products/${id}`} >
+              <Link to={`/products/${id}`}>
                 <h3 className="text-sm md:text-xl font-bold text-gray-800 line-clamp-1 sour-gummy">
                   {name}
                 </h3>
@@ -38,10 +36,18 @@ const CakeCard = ({ id, img, name, price, description, onPage, isHome }) => {
               )}
               <div className="flex items-center justify-between mt-1">
                 {price && (
-                  <p className="text-sm md:text-lg font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
-                    {isNumericPrice && currency}
-                    {isNumericPrice ? Number(price).toLocaleString() : price}
-                  </p>
+                  <div className="flex items-baseline gap-1">
+                    <p className="text-sm md:text-lg font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
+                      {isNumericPrice && currency}
+                      {isNumericPrice ? Number(price).toLocaleString() : price}
+                    </p>
+                    {/* Render Base Size on Mobile */}
+                    {baseSizeLabel && isNumericPrice && (
+                      <span className="text-[10px] md:text-xs text-gray-400 font-medium">
+                        / {baseSizeLabel}
+                      </span>
+                    )}
+                  </div>
                 )}
                 <Link
                   to={`/products/${id}`}
@@ -79,15 +85,29 @@ const CakeCard = ({ id, img, name, price, description, onPage, isHome }) => {
                 </p>
               )}
               <div
-                className={`flex ${price ? "justify-between" : "justify-center"} items-center gap-3 pt-4 border-t border-gray-100 mt-auto`}
+                className={`flex ${
+                  price ? "justify-between" : "justify-center"
+                } items-center gap-3 pt-4 border-t border-gray-100 mt-auto`}
               >
                 {price && (
-                  <p
-                    className={`font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent ${isNumericPrice ? "text-lg lg:text-xl" : "text-sm lg:text-base text-center"}`}
-                  >
-                    {isNumericPrice && currency}
-                    {isNumericPrice ? Number(price).toLocaleString() : price}
-                  </p>
+                  <div className="flex items-baseline gap-1.5">
+                    <p
+                      className={`font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent ${
+                        isNumericPrice
+                          ? "text-lg lg:text-xl"
+                          : "text-sm lg:text-base text-center"
+                      }`}
+                    >
+                      {isNumericPrice && currency}
+                      {isNumericPrice ? Number(price).toLocaleString() : price}
+                    </p>
+                    {/* Render Base Size on Desktop */}
+                    {baseSizeLabel && isNumericPrice && (
+                      <span className="text-xs lg:text-sm text-gray-400 font-medium">
+                        / {baseSizeLabel}
+                      </span>
+                    )}
+                  </div>
                 )}
                 <Link
                   to={`/products/${id}`}
@@ -122,9 +142,7 @@ const CakeCard = ({ id, img, name, price, description, onPage, isHome }) => {
           </Link>
 
           <div className="text-center max-w-[200px] md:max-w-[220px] lg:max-w-[250px]">
-            <Link
-              to={isHome ? `/services/category/${id}` : `/products/${id}`}
-            >
+            <Link to={isHome ? `/services/category/${id}` : `/products/${id}`}>
               <h3 className="text-lg lg:text-xl font-bold bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 bg-clip-text text-transparent group-hover:from-pink-500 group-hover:via-purple-500 group-hover:to-pink-400 transition-all duration-500 sour-gummy line-clamp-2">
                 {name}
               </h3>

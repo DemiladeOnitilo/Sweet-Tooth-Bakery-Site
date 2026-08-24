@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../assets/Images/sweet-tooth-logo.png";
+import logo from "../assets/Images/sweet-tooth-logo.jpeg";
 import { Link } from "react-router-dom";
 import {
   FaInstagram,

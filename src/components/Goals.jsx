@@ -6,47 +6,38 @@ const Goals = ({ isHome = false }) => {
   const Goals = isHome ? GoalsContent.slice(0, 3) : GoalsContent;
 
   return (
-    <section className="relative py-10 bg-gradient-to-br from-gray-50 via-pink-50/30 to-purple-50/30 overflow-hidden">
-      <div className="flex flex-col gap-6 md:gap-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col gap-6 items-center text-center max-w-4xl mx-auto">
-          <div className="inline-flex justify-center items-center w-fit px-4 py-2 bg-gradient-to-r from-pink-100 to-purple-100 border border-pink-200/50 rounded-full text-pink-700 text-xs lg:text-sm font-medium">
-            ✨ Our Mission & Values
-          </div>
-
-          <div className="flex flex-col gap-2 items-center text-center">
-            <h2 className="text-2xl md:text-5xl lg:text-6xl font-black">
-              <span className="bg-gradient-to-r from-pink-600 via-purple-600 to-pink-500 bg-clip-text text-transparent uppercase">
-                Our Goals
-              </span>
-            </h2>
-
-            <p className="text-md md:text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto">
-              Our main goal is to play a{" "}
-              <span className="text-pink-600 font-semibold">
-                symphony of flavors
-              </span>{" "}
-              in your mouth. We bake for those who want to treat themselves to
-              an{" "}
-              <span className="text-purple-600 font-semibold">
-                honest dessert!
-              </span>{" "}
-              Stop time for a moment and treat yourself or make your loved ones
-              happy.
-            </p>
-          </div>
+    <section className="relative py-16 md:py-24 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-10">
+        
+        {/* Header Section */}
+        <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16">
+          <p className="body-text text-sm md:text-base font-bold tracking-widest text-[#BE185D] uppercase mb-3">
+            Our Philosophy
+          </p>
+          
+          <h2 className="heading-text text-3xl md:text-5xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+            Crafting a Symphony of <span className="text-[#BE185D] italic">Flavors</span>
+          </h2>
+          
+          <p className="body-text text-base md:text-lg font-medium text-gray-600 leading-relaxed">
+            We bake for those who want to treat themselves to an honest dessert. 
+            Stop time for a moment and treat yourself or make your loved ones happy 
+            with uncompromising quality and passion.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-          {Goals.map((goal, index) => (
+        {/* Grid Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+          {Goals.map((goal) => (
             <GoalsCards
               key={goal.id}
               img={goal.img}
               main={goal.main}
               content={goal.content}
-              index={index}
             />
           ))}
         </div>
+        
       </div>
     </section>
   );

@@ -68,6 +68,7 @@ const CakeList = () => {
         breakpoint: 1024,
         settings: {
           slidesToShow: 3,
+          arrows: false,
           slidesToScroll: 1,
         },
       },
@@ -93,7 +94,7 @@ const CakeList = () => {
   };
 
   return (
-    <div className="flex flex-col gap-2 justify-center items-center min-h-[70vh] py-10  lg:px-8">
+    <div className="flex flex-col gap-2 justify-center items-center min-h-[70vh] py-10 px-8 lg:px-12">
       <div className="flex flex-col relative justify-center items-center gap-4 text-center px-4 max-w-4xl">
         <h2 className="text-3xl md:text-5xl lg:text-6xl font-black">
           <span className="bg-gradient-to-r from-pink-600 via-purple-600 to-pink-500 bg-clip-text text-transparent">

@@ -11,7 +11,6 @@ import {
 import { markAllRead, markOneRead } from "../store/notificationSlice";
 import { getActiveProductNotifications } from "./notification";
 
-
 const typeIcon = {
   new_arrival: <FaStar className="text-pink-500" />,
   promo: <FaTag className="text-purple-500" />,
@@ -29,7 +28,7 @@ const timeAgo = (isoString) => {
   return `${Math.floor(hrs / 24)}d ago`;
 };
 
-const NotificationBell = () => {
+const NotificationBell = ({ scrolled = false, isOpen: isNavOpen = false }) => {
   const [isOpen, setIsOpen] = useState(false);
   const panelRef = useRef(null);
   const navigate = useNavigate();
@@ -71,13 +70,21 @@ const NotificationBell = () => {
 
   return (
     <div className="relative" ref={panelRef}>
-      {/* Bell button */}
+      {/* Bell button with dynamic navbar transparency styling */}
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className="relative p-2 rounded-full hover:bg-pink-50 transition-all duration-300 group cursor-pointer"
+        className={`relative p-2 rounded-full transition-all duration-500 group cursor-pointer ${
+          scrolled || isNavOpen ? "hover:bg-pink-50" : "hover:bg-white/20"
+        }`}
         aria-label="Notifications"
       >
-        <FaBell className="text-xl text-gray-700 group-hover:text-pink-600 transition-colors duration-300" />
+        <FaBell
+          className={`text-xl transition-colors duration-300 ${
+            scrolled || isNavOpen
+              ? "text-gray-700 group-hover:text-pink-600"
+              : "text-white group-hover:text-pink-200"
+          }`}
+        />
         {unreadCount > 0 && (
           <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] bg-gradient-to-r from-pink-500 to-pink-600 text-white rounded-full flex items-center justify-center text-[10px] font-bold shadow animate-pulse px-1">
             {unreadCount > 9 ? "9+" : unreadCount}
@@ -85,7 +92,7 @@ const NotificationBell = () => {
         )}
       </button>
 
-      {/* Desktop dropdown — hidden on mobile */}
+      {/* Desktop & Tablet Dropdown */}
       {isOpen && (
         <div className="hidden md:block absolute right-0 top-full mt-3 w-80 bg-white border border-gray-100 rounded-2xl shadow-2xl z-50 overflow-hidden">
           <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-pink-50 to-purple-50 border-b border-gray-100">
@@ -123,7 +130,9 @@ const NotificationBell = () => {
                     </div>
                     <div className="flex-1 min-w-0">
                       <p
-                        className={`text-sm font-semibold text-gray-800 ${!isRead ? "text-pink-700" : ""}`}
+                        className={`text-sm font-semibold text-gray-800 ${
+                          !isRead ? "text-pink-700" : ""
+                        }`}
                       >
                         {notif.title}
                       </p>
@@ -153,7 +162,7 @@ const NotificationBell = () => {
         </div>
       )}
 
-      {/* Mobile inline panel — shown only on mobile when open */}
+      {/* Mobile inline panel */}
       {isOpen && (
         <div className="md:hidden fixed left-4 right-4 top-20 bg-white border border-gray-100 rounded-2xl shadow-2xl z-50 overflow-hidden">
           <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-pink-50 to-purple-50 border-b border-gray-100">
@@ -191,7 +200,9 @@ const NotificationBell = () => {
                     </div>
                     <div className="flex-1 min-w-0">
                       <p
-                        className={`text-sm font-semibold ${!isRead ? "text-pink-700" : "text-gray-800"}`}
+                        className={`text-sm font-semibold ${
+                          !isRead ? "text-pink-700" : "text-gray-800"
+                        }`}
                       >
                         {notif.title}
                       </p>
@@ -210,14 +221,6 @@ const NotificationBell = () => {
               })
             )}
           </div>
-          {allNotifications.length > 0 && (
-            <div className="px-4 py-2 bg-gray-50 border-t border-gray-100">
-              <p className="text-[10px] text-gray-400 text-center">
-                Product alerts expire automatically · Cart events reset each
-                session
-              </p>
-            </div>
-          )}
         </div>
       )}
     </div>
