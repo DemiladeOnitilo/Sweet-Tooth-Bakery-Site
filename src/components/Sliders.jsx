@@ -63,8 +63,8 @@ const Sliders = ({ onPage, main, autoPlay }) => {
   return (
     <div className="w-full">
       {onPage ? (
-        <div className="w-full max-w-7xl mx-auto px-4 md:px-12">
-          <Slider {...settings} className="px-2">
+        <div className="w-full max-w-7xl mx-auto md:px-12">
+          <Slider {...settings} >
             {main.map((item, index) => (
               <div key={index} className="p-3">
                 <CakeCard {...item} onPage={true} />

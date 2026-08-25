@@ -5,9 +5,7 @@ import {
   FaMinus,
   FaPlus,
   FaChevronRight,
-  FaExclamationCircle,
   FaWhatsapp,
-  FaPencilAlt,
   FaCheck,
 } from "react-icons/fa";
 import { useParams, Link } from "react-router-dom";
@@ -27,7 +25,7 @@ const Products = () => {
   const [quantity, setQuantity] = useState(1);
   const [selectedSizeObj, setSelectedSizeObj] = useState(null);
 
-  // Customization states — only active for isCustomizableRegular products
+  // Customization states
   const [selectedFlavor, setSelectedFlavor] = useState("");
   const [selectedIcing, setSelectedIcing] = useState("");
   const [cakeColor, setCakeColor] = useState("White / Standard");
@@ -41,14 +39,12 @@ const Products = () => {
 
   useEffect(() => {
     if (product) {
-      // Set default size object — falls back to a zero-modifier standard for products without sizes
       if (product.size && product.size.length > 0) {
         setSelectedSizeObj(product.size[0]);
       } else {
         setSelectedSizeObj({ label: "Standard Size", modifier: 0 });
       }
 
-      // Initialize customization defaults for customizable cakes only
       if (product.isCustomizableRegular) {
         setSelectedFlavor(product.flavors?.[0] || "Vanilla");
         setSelectedIcing(product.icings?.[0] || "Buttercream");
@@ -68,13 +64,11 @@ const Products = () => {
     .sort(() => Math.random() - 0.5)
     .slice(0, 8);
 
-  // Safe price calculation — consultation products have no price field
   const activePrice =
     product && selectedSizeObj && !product.isConsultationOnly
       ? parseFloat(product.price) + selectedSizeObj.modifier
       : 0;
 
-  // Compound label used as the cart row identifier
   const customRegularLabel = product?.isCustomizableRegular
     ? `${selectedSizeObj?.label} | ${selectedFlavor} | ${selectedIcing} | (${cakeColor})`
     : selectedSizeObj?.label || "Standard Size";
@@ -107,7 +101,6 @@ const Products = () => {
       }),
     );
 
-    // Fixed: was interpolating product.size (array), now uses selectedSizeObj.label
     toast.success(
       `${quantity}x ${product.name} (${selectedSizeObj?.label}) added to cart!`,
       { position: "top-right", autoClose: 2000 },
@@ -122,12 +115,12 @@ const Products = () => {
 
   if (!product || !selectedSizeObj) {
     return (
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center h-screen bg-[#FCFBF9]">
         <Audio
           height="80"
           width="80"
           radius="9"
-          color="rgb(236, 72, 153)"
+          color="#BE185D"
           ariaLabel="Loading product"
         />
       </div>
@@ -137,135 +130,109 @@ const Products = () => {
   if (!category || !category.types) return null;
 
   return (
-    <div className="flex flex-col mt-30 lg:mt-40">
-      {/* ── Breadcrumb + Product Card ── */}
-      <div className="flex flex-col gap-6 px-4 lg:px-16 max-w-7xl mx-auto w-full">
-        <nav className="flex flex-wrap items-center gap-2 text-sm text-gray-500">
-          <Link
-            to="/"
-            className="hover:text-pink-600 transition-colors duration-300"
-          >
+    <div className="flex flex-col mt-24 lg:mt-32 pb-16">
+      <div className="flex flex-col gap-6 p-6 lg:p-12 max-w-7xl mx-auto w-full bg-white rounded-2xl shadow-2xl">
+        <nav className="flex flex-wrap items-center gap-2 text-[10px] md:text-xs text-gray-400 body-text uppercase tracking-widest font-bold">
+          <Link to="/" className="hover:text-[#BE185D] transition-colors">
             Home
           </Link>
-          <FaChevronRight className="text-xs" />
+          <FaChevronRight className="text-[8px]" />
           <Link
             to="/services"
-            className="hover:text-pink-600 transition-colors duration-300"
+            className="hover:text-[#BE185D] transition-colors"
           >
-            Services
+            Menu
           </Link>
           {category?.name && (
             <>
-              <FaChevronRight className="text-xs" />
+              <FaChevronRight className="text-[8px]" />
               <Link
                 to={`/services/category/${category.name}`}
-                className="hover:text-pink-600 transition-colors duration-300"
+                className="hover:text-[#BE185D] transition-colors"
               >
                 {category.name}
               </Link>
             </>
           )}
-          <FaChevronRight className="text-xs" />
-          <span className="text-gray-800 font-medium">{product.name}</span>
+          <FaChevronRight className="text-[8px]" />
+          <span className="text-gray-900">{product.name}</span>
         </nav>
 
-        <div className="flex flex-col lg:flex-row gap-10 bg-white rounded-3xl shadow-xl p-4 md:p-8">
-          {/* Left: Image */}
-          <div className="flex items-center justify-center w-full lg:w-1/2 relative group">
-            <div className="relative overflow-hidden rounded-3xl shadow-xl w-full">
+        <div className="flex flex-col lg:flex-row gap-10 lg:gap-16">
+          <div className="w-full lg:w-1/2 relative group">
+            <div className="relative overflow-hidden rounded-3xl w-full aspect-[4/5] bg-gray-50 border border-gray-100">
               <img
                 src={product.img}
                 alt={`${product.name}`}
-                className="rounded-3xl h-[400px] lg:h-[550px] w-full items-center object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl" />
-              <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:translate-x-full transition-transform duration-1000 ease-out" />
+              <div className="absolute inset-0 bg-[#BE185D]/0 group-hover:bg-[#BE185D]/10 transition-colors duration-500 pointer-events-none" />
 
-              {/* In Cart badge on image */}
               {isInCart && !product.isConsultationOnly && (
-                <span className="absolute top-4 left-4 px-4 py-2 bg-white/90 backdrop-blur-sm text-pink-600 rounded-full text-sm font-medium flex items-center gap-2 shadow-md">
-                  <FaCheck size={12} />
-                  In Cart
+                <span className="absolute top-4 left-4 px-4 py-1.5 bg-white text-[#BE185D] body-text text-[10px] uppercase tracking-widest font-bold flex items-center gap-2 shadow-sm rounded-full">
+                  <FaCheck size={10} /> In Cart
                 </span>
               )}
             </div>
           </div>
 
-          {/* Right: Configuration Panel */}
-          <div className="w-full lg:w-1/2 flex flex-col gap-2 md:gap-6">
-            {/* Category label + Name */}
-            <div>
-              <span className="text-pink-600 text-sm font-semibold uppercase tracking-wide">
+          <div className="w-full lg:w-1/2 flex flex-col gap-6 lg:py-4">
+            <div className="flex flex-col gap-2">
+              <span className="body-text text-[#BE185D] text-[10px] md:text-xs font-bold uppercase tracking-widest">
                 {category.name}
               </span>
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-800">
+              <h1 className="heading-text text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
                 {product.name}
               </h1>
+
+              {product.isConsultationOnly ? (
+                <div className="mt-2 inline-flex border border-gray-200 px-4 py-1.5 rounded-full text-sm body-text uppercase tracking-widest font-bold text-gray-600 bg-gray-50 w-fit">
+                  Consultation Only
+                </div>
+              ) : (
+                <p className="heading-text text-2xl md:text-3xl font-bold text-[#BE185D] mt-2">
+                  {currency}
+                  {activePrice.toLocaleString()}
+                </p>
+              )}
             </div>
 
-            {/* Price — consultation shows badge, regular shows gradient price */}
-            {product.isConsultationOnly ? (
-              <p className="text-2xl font-extrabold text-pink-600 bg-pink-50 w-fit px-4 py-2 border border-pink-100 rounded-2xl">
-                Consultation Only
-              </p>
-            ) : (
-              <p className="text-3xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
-                {currency}
-                {activePrice.toLocaleString()}
-              </p>
-            )}
-
-            {/* Description — always shown */}
-            <p className="text-lg text-gray-600 leading-relaxed">
+            <p className="body-text text-base md:text-lg text-gray-600 leading-relaxed">
               {product.description}
             </p>
 
-            {/* ─────────────────────────────────────────────
-                BLOCK A: Consultation products only
-                Shows WhatsApp booking. All other blocks below
-                are hidden for consultation products.
-            ───────────────────────────────────────────── */}
             {product.isConsultationOnly && (
-              <div className="border-t border-gray-100 pt-6">
-                <div className="bg-gradient-to-r from-pink-50/60 to-purple-50/60 border border-pink-100/60 rounded-2xl p-3 md:p-5 space-y-4">
-                  <h3 className="text-md md:text-lg font-bold text-gray-800 flex items-center gap-2">
-                    <FaExclamationCircle className="text-pink-500" />
-                    Professional Consultation Booking
+              <div className="border-t border-gray-100 pt-8 mt-2">
+                <div className="bg-gray-50 border border-gray-100 rounded-2xl p-6 md:p-8 space-y-5">
+                  <h3 className="heading-text text-lg md:text-xl font-bold text-gray-900">
+                    Bespoke Consultation
                   </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    To ensure structural accuracy and complete flavor profiling
-                    for architectural pieces like{" "}
-                    <strong>{product.name}</strong>, we handle orders via a
-                    direct consultation. Connect with our decorators to build
-                    your quote:
+                  <p className="body-text text-gray-600 text-sm leading-relaxed">
+                    To ensure structural perfection and complete flavor
+                    profiling for architectural pieces like{" "}
+                    <strong>{product.name}</strong>, we handle orders via direct
+                    consultation with our master decorators.
                   </p>
                   <button
                     onClick={handleConsultationRedirect}
-                    className="w-full flex items-center justify-center gap-3 bg-emerald-500 hover:bg-emerald-600 text-white font-medium px-2 py-4 rounded-full shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 cursor-pointer text-sm md:text-lg"
+                    className="w-full flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#1DA851] text-white body-text font-bold uppercase tracking-widest px-6 py-4 rounded-full shadow-sm transition-all duration-300 transform hover:-translate-y-0.5 cursor-pointer text-xs"
                   >
-                    <FaWhatsapp size={24} />
-                    Chat With Our Baker via WhatsApp
+                    <FaWhatsapp size={18} /> Chat via WhatsApp
                   </button>
                 </div>
               </div>
             )}
 
-            {/* ─────────────────────────────────────────────
-                BLOCK B: Size / Packaging selector
-                Shown for any non-consultation product that
-                has a size array (loaves, cupcakes, muffins,
-                and customizable cakes).
-            ───────────────────────────────────────────── */}
             {!product.isConsultationOnly &&
               product.size &&
               product.size.length > 0 && (
-                <div className="border-t border-gray-100 pt-6 space-y-2">
-                  <label className="text-sm font-semibold text-gray-800 block">
+                <div className="border-t border-gray-100 pt-6 space-y-3">
+                  <label className="body-text text-[10px] font-bold uppercase tracking-widest text-gray-500">
                     {product.isCustomizableRegular
-                      ? "1. Select Cake Size:"
-                      : "Select Packaging Option:"}
+                      ? "1. Select Size"
+                      : "Select Packaging"}
                   </label>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-3">
                     {product.size.map((sizeObj, index) => {
                       const isSelected =
                         selectedSizeObj?.label === sizeObj.label;
@@ -273,14 +240,15 @@ const Products = () => {
                         <button
                           key={index}
                           onClick={() => setSelectedSizeObj(sizeObj)}
-                          className={`px-4 py-2 text-xs font-semibold rounded-full border transition-all duration-300 active:scale-95 cursor-pointer ${
+                          className={`px-5 py-2.5 body-text text-xs font-bold uppercase tracking-wider rounded-full border transition-all duration-300 cursor-pointer ${
                             isSelected
-                              ? "bg-gradient-to-r from-pink-500 to-purple-600 text-white border-transparent shadow-sm scale-105"
-                              : "bg-white border-gray-200 text-gray-700 hover:border-pink-300"
+                              ? "bg-[#BE185D] text-white border-[#BE185D] shadow-sm"
+                              : "bg-white border-gray-200 text-gray-600 hover:border-gray-900"
                           }`}
                         >
-                          {sizeObj.label} (+{currency}
-                          {sizeObj.modifier.toLocaleString()})
+                          {sizeObj.label}{" "}
+                          {sizeObj.modifier > 0 &&
+                            `(+${currency}${sizeObj.modifier.toLocaleString()})`}
                         </button>
                       );
                     })}
@@ -288,23 +256,17 @@ const Products = () => {
                 </div>
               )}
 
-            {/* ─────────────────────────────────────────────
-                BLOCK C: Customization options
-                Only shown for isCustomizableRegular products.
-                Requires Block B to also render (size is step 1,
-                these are steps 2–5).
-            ───────────────────────────────────────────── */}
             {product.isCustomizableRegular && (
-              <div className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-xs font-bold text-gray-700">
-                      2. Cake Flavour Profile:
+              <div className="space-y-5 pt-2">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div className="flex flex-col gap-2">
+                    <label className="body-text text-[10px] font-bold uppercase tracking-widest text-gray-500">
+                      2. Flavor Profile
                     </label>
                     <select
                       value={selectedFlavor}
                       onChange={(e) => setSelectedFlavor(e.target.value)}
-                      className="p-2.5 border border-gray-200 bg-white rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-pink-400 text-gray-700 font-medium"
+                      className="w-full px-4 py-3.5 rounded-2xl border bg-gray-50/50 body-text text-sm focus:outline-none transition-all duration-300 border-gray-200 focus:border-[#BE185D] focus:bg-white text-gray-900"
                     >
                       {product.flavors?.map((flavor) => (
                         <option key={flavor} value={flavor}>
@@ -314,14 +276,14 @@ const Products = () => {
                     </select>
                   </div>
 
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-xs font-bold text-gray-700">
-                      3. Icing Coating Style:
+                  <div className="flex flex-col gap-2">
+                    <label className="body-text text-[10px] font-bold uppercase tracking-widest text-gray-500">
+                      3. Icing Style
                     </label>
                     <select
                       value={selectedIcing}
                       onChange={(e) => setSelectedIcing(e.target.value)}
-                      className="p-2.5 border border-gray-200 bg-white rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-pink-400 text-gray-700 font-medium"
+                      className="w-full px-4 py-3.5 rounded-2xl border bg-gray-50/50 body-text text-sm focus:outline-none transition-all duration-300 border-gray-200 focus:border-[#BE185D] focus:bg-white text-gray-900"
                     >
                       {product.icings?.map((icing) => (
                         <option key={icing} value={icing}>
@@ -332,15 +294,14 @@ const Products = () => {
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-bold text-gray-700 flex items-center gap-1.5">
-                    <FaPencilAlt size={11} className="text-pink-500" />
-                    4. Inscription Style (OptIonal):
+                <div className="flex flex-col gap-2">
+                  <label className="body-text text-[10px] font-bold uppercase tracking-widest text-gray-500">
+                    4. Inscription Style (Optional)
                   </label>
                   <select
                     value={inscriptionStyle}
                     onChange={(e) => setInscriptionStyle(e.target.value)}
-                    className="p-2.5 border border-gray-200 bg-white rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-pink-400 text-gray-700 font-medium"
+                    className="w-full px-4 py-3.5 rounded-2xl border bg-gray-50/50 body-text text-sm focus:outline-none transition-all duration-300 border-gray-200 focus:border-[#BE185D] focus:bg-white text-gray-900"
                   >
                     {product.inscriptionStyle?.map((style) => (
                       <option key={style} value={style}>
@@ -350,92 +311,72 @@ const Products = () => {
                   </select>
                 </div>
 
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-bold text-gray-700 flex items-center gap-1.5">
-                    <FaPencilAlt size={11} className="text-pink-500" />
-                    5. Cake Inscription Message (Optional):
+                <div className="flex flex-col gap-2">
+                  <label className="body-text text-[10px] font-bold uppercase tracking-widest text-gray-500">
+                    5. Message (Optional)
                   </label>
                   <input
                     type="text"
                     value={inscription}
                     maxLength={50}
                     onChange={(e) => setInscription(e.target.value)}
-                    placeholder="E.g., Happy 25th Birthday, Tunde! "
-                    className="p-2.5 border border-gray-200 bg-white rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-pink-400 text-gray-700 placeholder-gray-400"
+                    placeholder="E.g., Happy 25th Birthday!"
+                    className="w-full px-4 py-3.5 rounded-2xl border bg-gray-50/50 body-text text-sm focus:outline-none transition-all duration-300 border-gray-200 focus:border-[#BE185D] focus:bg-white text-gray-900 placeholder-gray-400"
                   />
-                  <span className="text-xs text-gray-400 text-right">
+                  <span className="body-text text-[10px] text-gray-400 text-right uppercase tracking-wider font-bold">
                     {inscription.length}/50
                   </span>
                 </div>
               </div>
             )}
 
-            {/* ─────────────────────────────────────────────
-                BLOCK D: Ingredients
-                Always shown for every product type.
-            ───────────────────────────────────────────── */}
             {product.ingredients && product.ingredients.length > 0 && (
               <div className="border-t border-gray-100 pt-6 space-y-3">
-                <h2 className="text-lg font-semibold text-gray-800">
-                  Ingredients
-                </h2>
-                {product.ingredients && product.ingredients.length > 0 ? (
-                  <div className="flex flex-wrap gap-2">
-                    {product.ingredients.map((ingredient, index) => (
-                      <span
-                        key={index}
-                        className="px-3 py-1.5 bg-gradient-to-r from-pink-50 to-purple-50 border border-pink-200/50 text-gray-700 text-sm rounded-full"
-                      >
-                        {ingredient}
-                      </span>
-                    ))}
-                  </div>
-                ) : (
-                  <p className="text-gray-500 italic text-sm">
-                    No ingredients listed.
-                  </p>
-                )}
+                <h3 className="body-text text-[10px] font-bold uppercase tracking-widest text-gray-500">
+                  Core Ingredients
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {product.ingredients.map((ingredient, index) => (
+                    <span
+                      key={index}
+                      className="px-3 py-1.5 bg-gray-50 border border-gray-200 text-gray-700 body-text text-[10px] uppercase tracking-wider font-bold rounded-full"
+                    >
+                      {ingredient}
+                    </span>
+                  ))}
+                </div>
               </div>
             )}
 
-            {/* ─────────────────────────────────────────────
-                BLOCK E: Quantity selector + Add to Cart
-                Hidden for consultation-only products.
-                Shown for all regular, sized, and customizable
-                products.
-            ───────────────────────────────────────────── */}
             {!product.isConsultationOnly && (
-              <div className="flex flex-col md:flex-row  gap-4 border-t border-gray-100 pt-6 mt-auto">
-                <div className="flex justify-center items-center gap-3 bg-gradient-to-r from-pink-50 to-purple-50 rounded-full px-4 py-2 w-fit flex-shrink-0">
+              <div className="flex flex-col md:flex-row gap-4 border-t border-gray-100 pt-8 mt-auto">
+                <div className="flex justify-center items-center gap-4 bg-gray-50 border border-gray-200 rounded-full px-4 py-2 w-fit flex-shrink-0">
                   <button
                     onClick={decrementQuantity}
-                    className="w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center text-pink-600 hover:text-pink-700 transition-all duration-300 cursor-pointer hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-400"
+                    className="w-8 h-8 rounded-full bg-white shadow-sm border border-gray-100 flex items-center justify-center text-gray-600 hover:text-[#BE185D] transition-colors cursor-pointer focus:outline-none"
                     aria-label="Decrease quantity"
                   >
-                    <FaMinus size={12} />
+                    <FaMinus size={10} />
                   </button>
-                  <span className="text-xl font-bold text-gray-800 w-10 text-center">
+                  <span className="heading-text text-lg font-bold text-gray-900 w-8 text-center">
                     {quantity}
                   </span>
                   <button
                     onClick={incrementQuantity}
-                    className="w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center text-pink-600 hover:text-pink-700 transition-all duration-300 cursor-pointer hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-400"
+                    className="w-8 h-8 rounded-full bg-white shadow-sm border border-gray-100 flex items-center justify-center text-gray-600 hover:text-[#BE185D] transition-colors cursor-pointer focus:outline-none"
                     aria-label="Increase quantity"
                   >
-                    <FaPlus size={12} />
+                    <FaPlus size={10} />
                   </button>
                 </div>
 
                 <button
                   onClick={handleAddToCart}
-                  className="group/btn relative px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-full font-medium text-lg flex-grow flex items-center justify-center gap-2 shadow-lg hover:shadow-2xl overflow-hidden transition-all duration-500 transform hover:scale-102 cursor-pointer"
-                  aria-label={`Add ${quantity} ${product.name} to cart`}
+                  className="flex-grow flex items-center justify-center gap-3 bg-[#BE185D] text-white rounded-full px-8 py-4 body-text text-xs font-bold uppercase tracking-widest hover:bg-[#9D174D] shadow-sm transform hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
+                  aria-label={`Add ${quantity} to cart`}
                 >
-                  <span className="relative z-10 flex items-center justify-center gap-2">
-                    <FaShoppingCart size={20} />
-                    {isInCart ? "Add More to Cart" : "Add to Cart"}
-                  </span>
-                  <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover/btn:translate-x-full transition-transform duration-700 ease-out" />
+                  <FaShoppingCart size={14} />
+                  {isInCart ? "Add More" : "Add to Cart"}
                 </button>
               </div>
             )}
@@ -443,54 +384,41 @@ const Products = () => {
         </div>
       </div>
 
-      {/* Full-bleed carousel */}
       <Carousel />
 
-      {/* Related Offers */}
       {relatedProducts.length > 0 && (
-        <div className="flex flex-col items-center gap-5 w-full py-14 lg:py-16">
-          <div className="flex flex-col items-center gap-3 text-center px-4">
-            <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-pink-100 to-purple-100 border border-pink-200/50 rounded-full text-pink-700 text-sm font-medium">
-              🍰 More from {category.name}
+        <div className="flex flex-col items-center gap-8 w-full py-16 px-6 max-w-7xl mx-auto">
+          <div className="flex flex-col items-center gap-3 text-center">
+            <div className="body-text flex items-center gap-3 text-sm font-bold text-[#BE185D] tracking-widest uppercase">
+              <span className="w-6 h-[1px] bg-[#BE185D]"></span>
+              More from {category.name}
+              <span className="w-6 h-[1px] bg-[#BE185D]"></span>
             </div>
-            <h2 className="text-3xl lg:text-4xl font-bold">
-              <span className="bg-gradient-to-r from-pink-600 via-purple-600 to-pink-500 bg-clip-text text-transparent">
-                Related Offers
-              </span>
+            <h2 className="heading-text text-3xl md:text-4xl font-bold text-gray-900">
+              Related <span className="text-[#BE185D] italic">Treats</span>
             </h2>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 lg:gap-5 px-4 max-w-7xl w-full">
-            {relatedProducts.map((item) => (
-              <div
-                key={item.id}
-                className="h-full transform transition-all duration-300 hover:scale-105"
-              >
-                <CakeCard {...item} onPage={true} />
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 w-full">
+            {relatedProducts.slice(0, 4).map((item) => (
+              <CakeCard key={item.id} {...item} onPage={true} />
             ))}
           </div>
         </div>
       )}
 
-      {/* Y
-      )}
-
-      {/* You Might Also Like — fixed: was isHome={true} which links to category URLs
-          using individual product ids, producing broken /services/category/brownies-ChocolateBrownie
-          routes. onPage={true} correctly links to /products/${id} */}
       {recommendedItems.length > 0 && (
-        <div className="flex flex-col items-center gap-5 w-full pb-20">
+        <div className="flex flex-col items-center gap-8 w-full pb-20 px-6 max-w-7xl mx-auto">
           <div className="flex flex-col items-center gap-3 text-center">
-            <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-pink-100 to-purple-100 border border-pink-200/50 rounded-full text-pink-700 text-sm font-medium">
-              ✨ Discover More
+            <div className="body-text flex items-center gap-3 text-sm font-bold text-[#BE185D] tracking-widest uppercase">
+              <span className="w-6 h-[1px] bg-[#BE185D]"></span>
+              Discover More
+              <span className="w-6 h-[1px] bg-[#BE185D]"></span>
             </div>
-            <h2 className="text-3xl lg:text-4xl font-bold">
-              <span className="bg-gradient-to-r from-pink-600 via-purple-600 to-pink-500 bg-clip-text text-transparent">
-                You Might Also Like
-              </span>
+            <h2 className="heading-text text-3xl md:text-4xl font-bold text-gray-900">
+              You Might Also <span className="text-[#BE185D] italic">Like</span>
             </h2>
           </div>
-          <div className="w-full max-w-7xl">
+          <div className="w-full">
             <Sliders main={recommendedItems} onPage={true} autoPlay={true} />
           </div>
         </div>

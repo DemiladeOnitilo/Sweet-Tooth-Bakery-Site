@@ -23,11 +23,11 @@ const SignupStep2 = ({ data, onUpdate, onBack, onSubmit }) => {
     setLocalError(null);
 
     if (password.length < 6) {
-      setLocalError("Password must be at least 6 characters");
+      setLocalError("Password must be at least 6 characters.");
       return;
     }
     if (password !== confirmPassword) {
-      setLocalError("Passwords do not match");
+      setLocalError("Passwords do not match.");
       return;
     }
 
@@ -55,31 +55,31 @@ const SignupStep2 = ({ data, onUpdate, onBack, onSubmit }) => {
     >
       <button
         onClick={onBack}
-        className="flex items-center gap-1 text-sm text-gray-500 hover:text-pink-600 mb-4 cursor-pointer"
+        className="flex items-center gap-2 body-text text-[10px] uppercase tracking-widest font-bold text-gray-400 hover:text-[#BE185D] mb-6 cursor-pointer transition-colors"
       >
         <FaArrowLeft /> Back
       </button>
 
       <div className="text-center mb-6">
-        <h2 className="text-2xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
-          Almost Done
+        <h2 className="heading-text text-3xl font-bold text-gray-900">
+          Almost <span className="text-[#BE185D] italic">Done</span>
         </h2>
-        <p className="text-gray-500 text-sm mt-1">
-          Step 2 of 2 � Security & location
+        <p className="body-text text-gray-500 text-xs mt-2 uppercase tracking-widest font-medium">
+          Step 2 of 2 — Security & Location
         </p>
       </div>
 
       <StepIndicator current={1} total={2} />
 
       {displayedError && (
-        <div className="bg-red-50 border border-red-200 text-red-600 text-sm rounded-xl px-4 py-3 mb-5">
+        <div className="bg-red-50 border border-red-100 text-red-600 body-text text-xs rounded-xl px-4 py-3 mb-6 font-medium text-center">
           {displayedError}
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-5">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block body-text text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-1.5">
             Password
           </label>
           <div className="relative">
@@ -89,12 +89,12 @@ const SignupStep2 = ({ data, onUpdate, onBack, onSubmit }) => {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="At least 6 characters"
               required
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-transparent transition-all duration-200 pr-12"
+              className="w-full px-5 py-3.5 rounded-2xl border bg-gray-50/50 body-text text-sm focus:outline-none transition-all duration-300 border-gray-200 focus:border-[#BE185D] focus:ring-1 focus:ring-[#BE185D] focus:bg-white pr-12"
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-pink-600 cursor-pointer"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#BE185D] cursor-pointer transition-colors"
             >
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </button>
@@ -102,7 +102,7 @@ const SignupStep2 = ({ data, onUpdate, onBack, onSubmit }) => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block body-text text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-1.5">
             Confirm Password
           </label>
           <input
@@ -111,12 +111,12 @@ const SignupStep2 = ({ data, onUpdate, onBack, onSubmit }) => {
             onChange={(e) => setConfirmPassword(e.target.value)}
             placeholder="Repeat your password"
             required
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-transparent transition-all duration-200"
+            className="w-full px-5 py-3.5 rounded-2xl border bg-gray-50/50 body-text text-sm focus:outline-none transition-all duration-300 border-gray-200 focus:border-[#BE185D] focus:ring-1 focus:ring-[#BE185D] focus:bg-white"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block body-text text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-1.5">
             Delivery Address
           </label>
           <textarea
@@ -124,19 +124,20 @@ const SignupStep2 = ({ data, onUpdate, onBack, onSubmit }) => {
             onChange={(e) => setAddress(e.target.value)}
             placeholder="Enter your delivery address"
             rows={2}
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-transparent transition-all duration-200 resize-none"
+            className="w-full px-5 py-3.5 rounded-2xl border bg-gray-50/50 body-text text-sm focus:outline-none transition-all duration-300 border-gray-200 focus:border-[#BE185D] focus:ring-1 focus:ring-[#BE185D] focus:bg-white resize-none"
           />
-          <p className="text-xs text-gray-400 mt-1">
-            Optional � you can add this later
+          <p className="body-text text-[10px] uppercase tracking-wider text-gray-400 mt-1.5 font-medium">
+            Optional — you can add this later
           </p>
         </div>
 
-        <MainButton
-          name={loading ? "Creating account..." : "Create Account"}
-          variant="primary"
-          direction={loading ? null : "right"}
-          onClick={handleSubmit}
-        />
+        <div className="mt-2">
+          <MainButton
+            name={loading ? "Creating..." : "Create Account"}
+            variant="primary"
+            onClick={handleSubmit}
+          />
+        </div>
       </form>
     </motion.div>
   );
