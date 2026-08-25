@@ -11,11 +11,12 @@ import {
 import { markAllRead, markOneRead } from "../store/notificationSlice";
 import { getActiveProductNotifications } from "./notification";
 
+// Swapped generic colors for a cohesive, premium palette
 const typeIcon = {
-  new_arrival: <FaStar className="text-pink-500" />,
-  promo: <FaTag className="text-purple-500" />,
-  cart_add: <FaShoppingCart className="text-blue-500" />,
-  checkout: <FaCheckCircle className="text-green-500" />,
+  new_arrival: <FaStar className="text-[#BE185D]" />,
+  promo: <FaTag className="text-[#BE185D]" />,
+  cart_add: <FaShoppingCart className="text-gray-800" />,
+  checkout: <FaCheckCircle className="text-gray-800" />,
 };
 
 const timeAgo = (isoString) => {
@@ -70,47 +71,55 @@ const NotificationBell = ({ scrolled = false, isOpen: isNavOpen = false }) => {
 
   return (
     <div className="relative" ref={panelRef}>
-      {/* Bell button with dynamic navbar transparency styling */}
+      {/* Bell Button */}
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className={`relative p-2 rounded-full transition-all duration-500 group cursor-pointer ${
-          scrolled || isNavOpen ? "hover:bg-pink-50" : "hover:bg-white/20"
+        className={`relative p-2 rounded-full transition-all duration-300 group cursor-pointer ${
+          scrolled || isNavOpen ? "hover:bg-[#BE185D]/10" : "hover:bg-white/20"
         }`}
         aria-label="Notifications"
       >
         <FaBell
           className={`text-xl transition-colors duration-300 ${
             scrolled || isNavOpen
-              ? "text-gray-700 group-hover:text-pink-600"
-              : "text-white group-hover:text-pink-200"
+              ? "text-gray-900 group-hover:text-[#BE185D]"
+              : "text-white group-hover:text-pink-100"
           }`}
         />
         {unreadCount > 0 && (
-          <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] bg-gradient-to-r from-pink-500 to-pink-600 text-white rounded-full flex items-center justify-center text-[10px] font-bold shadow animate-pulse px-1">
+          <span className="body-text absolute -top-1 -right-1 min-w-[18px] h-[18px] bg-[#BE185D] text-white rounded-full flex items-center justify-center text-[10px] font-bold shadow-sm animate-pulse px-1">
             {unreadCount > 9 ? "9+" : unreadCount}
           </span>
         )}
       </button>
 
-      {/* Desktop & Tablet Dropdown */}
+      {/* Dropdown Panel (Desktop & Mobile Unified classes where possible) */}
       {isOpen && (
-        <div className="hidden md:block absolute right-0 top-full mt-3 w-80 bg-white border border-gray-100 rounded-2xl shadow-2xl z-50 overflow-hidden">
-          <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-pink-50 to-purple-50 border-b border-gray-100">
-            <h3 className="font-bold text-gray-800 text-sm">Notifications</h3>
+        <div className="absolute right-0 md:right-0 left-4 md:left-auto top-16 md:top-full mt-3 w-auto md:w-80 bg-white border border-gray-100 rounded-3xl shadow-xl z-50 overflow-hidden">
+          
+          {/* Header */}
+          <div className="flex items-center justify-between px-5 py-4 bg-white border-b border-gray-100">
+            <h3 className="heading-text font-bold text-gray-900 text-sm tracking-widest uppercase">
+              Notifications
+            </h3>
             {unreadCount > 0 && (
               <button
                 onClick={handleMarkAllRead}
-                className="text-xs text-pink-600 hover:text-pink-800 font-medium transition-colors"
+                className="body-text text-[10px] text-[#BE185D] hover:text-[#9D174D] font-bold uppercase tracking-widest transition-colors"
               >
                 Mark all read
               </button>
             )}
           </div>
-          <div className="max-h-80 overflow-y-auto divide-y divide-gray-50">
+          
+          {/* Notifications List */}
+          <div className="max-h-[60vh] md:max-h-80 overflow-y-auto">
             {allNotifications.length === 0 ? (
-              <div className="py-10 text-center">
-                <FaBell className="text-3xl text-gray-200 mx-auto mb-2" />
-                <p className="text-sm text-gray-400">No notifications yet</p>
+              <div className="py-12 text-center flex flex-col items-center">
+                <div className="w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center mb-3">
+                  <FaBell className="text-xl text-gray-300" />
+                </div>
+                <p className="body-text text-sm text-gray-400">No new notifications</p>
               </div>
             ) : (
               allNotifications.map((notif) => {
@@ -119,108 +128,41 @@ const NotificationBell = ({ scrolled = false, isOpen: isNavOpen = false }) => {
                   <button
                     key={notif.id}
                     onClick={() => handleNotifClick(notif)}
-                    className={`w-full text-left flex items-start gap-3 px-4 py-3 hover:bg-pink-50 transition-colors duration-200 cursor-pointer ${
-                      !isRead ? "bg-pink-50/40" : ""
+                    className={`w-full text-left flex items-start gap-4 px-5 py-4 hover:bg-gray-50 transition-colors duration-200 cursor-pointer border-b border-gray-50 last:border-0 ${
+                      !isRead ? "bg-[#BE185D]/5" : "bg-white"
                     }`}
                   >
-                    <div className="mt-0.5 text-base flex-shrink-0">
-                      {typeIcon[notif.type] || (
-                        <FaBell className="text-gray-400" />
-                      )}
+                    <div className="mt-1 text-base flex-shrink-0">
+                      {typeIcon[notif.type] || <FaBell className="text-gray-400" />}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p
-                        className={`text-sm font-semibold text-gray-800 ${
-                          !isRead ? "text-pink-700" : ""
-                        }`}
-                      >
+                      <p className={`heading-text text-sm font-bold ${!isRead ? "text-gray-900" : "text-gray-600"}`}>
                         {notif.title}
                       </p>
-                      <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">
+                      <p className="body-text text-xs text-gray-500 mt-1 leading-relaxed">
                         {notif.message}
                       </p>
-                      <p className="text-[10px] text-gray-400 mt-1">
+                      <p className="body-text text-[10px] text-gray-400 mt-2 uppercase tracking-wider font-medium">
                         {timeAgo(notif.createdAt)}
                       </p>
                     </div>
                     {!isRead && (
-                      <div className="w-2 h-2 bg-pink-500 rounded-full mt-1.5 flex-shrink-0" />
+                      <div className="w-2 h-2 bg-[#BE185D] rounded-full mt-1.5 flex-shrink-0 shadow-sm" />
                     )}
                   </button>
                 );
               })
             )}
           </div>
+          
+          {/* Footer */}
           {allNotifications.length > 0 && (
-            <div className="px-4 py-2 bg-gray-50 border-t border-gray-100">
-              <p className="text-[10px] text-gray-400 text-center">
-                Product alerts expire automatically · Cart events reset each
-                session
+            <div className="px-5 py-3 bg-[#FCFBF9] border-t border-gray-100">
+              <p className="body-text text-[10px] text-gray-400 text-center uppercase tracking-wider">
+                Product alerts expire automatically
               </p>
             </div>
           )}
-        </div>
-      )}
-
-      {/* Mobile inline panel */}
-      {isOpen && (
-        <div className="md:hidden fixed left-4 right-4 top-20 bg-white border border-gray-100 rounded-2xl shadow-2xl z-50 overflow-hidden">
-          <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-pink-50 to-purple-50 border-b border-gray-100">
-            <h3 className="font-bold text-gray-800 text-sm">Notifications</h3>
-            {unreadCount > 0 && (
-              <button
-                onClick={handleMarkAllRead}
-                className="text-xs text-pink-600 hover:text-pink-800 font-medium transition-colors"
-              >
-                Mark all read
-              </button>
-            )}
-          </div>
-          <div className="max-h-72 overflow-y-auto divide-y divide-gray-50">
-            {allNotifications.length === 0 ? (
-              <div className="py-8 text-center">
-                <FaBell className="text-3xl text-gray-200 mx-auto mb-2" />
-                <p className="text-sm text-gray-400">No notifications yet</p>
-              </div>
-            ) : (
-              allNotifications.map((notif) => {
-                const isRead = readIds.includes(notif.id);
-                return (
-                  <button
-                    key={notif.id}
-                    onClick={() => handleNotifClick(notif)}
-                    className={`w-full text-left flex items-start gap-3 px-4 py-3 hover:bg-pink-50 transition-colors duration-200 ${
-                      !isRead ? "bg-pink-50/40" : ""
-                    }`}
-                  >
-                    <div className="mt-0.5 text-base flex-shrink-0">
-                      {typeIcon[notif.type] || (
-                        <FaBell className="text-gray-400" />
-                      )}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p
-                        className={`text-sm font-semibold ${
-                          !isRead ? "text-pink-700" : "text-gray-800"
-                        }`}
-                      >
-                        {notif.title}
-                      </p>
-                      <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">
-                        {notif.message}
-                      </p>
-                      <p className="text-[10px] text-gray-400 mt-1">
-                        {timeAgo(notif.createdAt)}
-                      </p>
-                    </div>
-                    {!isRead && (
-                      <div className="w-2 h-2 bg-pink-500 rounded-full mt-1.5 flex-shrink-0" />
-                    )}
-                  </button>
-                );
-              })
-            )}
-          </div>
         </div>
       )}
     </div>

@@ -1,33 +1,48 @@
 import React from 'react';
-import Icon from './Icon';
 import { FaLocationArrow, FaPhone, FaEnvelope } from 'react-icons/fa';
 
 const ContactIcons = () => {
-  return (
-    <section className="relative py-16 bg-gradient-to-b from-white via-pink-50/10 to-purple-50/20 border-t border-gray-50 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div className="flex flex-col sm:grid sm:grid-cols-2 lg:flex lg:flex-row justify-center items-stretch gap-4 sm:gap-6">
-          <Icon
-            img={<FaLocationArrow className="text-xl text-white" />}
-            name="Our Bakery"
-            info="No 1, Sweet Tooth Street, Victoria Island, Lagos, Nigeria."
-          />
-          <Icon
-            img={<FaPhone className="text-xl text-white" />}
-            name="Call Us"
-            info="+234 1234 567 8910"
-          />
-          {/* Col-span hack perfectly centers the third box item on tablet displays */}
-          <div className="sm:col-span-2 lg:col-span-1 lg:w-1/3 flex justify-center w-full">
-            <Icon
-              img={<FaEnvelope className="text-xl text-white" />}
-              name="Email Us"
-              info="orders@sweettooth.com"
-            />
-          </div>
-        </div>
+  const contactMethods = [
+    {
+      icon: <FaLocationArrow />,
+      title: "Our Bakery",
+      sub: "No 1, Sweet Tooth St, VI",
+    },
+    {
+      icon: <FaPhone />,
+      title: "Call Us",
+      sub: "+234 123 456 7891",
+    },
+    {
+      icon: <FaEnvelope />,
+      title: "Email Us",
+      sub: "hello@sweettooth.com",
+    },
+  ];
 
+  return (
+    <section className="w-full bg-[#FCFBF9] py-12 md:py-16 px-6 border-y border-gray-100">
+      <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12 md:gap-0 text-center">
+        {contactMethods.map((item, index) => (
+          <div
+            key={index}
+            className={`flex-1 flex flex-col items-center justify-center w-full group ${
+              index === 1 ? "md:border-x md:border-gray-200 md:px-12" : "md:px-12"
+            }`}
+          >
+            <div className="text-3xl md:text-4xl mb-5 text-[#BE185D] transform group-hover:-translate-y-1 transition-transform duration-300">
+              {item.icon}
+            </div>
+            
+            <h3 className="heading-text text-xl font-bold text-gray-900 mb-2">
+              {item.title}
+            </h3>
+            
+            <p className="body-text text-xs md:text-sm text-gray-500 uppercase tracking-widest leading-relaxed">
+              {item.sub}
+            </p>
+          </div>
+        ))}
       </div>
     </section>
   );

@@ -2,7 +2,7 @@ import React from 'react'
 import ContactHero from '../components/Contact/ContactHero'
 import ContactMain from '../components/Contact/ContactMain'
 import ContactIcons from '../components/Contact/ContactIcons'
-import NewsLetter from '../components/NewsLetter'
+import NewsLetter from '../components/Contact/NewsLetter'
 
 const Contact = () => {
   return (

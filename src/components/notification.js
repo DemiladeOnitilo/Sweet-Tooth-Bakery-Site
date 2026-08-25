@@ -2,8 +2,8 @@ export const productnotification = [
   {
     id: "notif-001",
     type: "new_arrival",
-    title: "New Arrival 🎉",
-    message: "Red Velvet Brownies are here — limited batch!",
+    title: "Freshly Baked",
+    message: "Our Signature Red Velvet Brownies are back — limited batch available!",
     productId: "brownies-RedVelvetBrownies", 
     expiresAt: "2026-12-01", 
     createdAt: "2026-01-01",
@@ -11,8 +11,8 @@ export const productnotification = [
   {
     id: "notif-002",
     type: "new_arrival",
-    title: "Just Dropped 🍰",
-    message: "Customizable Cakes!",
+    title: "New to the Menu",
+    message: "Fully customizable artisanal cakes are now available for order.",
     productId: "custom-RegularCake", 
     expiresAt: "2026-12-20",
     createdAt: "2026-01-01",
@@ -20,8 +20,8 @@ export const productnotification = [
   {
     id: "notif-003",
     type: "promo",
-    title: "Limited Offer 🔥",
-    message: "Order any 3 pastries and get free delivery this week.",
+    title: "Complimentary Delivery",
+    message: "Order any 3 signature pastries and enjoy complimentary delivery this week.",
     productId: null, 
     expiresAt: "2026-12-10",
     createdAt: "2026-01-01",
@@ -37,4 +37,4 @@ export const getActiveProductNotifications = () => {
         const expiry = new Date(notif.expiresAt);
         return expiry >= today;
     });
-}
+};
