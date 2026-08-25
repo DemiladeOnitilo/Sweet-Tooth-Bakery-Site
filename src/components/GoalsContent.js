@@ -1,8 +1,8 @@
-import goalImgOne from "../assets/images/Goals-img-1.jpg"
-import goalImgTwo from "../assets/images/Goals-img-2.avif"
-import goalImgThree from "../assets/images/Goals-img-3.webp"
-import goalImgFour from "../assets/images/Goals-img-4.jpg"
-import goalImgFive from "../assets/images/Goals-img-5.jpg"
+import goalImgOne from "../assets/Images/Goals-img-1.jpg"
+import goalImgTwo from "../assets/Images/Goals-img-2.avif"
+import goalImgThree from "../assets/Images/Goals-img-3.webp"
+import goalImgFour from "../assets/Images/Goals-img-4.jpg"
+import goalImgFive from "../assets/Images/Goals-img-5.jpg"
 
 const GoalsContent = [
     {
