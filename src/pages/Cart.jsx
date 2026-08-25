@@ -108,7 +108,7 @@ const Cart = () => {
 
   if (!cartItems || amount < 1) {
     return (
-      <div className="flex flex-col items-center min-h-screen w-full pt-32 pb-20">
+      <div className="flex flex-col items-center min-h-screen mx-auto max-w-7xl w-full pt-32 pb-20">
         <div className="flex flex-col items-center justify-center text-center max-w-xl mx-auto px-6 py-16 bg-white rounded-[2rem] border border-gray-100 shadow-sm mt-10">
           <div className="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center mb-8 border border-gray-100">
             <FaShoppingBag className="text-4xl text-gray-300" />
@@ -128,7 +128,7 @@ const Cart = () => {
         </div>
 
        {recommendedItems.length > 0 && (
-            <div className="flex flex-col items-center gap-8 w-full border-t border-gray-200 pt-16">
+            <div className="flex flex-col items-center gap-8 w-full pt-16">
               <div className="flex flex-col items-center gap-3 text-center">
                 <div className="body-text flex items-center gap-3 text-sm font-bold text-[#BE185D] tracking-widest uppercase">
                   <span className="w-6 h-[1px] bg-[#BE185D]"></span>
@@ -383,7 +383,7 @@ const Cart = () => {
           </div>
 
         {recommendedItems.length > 0 && (
-            <div className="flex flex-col items-center gap-8 w-full border-t border-gray-200 pt-16">
+            <div className="flex flex-col items-center gap-8 w-full pt-16">
               <div className="flex flex-col items-center gap-3 text-center">
                 <div className="body-text flex items-center gap-3 text-sm font-bold text-[#BE185D] tracking-widest uppercase">
                   <span className="w-6 h-[1px] bg-[#BE185D]"></span>
