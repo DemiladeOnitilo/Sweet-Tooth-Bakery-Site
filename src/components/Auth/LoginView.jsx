@@ -90,7 +90,7 @@ const LoginView = ({ onSuccess }) => {
           <MainButton
             name={loading ? "Signing In..." : "Sign In"}
             variant="primary"
-            onClick={handleSubmit}
+            type="submit"
           />
         </div>
       </form>
@@ -99,7 +99,10 @@ const LoginView = ({ onSuccess }) => {
         <p className="body-text text-xs text-gray-500 uppercase tracking-widest font-medium">
           Don't have an account?{" "}
           <button
-            onClick={() => dispatch(setAuthMode("signup"))}
+            onClick={() => {
+              dispatch(clearError());
+              dispatch(setAuthMode("signup"));
+            }}
             className="text-[#BE185D] font-bold hover:text-[#9D174D] cursor-pointer ml-1"
           >
             Create one

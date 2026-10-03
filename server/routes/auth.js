@@ -14,8 +14,10 @@ if (!process.env.JWT_SECRET) {
 const normalizeEmail = (email) => email.trim().toLowerCase();
 
 // POST /api/auth/signup
+// POST /api/auth/signup
 router.post("/signup", (req, res) => {
-  const { name, email, password, phone } = req.body;
+  // 1. Add address to the destructured body
+  const { name, email, password, phone, address } = req.body;
 
   if (!name || !email || !password) {
     return res.status(400).json({ error: "Name, email, and password are required" });
@@ -35,9 +37,10 @@ router.post("/signup", (req, res) => {
 
     const hashedPassword = bcrypt.hashSync(password, 10);
 
+    // 2. Add address to the INSERT statement
     run(
-      "INSERT INTO users (name, email, password, phone) VALUES (?, ?, ?, ?)",
-      [name, normalizedEmail, hashedPassword, phone || ""]
+      "INSERT INTO users (name, email, password, phone, address) VALUES (?, ?, ?, ?, ?)",
+      [name, normalizedEmail, hashedPassword, phone || "", address || ""]
     );
 
     const user = get(
@@ -62,8 +65,6 @@ router.post("/signup", (req, res) => {
       token,
     });
   } catch (err) {
-    // Catch a UNIQUE constraint violation from a race condition
-    // (two signups with the same email landing at nearly the same time)
     if (err.message && err.message.includes("UNIQUE constraint failed")) {
       return res.status(409).json({ error: "An account with this email already exists" });
     }

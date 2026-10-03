@@ -8,52 +8,54 @@ const SingleCardService = ({
   productNumber,
 }) => {
   return (
-    <div className="flex justify-center items-center w-full px-6 py-16 md:py-24 mx-auto">
-      <div className="flex flex-col md:flex-row rounded-3xl max-w-7xl w-full overflow-hidden border border-gray-100 shadow-sm group hover:shadow-xl transition-all duration-500 cursor-pointer">
-        <div className="w-full md:w-1/2 h-64 md:h-auto min-h-[300px] relative overflow-hidden bg-gray-50">
+    <div className="flex justify-center items-center w-full px-8 py-20 md:py-32 mx-auto">
+      <div className="flex flex-col md:flex-row max-w-7xl w-full group cursor-pointer gap-4 lg:gap-10 xl:gap-16 items-center bg-[#ffffff] rounded-4xl shadow-2xl group-hover:shadow-3xl">
+        
+        <div className="w-full md:w-1/2 relative overflow-hidden rounded-l-4xl bg-gray-50 aspect-square shadow-sm group-hover:shadow-2xl transition-all duration-700">
           <img
             src={singleProduct.img}
             alt={singleProduct.name}
-            className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
+            className="w-full h-full object-cover transition-transform duration-1000 ease-in-out group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-[#BE185D]/0 group-hover:bg-[#BE185D]/10 transition-colors duration-500 pointer-events-none" />
+          <div className="absolute inset-0 bg-gray-900/0 group-hover:bg-gray-900/10 transition-colors duration-500 pointer-events-none" />
         </div>
 
-        <div className="w-full md:w-1/2 flex flex-col justify-center items-start gap-6 p-8 lg:p-16 bg-white">
-          <div className="body-text flex items-center gap-3 text-sm font-bold text-[#BE185D] tracking-widest uppercase">
+        <div className="w-full md:w-1/2 flex flex-col justify-center items-start gap-2 md:gap-4 lg:gap-6 p-6 lg:p-4">
+          <div className="body-text flex items-center gap-3 text-[10px] font-bold text-[#BE185D] tracking-widest uppercase">
             <span className="w-8 h-[1px] bg-[#BE185D]"></span>
-            {productNumber} / {String(products.length).padStart(2, "0")}
+            Collection {productNumber} / {String(products.length).padStart(2, "0")}
           </div>
 
-          <div className="flex flex-col gap-4 w-full">
-            <h2 className="heading-text text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 group-hover:text-[#BE185D] transition-colors">
+          <div className="flex flex-col gap-2 w-full">
+            <h2 className="heading-text text-4xl lg:text-6xl font-bold text-gray-900 group-hover:text-[#BE185D] transition-colors leading-tight">
               {singleProduct.name}
             </h2>
-            <div className="text-gray-500 text-base md:text-lg leading-relaxed body-text">
+            <p className="text-gray-600 text-base md:text-lg leading-relaxed body-text font-light">
               {singleProduct.description}
-            </div>
+            </p>
           </div>
 
           <div className="flex flex-col gap-2 mt-2">
             <h3 className="body-text text-xs font-bold text-gray-400 uppercase tracking-widest">
-              Available Options
+              Available Creations
             </h3>
-            <div className="flex flex-wrap text-gray-800 text-sm md:text-base font-medium">
+            <div className="flex flex-wrap text-gray-900 body-text text-xs font-bold uppercase tracking-wider">
               {singleProductTypes.map((items, index) => (
                 <React.Fragment key={index}>
                   <span>{items.name.replace(/Brownies/gi, "").trim()}</span>
                   {index !== singleProductTypes.length - 1 && (
-                    <span className="mx-2 text-pink-300">•</span>
+                    <span className="mx-2 text-[#BE185D]">·</span>
                   )}
                 </React.Fragment>
               ))}
             </div>
           </div>
 
-          <div className="mt-4">
+          <div className="mt-4 md:mt-8">
             <ViewAll to={`/services/category/${singleProduct.id}`} />
           </div>
         </div>
+
       </div>
     </div>
   );

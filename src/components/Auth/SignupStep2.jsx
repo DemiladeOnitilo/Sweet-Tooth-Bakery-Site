@@ -37,6 +37,7 @@ const SignupStep2 = ({ data, onUpdate, onBack, onSubmit }) => {
         email: data.email,
         password,
         phone: data.phone,
+        address,
       }),
     ).then((res) => {
       if (res.meta.requestStatus === "fulfilled") {
@@ -135,7 +136,7 @@ const SignupStep2 = ({ data, onUpdate, onBack, onSubmit }) => {
           <MainButton
             name={loading ? "Creating..." : "Create Account"}
             variant="primary"
-            onClick={handleSubmit}
+            type="submit"
           />
         </div>
       </form>

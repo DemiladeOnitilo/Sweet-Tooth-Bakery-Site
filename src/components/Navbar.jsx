@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import logo from "../assets/Images/sweet-tooth-logo.jpeg";
 import { NavLink, Link, useNavigate, useLocation } from "react-router-dom";
 import {
@@ -43,7 +43,7 @@ const Navbar = () => {
   const isSolid = scrolled || isOpen || !isHeroPage;
 
   const allProducts = products.flatMap((category) =>
-    category.types.map((product) => ({
+    (category.types || []).map((product) => ({
       ...product,
       categoryName: category.name,
     })),
@@ -162,7 +162,7 @@ const Navbar = () => {
         }`}
       >
         <div className="w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-10">
-          <div className="flex justify-between items-center h-16">
+          <div className="flex justify-between items-center h-16 px-2 md:px-0">
             <div className="flex items-center z-50">
               <Link
                 to="/"
@@ -177,7 +177,7 @@ const Navbar = () => {
                   />
                 </div>
                 <span
-                  className={`hidden sm:block text-2xl md:text-3xl heading-text font-bold italic tracking-tight transition-colors duration-300 ${isSolid ? "text-gray-900" : "text-white group-hover:text-[#BE185D]"}`}
+                  className={`block text-2xl md:text-3xl heading-text font-bold italic tracking-tight transition-colors duration-300 ${isSolid ? "text-gray-900" : "text-white group-hover:text-[#BE185D]"}`}
                 >
                   Sweet <span className="text-[#BE185D]">Tooth</span>
                 </span>
@@ -394,7 +394,7 @@ const Navbar = () => {
                 ) : (
                   <button
                     onClick={() => dispatch(openAuthModal("login"))}
-                    className={`body-text font-bold uppercase tracking-widest text-xs px-5 py-2.5 rounded-full border transition-all ${
+                    className={`body-text font-bold uppercase tracking-widest text-xs rounded-full border transition-all duration-300 px-8 py-2.5 cursor-pointer transform hover:-translate-y-0.5 ${
                       isSolid
                         ? "border-gray-200 text-gray-900 hover:border-gray-900 hover:bg-gray-50"
                         : "border-white/50 text-white hover:bg-white/20"

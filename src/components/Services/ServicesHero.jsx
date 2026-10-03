@@ -12,7 +12,7 @@ const ServicesHero = ({ scrollToSection }) => {
   }, []);
 
   return (
-    <div className="relative h-[60vh] md:h-[70vh] flex justify-center items-center overflow-hidden">
+    <div className="relative  h-[60vh] md:h-[70vh] flex justify-center items-center overflow-hidden">
       <div
         className="absolute inset-0 bg-no-repeat bg-cover bg-center transition-transform duration-300 ease-out"
         style={{

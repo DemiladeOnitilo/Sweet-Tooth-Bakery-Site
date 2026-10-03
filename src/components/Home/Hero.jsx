@@ -36,8 +36,8 @@ const Hero = () => {
       />
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-10 mt-20 md:mt-10">
-        <div className="flex flex-col items-center lg:items-start justify-center gap-4 max-w-4xl md:rounded-3xl py-4 md:py-12 transition-all duration-500 ease-in-out">
-          <h1 className="text-4xl md:text-5xl xl:text-6xl font-medium text-center lg:text-left heading-text text-[#ffffff] leading-tight transition-[font-size] duration-500 ease-in-out">
+        <div className="flex flex-col items-center lg:items-start justify-center gap-4 max-w-4xl md:rounded-3xl py-4 md:py-12 px-6 md:px-0 transition-all duration-500 ease-in-out">
+          <h1 className="text-2xl md:text-5xl xl:text-6xl font-medium text-center lg:text-left heading-text text-[#ffffff] leading-tight transition-[font-size] duration-500 ease-in-out">
             Satisfy your daily cravings with our freshly baked,{" "}
             <span className="text-[#BE185D] font-medium italic">
               mouthwatering
@@ -45,39 +45,52 @@ const Hero = () => {
             signature treats
           </h1>
 
-          <p className="text-sm md:text-lg text-[#ffffff] text-center lg:text-left font-medium body-text max-w-xl lg:max-w-2xl leading-relaxed transition-[font-size] duration-500 ease-in-out">
+          <p className="text-xs md:text-lg text-[#ffffff] text-center lg:text-left font-medium body-text max-w-xl lg:max-w-2xl leading-relaxed transition-[font-size] duration-500 ease-in-out">
             Treat yourself to our daily pastry selection, or bring the ultimate
             sweetness to your next event with our signature Pancake & Slushie
             catering packages.
           </p>
 
-          <div className="flex items-center gap-2 md:gap-4 flex-wrap justify-center lg:justify-start body-text mt-4">
-            <div className="flex flex-col items-center text-center">
-              <div className="text-xl md:text-2xl font-semibold text-[#BE185D] transition-[font-size] duration-500 ease-in-out">
-                10K+
-              </div>
-              <div className="text-sm md:text-md font-medium text-[#BE185D] transition-[font-size] duration-500 ease-in-out">
-                Happy Customers
-              </div>
-            </div>
-            <div className="w-px h-12 md:h-16 bg-[#ffffff] transition-[height] duration-500 ease-in-out" />
-            <div className="text-center">
-              <div className="text-xl md:text-2xl font-semibold text-pink-500 transition-[font-size] duration-500 ease-in-out">
-                50+
-              </div>
-              <div className="text-sm md:text-md text-pink-500 transition-[font-size] duration-500 ease-in-out">
-                Unique Recipes
-              </div>
-            </div>
-            <div className="w-px h-12 md:h-16 bg-[#ffffff] transition-[height] duration-500 ease-in-out" />
-            <div className="text-center">
-              <div className="text-xl md:text-2xl font-semibold text-yellow-300 transition-[font-size] duration-500 ease-in-out">
-                5★
-              </div>
-              <div className="text-sm md:text-md text-yellow-200 transition-[font-size] duration-500 ease-in-out">
-                Premium Quality
-              </div>
-            </div>
+          <div className="flex items-center gap-4 flex-wrap justify-center lg:justify-start body-text mt-4">
+            {[
+              {
+                value: "10K+",
+                label: "Happy Customers",
+                valueColor: "text-[#BE185D]",
+                labelColor: "text-[#BE185D] font-medium",
+              },
+              {
+                value: "50+",
+                label: "Unique Recipes",
+                valueColor: "text-pink-500",
+                labelColor: "text-pink-500",
+              },
+              {
+                value: "5★",
+                label: "Premium Quality",
+                valueColor: "text-yellow-300",
+                labelColor: "text-yellow-200",
+              },
+            ].map((stat, index, arr) => (
+              <React.Fragment key={index}>
+                <div className="flex flex-col items-center text-center">
+                  <div
+                    className={`text-lg md:text-2xl font-semibold transition-[font-size] duration-500 ease-in-out ${stat.valueColor}`}
+                  >
+                    {stat.value}
+                  </div>
+                  <div
+                    className={`text-xs md:text-md transition-[font-size] duration-500 ease-in-out ${stat.labelColor}`}
+                  >
+                    {stat.label}
+                  </div>
+                </div>
+
+                {index < arr.length - 1 && (
+                  <div className="w-px h-12 md:h-16 bg-[#ffffff] transition-[height] duration-500 ease-in-out" />
+                )}
+              </React.Fragment>
+            ))}
           </div>
 
           <div className="flex items-center justify-center lg:justify-start mt-2 md:mt-4 w-full">

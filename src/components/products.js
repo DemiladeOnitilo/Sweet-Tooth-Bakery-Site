@@ -59,6 +59,10 @@ import BirthdayCake from "../assets/Images/Sweet tooth pastries list/Custom Cake
 import CustomizableCakes from "../assets/Images/Sweet tooth pastries list/Custom Cakes/Customizable Cakes.jpg";
 import SpecialOccasionCake from "../assets/Images/Sweet tooth pastries list/Custom Cakes/Special occasions Cakes.jpg";
 import WeddingCake from "../assets/Images/Sweet tooth pastries list/Custom Cakes/Wedding Cakes.jpg";
+//Slush and Pancake
+import PancakeCart from "../assets/Images/Goals-img-5.jpg";
+import SlushAndPancakeRateCard from "../assets/Images/Sweet-Tooth-Slush-and-Pancake-Rate-Card.png";
+import PancakeRateCard from "../assets/Images/Sweet-Tooth-Pancake-Rate-Card.png";
 
 export const products = [
   {
@@ -1166,6 +1170,37 @@ export const products = [
         ],
         inscription: "",
         inscriptionStyle: ["Icing", "Topper"],
+      },
+    ],
+  },
+  {
+    id: "event-carts-category",
+    name: "Event Carts",
+    desc: "Bring the Sweet Tooth experience directly to your venue.",
+    img: PancakeCart,
+    types: [
+      {
+        id: "event-carts",
+        name: "Live Event Carts",
+        price: "Consultation",
+        img: PancakeCart,
+        description:
+          "Bring the Sweet Tooth experience to your venue. Choose between our standalone Premium Slushie setup, or the ultimate Slushie & Live Mini-Pancake combo station.",
+        isConsultationOnly: true,
+        rateCards: [
+          { title: "Pancake Cart Only", img: PancakeRateCard },
+          {
+            title: "Slushie & Pancake Cart Combo",
+            img: SlushAndPancakeRateCard,
+          },
+        ],
+        ingredients: [
+          "Premium Slushies",
+          "Hot Mini-Pancakes",
+          "Custom Toppings",
+          "Live Attendant",
+          "Setup & Takedown",
+        ],
       },
     ],
   },

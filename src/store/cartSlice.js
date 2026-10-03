@@ -4,7 +4,7 @@ const initialState = {
   cartItems: [],
   amount: 0,
   total: 0,
-  delivery_fee: 1500,
+  delivery_fee: 5500,
   currency: "₦",
 };
 
